@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Food Menu</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <!-- fontawesome icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    
+  </head>
+  <body>
+  	<nav style="text-align: right; padding-right: 10px;"> <a href="#" style="text-decoration: none; color: white">Login          <i class="fa fa-user" aria-hidden="true" style="color: black"></i>
+</a>
+<a href="#" style="color: black; padding-left: 20px;"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+
+</nav>
+
+    <section class = "menu">
+      <div class = "menu-container">
+        
+        <div class = "menu-btns">
+        	<div class="btn-hover">
+          <button type = "button" class = "menu-btn active-btn" id = "featured">Breakfast</button>
+      </div>
+      <div class="btn-hover">
+          <button type = "button" class = "menu-btn" id = "today-special">Lunch </button>
+      </div>
+        </div>
+ 
+        <div class = "food-items">
+          <!-- item -->
+          <div class = "food-item featured">
+            <div class = "food-img">
+              <img src = "" alt = "food image">
+            </div>
+            <div class = "food-content">
+              <h2 class = "food-name">Pancakes</h2>
+              <h3 class = "food-price">$5.00</h3>
+   
+              <button style="width: 25px; height: 20px;" id="inct"> + </button>
+              <input id=demoInput type=number style="width: 40px;">
+              <button style="width: 25px;height: 20px;" id="decrement"> - </button>
+
+             <script src="https://use.fontawesome.com/a6e14efad5.js"></script>
+    
+           <script>
+           	var x = 0;
+    	var span = document.getElementById('demoInput');
+    	      var increment = document.getElementById('inct');
+    	      var decrement = document.getElementById('decrement');
+
+   increment.addEventListener('click', function () {
+  // this function is executed whenever the user clicks the increment button
+  span.value++;
+});
+
+decrement.addEventListener('click', function () {
+  // this function is executed whenever the user clicks the decrement button
+  span.value--;
+});
+</script>
+              <p class = "category">Categories: <span>Featured</span></p>
+            </div>
+          </div>
+          <!-- end of item -->
+
+          
+
+          
+        </div>
+      </div>
+    </section>
+
+    
+
+
+    
+    
+  </body>
+</html>
