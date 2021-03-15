@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Item, category
 
 # Create your views here.
 
@@ -6,5 +7,12 @@ from django.shortcuts import render
     Return: Returns a render response to the client 
 """
 def menu_home(request):
-    return render(request, 'menu.html')
+    items = Item.objects.all() #put all food items in database in this single variable
+    context = {'itms':items}
 
+
+    return render(request, 'menu.html',context) 
+def cat_g(request):
+    cats = category.objects.all()
+
+    return 0
