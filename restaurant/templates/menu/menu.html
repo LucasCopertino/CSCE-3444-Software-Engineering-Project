@@ -35,6 +35,7 @@
           <button type = "button" class = "menu-btn" id = "today-special">Lunch </button>
       </div>
         </div>
+        {%for item in itms %}
  
         <div class = "food-items">
           <!-- item -->
@@ -43,8 +44,8 @@
               <img src = "" alt = "food image">
             </div>
             <div class = "food-content">
-              <h2 class = "food-name">Pancakes</h2>
-              <h3 class = "food-price">$5.00</h3>
+              <h2 class = "food-name">{{item.name}}</h2>
+              <h3 class = "food-price">${{item.price}}</h3>
    
               <button style="width: 25px; height: 20px;" id="inct"> + </button>
               <input id=demoInput type=number style="width: 40px;">
@@ -72,11 +73,12 @@ decrement.addEventListener('click', function () {
             </div>
           </div>
           <!-- end of item -->
-
           
 
           
         </div>
+        {%endfor%}
+
       </div>
     </section>
 
