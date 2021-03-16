@@ -17,9 +17,10 @@ from django.contrib import admin
 from django.urls import path
 from menu.views import menu_home
 from accounts.views import customer_login
-
+from orders.views import cart
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('cart/',cart, name="cart"),
     path('customer-login/', customer_login, name='customer_login'),
     path('menu/', menu_home, name='menu_home') #set a path for a views.py function to be activated. eg localhost:/8000/menu/ will activate views.py's function 'menu_home'
 ]
