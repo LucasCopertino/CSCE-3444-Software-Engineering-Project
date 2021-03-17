@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head> 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>Split payment or no?</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .paymentButton{
+            background-color: cyan;
+            width: 200px;
+            height: 100px;
+        } 
+        .goBackButton{
+            background-color: white;
+            width: 150px;
+            height: 75px;
+        } 
+        .refillDrinkButton{
+            background-color:white;
+            width: 150px;
+            height: 75px;
+        }
+        .helpButton{
+            background-color:white;
+            width: 150px;
+            height: 75px;
+        }     
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <button class = refillDrinkButton>
+            <p>Refill drink</p>
+        </button>
+        <button class = helpButton>
+            <p>Help</p>
+        </button>
+    </header>
+    <h1>A waiter will collect your cash now.</h1>
+
+    <form>
+        <label for="confirmPaymentCode">Waiter enters payment confirmation code here:</label><br>
+        <input type="text" num="confirmPaymentCode"><br>
+    </form>
+   
+    <button class = paymentButton>
+        <p>End payment</p>
+    </button>
+   
+    <footer>
+        <button class = goBackButton>
+            <p>Go Back</p>
+        </button>
+    </footer>
+</body>    
