@@ -4,31 +4,20 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
-    <title>Payment Page</title>
+    <title>Split payment or no?</title>
     <link rel="stylesheet" href="style.css">
 
     <style>
-        .totalBox{
-            background-color:yellow;
-            width: 400px;
-            height: 300px;
-        }
-
         .paymentButton{
             background-color: cyan;
             width: 200px;
             height: 100px;
-        }
+        } 
         .goBackButton{
             background-color: white;
             width: 150px;
             height: 75px;
-        }
-        .couponButton{
-            background-color:white;
-            width: 150px;
-            height: 75px;
-        }
+        } 
         .refillDrinkButton{
             background-color:white;
             width: 150px;
@@ -38,15 +27,12 @@
             background-color:white;
             width: 150px;
             height: 75px;
-        }
+        }     
     </style>
 
-</head> 
-
-
+</head>
 
 <body>
-
     <header>
         <button class = refillDrinkButton>
             <p>Refill drink</p>
@@ -55,30 +41,20 @@
             <p>Help</p>
         </button>
     </header>
-
-    <h1>Payment</h1>
-
-    <div class = totalBox>
-        <p>all items on receipt displayed here</p>
-    </div>
+    <h1>Enter your card information and press "Pay".</h1>
 
     <form>
-        <label for="couponCode">Enter coupon code here:</label><br>
-        <input type="text" id="couponCode"><br>
+        <label for="cardNumber">Enter card number here:</label><br>
+        <input type="text" num="cardNumber"><br>
     </form>
-
-    <button class = couponButton>
-        <p>Apply coupon</p>
-    </button>
-
+   
     <button class = paymentButton>
-        <p>Pay now</p>
+        <p>Pay</p>
     </button>
-
+   
     <footer>
         <button class = goBackButton>
-            <p>Go back</p>
+            <p>Go Back</p>
         </button>
-    </footer> 
-
-</body> 
+    </footer>
+</body>  
