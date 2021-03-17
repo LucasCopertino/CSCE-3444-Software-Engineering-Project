@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&family=Kaushan+Script&family=Montserrat:wght@200;300;400;500;600;700;800;900&display=swap');
+
+:root{
+    --Inter: 'Inter', sans-serif;
+    --Kaushan: 'Kaushan Script', cursive;
+    --Mont: 'Montserrat', sans-serif;
+}
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+body{
+    line-height: 1.5;
+    font-family: var(--Mont);
+    background-color: white;
+}
+
+
+.totalBox{
+    background-color:yellow;
+    width: 400px;
+    height: 300px;
+}
+
+.blueButton{
+    background-color: cyan;
+    width: 200px;
+    height: 100px;
+}
+.goBackButton{
+    background-color: white;
+    width: 150px;
+    height: 75px;
+}
+.couponButton{
+    background-color:white;
+    width: 150px;
+    height: 75px;
+}
+.refillDrinkButton{
+    background-color:white;
+    width: 150px;
+    height: 75px;
+}
+.helpButton{
+    background-color:white;
+    width: 150px;
+    height: 75px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropDownButton {
+    background-color: cyan;
+    color: black;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropDownContents {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    z-index: 1;
+}
+
+.dropDownContents a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropDown:hover .dropDownContents {
+    display: block;
+}
