@@ -8,21 +8,16 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
-        .splitButton{
+        .paymentButton{
             background-color: cyan;
             width: 200px;
             height: 100px;
-        }
-        .doNotSplitButton{
-            background-color: cyan;
-            width: 200px;
-            height: 100px;
-        }
+        } 
         .goBackButton{
             background-color: white;
             width: 150px;
             height: 75px;
-        }
+        } 
         .refillDrinkButton{
             background-color:white;
             width: 150px;
@@ -32,12 +27,10 @@
             background-color:white;
             width: 150px;
             height: 75px;
-        }
+        }     
     </style>
 
-</head> 
-
-
+</head>
 
 <body>
     <header>
@@ -48,18 +41,22 @@
             <p>Help</p>
         </button>
     </header>
+    <h1>Choose your payment method.</h1>
 
-    <h1>Would you like to split payment?</h1>
-
-    <button class = splitButton>
-        <p>Yes, split payment</p>
+    <button class = paymentButton>
+        <p>Debit</p>
     </button>
-    <button class = doNotSplitButton>
-        <p>No, do not split payment</p>
+    <button class = paymentButton>
+        <p>Credit</p>
     </button>
+    <button class = paymentButton>
+        <p>Cash</p>
+    </button>
+   
     <footer>
         <button class = goBackButton>
             <p>Go Back</p>
         </button>
     </footer>
-</body> 
+
+</body>

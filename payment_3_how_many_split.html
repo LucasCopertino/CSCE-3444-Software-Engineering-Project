@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head> 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>Split payment or no?</title>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .refillDrinkButton{
+            background-color:white;
+            width: 150px;
+            height: 75px;
+        }
+        .helpButton{
+            background-color:white;
+            width: 150px;
+            height: 75px;
+        }
+        .paymentButton{
+            background-color: cyan;
+            width: 200px;
+            height: 100px;
+        } 
+        .goBackButton{
+            background-color: white;
+            width: 150px;
+            height: 75px;
+        }  
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropDownButton {
+            background-color: cyan;
+            color: black;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropDownContents {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            z-index: 1;
+        }
+
+        .dropDownContents a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        /* Show the dropdown menu on hover */
+        .dropDown:hover .dropDownContents {
+            display: block;
+        }
+    </style>
+<head>
+
+
+
+<body>
+    <header>
+        <button class = refillDrinkButton>
+            <p>Refill drink</p>
+        </button>
+        <button class = helpButton>
+            <p>Help</p>
+        </button>
+    </header>
+    <h1>How many ways would you like to split your bill?</h1>
+    
+    <div class="dropDown">
+        <button class="dropDownButton">Use this drop down menu</button>
+        <div class="dropDownContents">
+          <a href="#">2 payments</a>
+          <a href="#">3 payments</a>
+          <a href="#">4 payments</a>
+        </div>
+    </div>
+
+    <footer>
+        <button class = goBackButton>
+            <p>Go Back</p>
+        </button>
+    </footer>
+</body> 
