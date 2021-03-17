@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Waiter View</title>
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.logoutContainer{
+	padding: 1px;	 /* background */
+    text-align: center; /* center the text */
+    border-radius: 25px; /* rounded corners */
+    margin-left: 840px;  /* move to the side */
+    margin-bottom: 10px;
+    background: DarkRed;
+    color: white;
+}
+
+.logout {
+	border: none;
+    outline: 0;
+    background-color: DarkRed;
+    text-align: center;
+    border-radius: 25px; /* rounded corners */
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.logout:hover {
+	background-color: Maroon;		/* to make it look darker when you hover over */
+}
+
+.header {
+  padding: 1px;
+  text-align: center; 
+  border-radius: 25px;
+  margin-bottom: 50px;
+  background: DarkCyan;
+  color: white;
+}
+
+.row {
+  padding: 1px;
+  text-align: center; 
+  border-radius: 25px;
+}
+
+.card {
+  padding: 1px;
+  text-align: center; 
+  border-radius: 25px;
+  background: DarkCyan;
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.container {
+  padding: .5px;
+  text-align: center; 
+  flex: 75%;				/*to split the area in the card */
+  border-radius: 25px;
+  background: DarkCyan;
+  color: white;
+}
+
+.delete {
+	padding: .5px;
+  	text-align: center;
+  	flex: 25%;
+ 	border-radius: 25px;
+  	background: DarkRed;
+  	color: white;
+}
+
+/* Increase the font size of the <h1> element */
+.logoutContainer h1 {
+	font-size: 10px;
+}
+
+.header h1 {
+  font-size: 30px;
+}
+</style>
+</head>
+<body>
+
+<div class="logoutContainer">
+  <h1><button class="logout">Log Out</button></h1>
+</div>
+
+<div class="header">
+  <h1>Notifications</h1>
+</div>
+
+<div class="row">
+	<div class="card">
+    	<div class="container">
+        	<h1>Table 6</h1>
+            <p>Lime Soda Needs Refill</p>
+        </div>
+        <button class="delete">
+        	<p>Delete</p>
+        </button>
+    </div>
+</div>
+
+<div class="row">
+	<div class="card">
+    	<div class="container">
+        	<h1>Table 2</h1>
+            <p>Needs Help</p>
+        </div>
+        <button class="delete">
+        	<p>Delete</p>
+        </button>
+    </div>
+</div>
+
+<div class="row">
+	<div class="card">
+    	<div class="container">
+        	<h1>Kitchen</h1>
+            <p>Order ID #45213 Ready For Table 8</p>
+        </div>
+        <button class="delete">
+        	<p>Delete</p>
+        </button>
+    </div>
+</div>
+
+<div class='back-button'>
+  <button>Back</button>
+</div>
+
+
+</body>
+</html>
