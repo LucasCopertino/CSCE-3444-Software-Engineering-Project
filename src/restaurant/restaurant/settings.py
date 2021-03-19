@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'menu', #our update - install the app we created from the terminal 
+    'orders',
 ]
 
 MIDDLEWARE = [
