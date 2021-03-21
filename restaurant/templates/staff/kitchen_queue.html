@@ -4,36 +4,184 @@
         <title>Kitchen Queue</title>
     </head>
 
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&family=Kaushan+Script&family=Montserrat:wght@200;300;400;500;600;700;800;900&display=swap');
+
+        :root{
+                --Inter: 'Inter', sans-serif;
+                --Kaushan: 'Kaushan Script', cursive;
+                --Mont: 'Montserrat', sans-serif;
+        }
+
+        *{
+            box-sizing: border-box;
+        }
+
+        .main-title{
+            font-family: var(--Inter);
+            text-align: center;
+        }
+
+        .logout-container{
+            font-family: var(--Inter);
+            font-size: 20px;
+            float: right;
+            background-color: black;
+            border-radius: 4px;
+            
+        }
+
+        .logout-container:hover{
+            box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.75);
+        }
+
+        .logout-container button{
+            font-family: var(--Inter);
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            background-color: black;
+            color: green;
+            padding-left: 20px;
+            padding-right: 20px;
+            border-radius: 4px;
+            
+        }
+
+        .row::after{
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .column{
+            float: left;
+            width: 33.33%;
+            padding: 10px;
+            height: 300px;
+            background-color: lightgray;
+            color: green;
+            border: solid black;
+            border-radius: 4px;
+            font-family: var(--Inter);
+
+        }
+
+        .queue-header ul{
+            font-family: var(--Inter);
+            font-size: 24px;
+            font-weight: bold;
+            list-style-type: none;
+            margin: 0px;
+            padding-top: 4px;
+            padding-bottom: 4px;
+            overflow: hidden;
+            background: black;
+            color: green;
+            border-radius: 4px;
+            
+            
+        }
+
+        .queue-header li{
+            float: left;
+            text-align: center;
+            
+        }
+
+        .key{
+            width: 33.33%;
+        }
+
+        .back-button{
+                font-family: var(--Inter);
+                font-size: 16px;
+                background-color: black;
+                border: none;
+                border-radius: 4px;
+                padding: 20px;
+                
+            }
+
+        .back-button a{
+            text-decoration: none;
+            color: green;
+        }
+
+        .back-button:hover{
+            box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.75);
+        }
+
+        .status-dropdown{
+            font-family: var(--Inter);
+            font-size: 20px;
+            padding: 10px;
+        }
+
+        .delete-order{
+            font-family: var(--Inter);
+            font-size: 20px;
+            background-color: green;
+            color: white;
+            border: solid 1px black;
+            border-radius: 4px;
+            padding: 10px;
+            margin-left: 20px;
+        }
+
+        
+    </style>
 
 
 
     <body>
+        <div class='logout-container'>
+            <button>Log Out</button>
+        </div>
+
         <div class='main-title'>
             <h1>Kitchen Queue</h1>
         </div>
-        
 
-        <div class='logout-container'>
-            <button style='float: right;'>Log Out</button>
-        </div>
 
         <div class='queue-header'>
             <ul>
-                <li style ='display: inline;'>Order</li>
-                <li style ='display: inline;'>Time</li>
-                <li style ='display: inline;'>Order Status</li>
+                <li class='key'>Order</li>
+                <li class='key'>Time</li>
+                <li class='key'>Order Status</li>
             </ul>
         </div>
-        <hr>
+        <br>
+        
+        
 
-        <div class='row-container'>
-            
+        <!--Item in Queue goes in row-container-->
+        <div class='row'>
+            <div class='column'>
+                <h2>Order Details will go here</h2>
+            </div>
+            <div class='column'>
+                <h2>Timer here</h2>
+            </div>
+            <div class='column'>
+                <h2>Status and delete here</h2>
+
+                <select class="status-dropdown" name='status'>
+                    <option value='not-started'>Not Started</option>
+                    <option value="in-progress">In Progress</option>
+                    <option value="complete">Complete</option>
+                    <option value="canceled">Canceled</option>
+                </select>
+
+                <button class="delete-order">Delete</button>
+                
+            </div>
         </div>
+        <!--Next item in queue ends here-->
 
-
-        <div class='back-button'>
-            <button>Back</button>
-        </div>
+        <br>
+        <button class='back-button'><a href='#back'>Back</a></button>
+        
 
 
     </body>

@@ -2,17 +2,84 @@
 <html>
     <head>
         <title>Home Page</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&family=Kaushan+Script&family=Montserrat:wght@200;300;400;500;600;700;800;900&display=swap');
+
+            :root{
+                --Inter: 'Inter', sans-serif;
+                --Kaushan: 'Kaushan Script', cursive;
+                --Mont: 'Montserrat', sans-serif;
+            }
+
+            .container{
+                
+            }
+
+            .main-text{
+                text-align: center;
+                padding-top: 30px;
+            }
+
+            .main-header{
+                font-family: var(--Inter);
+            }
+
+            .main-buttons{
+                text-align: center;
+                
+            }
+
+            .main-buttons a{
+                text-decoration: none;
+                color: green;
+                font-size: 40px;
+                
+                font-family: var(--Inter);
+                
+                
+            }
+
+            .button-name{
+                margin-top: 5%;
+                padding: 180px;
+                margin-left: 20px;
+                margin-right: 20px;
+                border-radius: 4px;
+                background-color: black;
+                border: none;
+            }
+
+            .button-name:hover{
+                box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.75);
+            }
+
+            
+
+        </style>
+
+
     </head>
     <body>
-        <div class='main-text'>
-            <h1>Welcome</h1>
-            <h2>Please select a role</h2>
-        </div>
+        <div class='container'> <!--Main container-->
 
-        <div class='main-btns'>
-            <button><a href='#customer_home'>Customer</a></button>
-            <button><a href='#employee_login'>Employee</a></button>
-        </div>
+
+            <div class='main-text'>
+            <h1 class='main-header'>Welcome</h1>
+            <h2 class='main-header'>Please select a role</h2>
+            </div>
+
+            <div class='main-buttons'>
+                <button class='button-name'><a href='#customer_home'>Customer</a></button>
+                <button class='button-name'><a href='#employee_login'>Employee</a></button>
+            </div>
+
+
+
+        </div> <!--Container ends here-->
+
         
     </body>
 </html>
