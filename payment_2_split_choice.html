@@ -15,26 +15,28 @@
 
 
 <body>
-    <header>
-        <button class = refillDrinkButton>
-            <p>Refill drink</p>
-        </button>
-        <button class = helpButton>
-            <p>Help</p>
-        </button>
-    </header>
+    <!--Nav Bar -->
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
 
-    <h1>Would you like to split payment?</h1>
+            <li class="nav-right"><a href="#refill">Refill drink</a></li>
+            <li class="nav-right"><a href="#help">Help</a></li>
+            <li class="nav-right" style="border-left: 1px solid white;"><a href="#login-signup">Login/Sign-Up</a></li>
+        </ul>
+    </nav> <!--End of Nav-->
 
-    <button class = blueButton>
-        <p>Yes, split payment</p>
-    </button>
-    <button class = blueButton>
-        <p>No, do not split payment</p>
-    </button>
-    <footer>
-        <button class = goBackButton>
-            <p>Go Back</p>
-        </button>
-    </footer>
+    <h1 style="text-align:center;"> 
+        Would you like to split payment?
+    </h1>
+
+
+    <!--Main Page Buttons-->
+    <div class="main-buttons">
+        <button class="button">Yes, split Payment</button>
+        <button class="button">No, do not split payment</button>
+    </div>
+
+    <!--Back Button-->
+    <button class="back-button"><a href="#back">Back</a></button>
 </body> 
