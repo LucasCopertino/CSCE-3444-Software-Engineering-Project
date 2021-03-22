@@ -1,31 +1,48 @@
-<div id="login-container" class="flex container mx-auto">
-  <div class="w-full max-w-xs">
-    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 ">
-      <div class="mb-4">
-        <label class="block text-gray-700 text-sm font-bold mb-2 " for="username">
+<!DOCTYPE html>
+<html lang = en>
+
+<head>
+    <link rel="stylesheet" href="login.css">
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li class="nav-right"><a href="#refill">Refill drink</a></li>
+            <li class="nav-right"><a href="#help">Help</a></li>
+            <li class="nav-right" style="border-left: 1px solid white;"><a href="#login-signup">Login/Sign-Up</a></li>
+        </ul>
+    </nav> <!--End of Nav-->
+</head>
+
+
+<div id="login-container">
+  <div >
+    <form >
+      <div>
+        <label for="username">
           Username
         </label>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username">
-        <p class="text-red-500 text-xs italic">Must be at least 8 characters. Numbers and letters only.</p>
+        <input id="username" type="text" placeholder="Username">
+        <p>Must be at least 8 characters. Numbers and letters only.</p>
       </div>
-      <div class="mb-6">
-        <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
+      <div>
+        <label for="password">
           Password
         </label>
-        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="********">
+        <input id="password" type="password" placeholder="********">
       </div>
       <div class="flex items-center justify-between">
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+        <button type="button">
           Sign In
         </button>
-        <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
+        <a href="#">
           Forgot Password?
         </a>
       </div>
     </form>
   </div>
-  <div class="notification bg-indigo-900 text-center py-4 lg:px-4">
-    <div class="p-2 bg-indigo-800 items-center text-indigo-100 leading-none lg:rounded-full flex lg:inline-flex" role="alert">
+  <div>
+    <div role="alert">
     </div>
   </div>
 </div>
+</html>
