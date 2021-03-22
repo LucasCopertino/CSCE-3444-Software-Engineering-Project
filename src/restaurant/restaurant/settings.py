@@ -57,7 +57,7 @@ ROOT_URLCONF = 'restaurant.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates/menu','templates/staff','templates/accounts','templates/orders'], #our update - this setting defines the directory to look for html files to be rendered in the views.py of different apps.
+        'DIRS': ['templates/menu','templates/staff','templates/accounts','templates/orders','templates/home_pages'], #our update - this setting defines the directory to look for html files to be rendered in the views.py of different apps.
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

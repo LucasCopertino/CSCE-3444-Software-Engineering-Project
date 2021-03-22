@@ -11,28 +11,31 @@
 </head>
 
 <body>
-    <header>
-        <button class = refillDrinkButton>
-            <p>Refill drink</p>
-        </button>
-        <button class = helpButton>
-            <p>Help</p>
-        </button>
-    </header>
-    <h1>Enter your card information and press "Pay".</h1>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
 
-    <form>
+            <li class="nav-right"><a href="#refill">Refill drink</a></li>
+            <li class="nav-right"><a href="#help">Help</a></li>
+            <li class="nav-right" style="border-left: 1px solid white;"><a href="#login-signup">Login/Sign-Up</a></li>
+        </ul>
+    </nav> <!--End of Nav-->
+    <h1 style="text-align:center;">
+        Enter your card information and press "Pay".
+    </h1>
+
+    <form style="text-align:center;">
         <label for="cardNumber">Enter card number here:</label><br>
         <input type="text" num="cardNumber"><br>
     </form>
    
-    <button class = blueButton>
-        <p>Pay</p>
-    </button>
+     <!--Main Page Buttons-->
+     <div class="main-buttons">
+        <button class="button">Process payment</button>
+    </div>
    
     <footer>
-        <button class = goBackButton>
-            <p>Go Back</p>
-        </button>
+        <!--Back Button-->
+         <button class="back-button"><a href="#back">Back</a></button>
     </footer>
 </body>  

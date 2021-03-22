@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang = "en">
 <head> 
@@ -5,34 +7,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <title>Cart Page</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styleCartAndPayment.css">
 
-    <style>
-        .cartBox{
-            background-color: cyan;
-            width: 300px;
-            height: 500px;
-        }
-        .buttonBox{
-            background-color: fuchsia;
-            width: 200px;
-            height: 100px;
-        }
-    </style>
 
 </head> 
 
 
 
 <body>
-    <h1>Cart Page</h1>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
 
-    <div class = cartBox>
+            <li class="nav-right"><a href="#refill">Refill drink</a></li>
+            <li class="nav-right"><a href="#help">Help</a></li>
+            <li class="nav-right" style="border-left: 1px solid white;"><a href="#login-signup">Login/Sign-Up</a></li>
+        </ul>
+    </nav> <!--End of Nav-->
+    <h1 style="text-align:center;">Cart</h1>
+
+    <div class = totalBox>
         <p>cart items listed here</p>
     </div>
 
-    <button class = buttonBox>
-        <p>place order button</p>
-    <button>    
+     <!--Main Page Buttons-->
+     <div class="main-buttons">
+        <button class="button">Place order</button>
+    </div>
+    <footer>
+        <!--Back Button-->
+        <button class="back-button"><a href="#back">Back</a></button>
+    </footer>       
 
 </body>  
