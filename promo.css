@@ -171,11 +171,76 @@ body{
 .dropDown:hover .dropDownContents {
     display: block;
 }
-.center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
+div{
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
   }
- 
-  
+img     {
+    height: 500px;
+    width: 340px;  
+    border: 3px solid black;
+    border-radius: 10px;
+    margin: 0px 8px;
+    display: block;
+    box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.75);
+    
+}
+.square {
+    background: #5F9EA0;
+    border-radius: 25px;
+    margin: auto;
+    width: 1000px;
+    height: 200px;
+    line-height: 200px;
+    text-align: center;
+    font-size: 25px;
+    border: 3px solid black;
+}
+.container {
+  display: -ms-grid;
+  display: grid;
+  grid-gap: 0.5em;
+  -ms-grid-rows: (1fr)[2];
+      grid-template-rows: repeat(2, 1fr);
+  -ms-grid-columns: (1fr)[4];
+      grid-template-columns: repeat(4, 1fr);
+  width: 100vw;
+  height: 100vh;
+}
+
+.grid-1 {
+  -ms-grid-column: 1;
+      grid-column-start: 1;
+  grid-column-end: 3;
+  -ms-grid-row: 1;
+      grid-row: 1;
+}
+.grid-2 {
+  -ms-grid-column: 3;
+      grid-column-start: 3;
+  grid-column-end: 5;
+  -ms-grid-row: 1;
+      grid-row: 1;
+}
+.grid-3 {
+  -ms-grid-column: 1;
+      grid-column-start: 1;
+  grid-column-end: 3;
+  -ms-grid-row: 2;
+      grid-row: 2;
+}
+.grid-4 {
+  -ms-grid-column: 3;
+      grid-column-start: 3;
+  grid-column-end: 5;
+  -ms-grid-row: 2;
+      grid-row: 2;
+}
+
+.callout {
+  margin: 0;
+  background-color: #5F9EA0;
+}
