@@ -21,7 +21,7 @@ from orders.views import *
 from home_pages.views import *
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls,name='admin1'),
         path('',index, name="blank"),
 
     path('cart/',cart, name="cart"),

@@ -1,29 +1,6 @@
+{% extends 'order_base.html' %}
 
-
-<!DOCTYPE html>
-<html lang = "en">
-<head> 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
-    <title>Cart Page</title>
-    <link rel="stylesheet" href="styleCartAndPayment.css">
-
-
-</head> 
-
-
-
-<body>
-    <nav>
-        <ul>
-            <li><a href="#home">Home</a></li>
-
-            <li class="nav-right"><a href="#refill">Refill drink</a></li>
-            <li class="nav-right"><a href="#help">Help</a></li>
-            <li class="nav-right" style="border-left: 1px solid white;"><a href="#login-signup">Login/Sign-Up</a></li>
-        </ul>
-    </nav> <!--End of Nav-->
+{% block content %}
     <h1 style="text-align:center;">Cart</h1>
 
     <div class = totalBox>
@@ -40,3 +17,5 @@
     </footer>       
 
 </body>  
+
+{% endblock %}

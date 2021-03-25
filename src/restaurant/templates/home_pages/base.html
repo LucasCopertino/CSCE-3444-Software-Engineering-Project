@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="{% static '/orders/styleCartAndPayment.css' %}">
+
+</head>
+<!--Nav Bar -->
+<nav>
+    <ul>
+        <li><a href="{% url 'homepage' %}">Home</a></li>
+        <li><a href="{% url 'menu_home' %}">Menu</a></li>
+        <li><a href="#games">Games</a></li>
+        <li><a href="{% url 'finish-pay' %}">Place Order</a></li>
+        <li><a href="{% url 'pay' %}">Pay Now</a></li>
+
+        <li class="nav-right"><a href="#help">Help</a></li>
+        <li class="nav-right" style="border-left: 1px solid white;"><a href="{% url 'customer_login'%}">Login/Sign-Up</a></li>
+        
+    </ul>
+</nav> <!--End of Nav-->
+    {% block content %}
+    {% endblock %}
+</html>
