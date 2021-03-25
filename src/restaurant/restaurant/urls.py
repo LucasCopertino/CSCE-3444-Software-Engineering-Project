@@ -16,9 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from menu.views import menu_home
-from accounts.views import customer_login
+from accounts.views import customer_login,sign_up
 from orders.views import *
 from home_pages.views import *
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('cart/',cart, name="cart"),
@@ -28,6 +29,7 @@ urlpatterns = [
     path('pay3/',how_many_split, name="pay3"),
     path('cash-payment/',cash_payment, name="cash"),
     path('card-payment/',card_payment, name="card"),
+    path('sign-up',sign_up,name="sign_up"),
 
     path('customer-login/', customer_login, name='customer_login'),
         path('select-role/', index, name='index'),

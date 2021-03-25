@@ -40,7 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'menu', #our update - install the app we created from the terminal 
     'orders',
+    'accounts',
+    'crispy_forms'
 ]
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -125,3 +128,4 @@ STATIC_URL = '/static/' #this defines the static files we need for the website l
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),#BASE_DIR here is 'RESTAURANT/' directory
 )
+LOGIN_REDIRECT_URL = 'homepage'
