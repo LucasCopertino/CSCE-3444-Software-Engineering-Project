@@ -22,6 +22,8 @@ from home_pages.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+        path('',index, name="blank"),
+
     path('cart/',cart, name="cart"),
         path('finish-pay/',choose_method, name="finish-pay"),
     path('pay/', start_payment, name="pay"),
