@@ -15,7 +15,7 @@ def sign_up(request):
         if form.is_valid():
             user = form.save()
             login(request,user)
-            return render(request,'accounts/home_pages/index.html')
+            return render(request,'accounts/customer_home.html')
     context['form']=form
     return render(request,'sign_up.html',context)
 

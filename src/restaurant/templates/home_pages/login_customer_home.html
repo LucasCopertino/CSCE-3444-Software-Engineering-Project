@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="{% static '/orders/styleCartAndPayment.css' %}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Home Page</title>
+    
+</head>
+<!--Nav Bar -->
+<nav>
+    <ul>
+        <li><a href="{% url 'homepage' %}">Home</a></li>
+        <li><a href="{% url 'menu_home' %}">Menu</a></li>
+        <li><a href="#games">Games</a></li>
+        <li><a href="{% url 'finish-pay' %}">Place Order</a></li>
+        <li><a href="{% url 'pay' %}">Pay Now</a></li>
+
+        <li class="nav-right"><a href="#help">Help</a></li>
+        <li class="nav-right" style="border-left: 1px solid white;"><a href="{% url 'logout'%}">Logout</a></li>
+        
+    </ul>
+</nav> <!--End of Nav-->
+   <!--Main Page Buttons-->
+   <div class="main-buttons">
+    <button class="button"><a href="{% url 'menu_home' %}">Menu</a></button>
+    <button class="button">Games</button>
+    <button class="button"> <a href="{% url 'finish-pay' %}">Place Order</a></button>
+    <button class="button"><a href="{% url 'pay' %}">Pay Now</a></button>
+</div>
+
+<!--Back Button-->
+<button class="back-button"><a href="#back">Back</a></button>
+</html>
+ 
+       
+       
+        
+
+
+
+ 
