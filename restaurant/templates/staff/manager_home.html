@@ -20,7 +20,7 @@
 
         .logout-container button{
             background-color: black;
-            color: green;
+            
             font-family: var(--Inter);
             font-size: 20px;
             font-weight: bold;
@@ -29,6 +29,11 @@
             padding-left: 20px;
             padding-right: 20px;
 
+        }
+
+        .logout-container a{
+            text-decoration: none;
+            color: white;
         }
 
         .logout-container button:hover{
@@ -48,7 +53,7 @@
 
         .main-buttons button{
             background-color: black;
-            color: green;
+            color: white;
             font-family: var(--Inter);
             font-size: 40px;
             font-weight: bold;
@@ -59,7 +64,7 @@
 
         .main-buttons a{
             text-decoration: none;
-            color: green;
+            color: white;
         }
 
         .main-buttons button:hover{
@@ -67,13 +72,19 @@
         }
 
         .back-button{
-            font-family: var(--Inter);
-            font-size: 16px;
             background-color: black;
-            color: green;
             border: none;
             border-radius: 4px;
             padding: 20px;
+        }
+
+        .back-button a{
+            text-decoration: none;
+            font-family: var(--Inter);
+            font-size: 16px;
+            font-weight: bold;
+            
+            color: white;
         }
 
         .back-button:hover{
@@ -84,7 +95,7 @@
 
     <body>
         <div class="logout-container">
-            <button>Log Out</button>
+            <button><a href="#log-out">Log Out</a></button>
         </div>
 
         <div class="main-header">
@@ -100,7 +111,7 @@
         <br>
 
         
-        <button class="back-button">Back</button>
+        <button class="back-button"><a href='#back'>Back</a></button>
         
     </body>
 </html>
