@@ -47,28 +47,13 @@
               <h2 class = "food-name">{{item.name}}</h2>
               <h3 class = "food-price">${{item.price}}</h3>
    
-              <button style="width: 25px; height: 20px;" id="inct"> + </button>
+              <button style="width: 25px; height: 20px;" id="inct" onclick="increase('{{item.pk}}')"> + </button>
               <input id=demoInput type=number style="width: 40px;">
-              <button style="width: 25px;height: 20px;" id="decrement"> - </button>
+              <button style="width: 25px; height: 20px;" id="inct" onclick="decrease('{{item.pk}}')"> - </button>
 
              <script src="https://use.fontawesome.com/a6e14efad5.js"></script>
     
-           <script>
-           	var x = 0;
-    	var span = document.getElementById('demoInput');
-    	      var increment = document.getElementById('inct');
-    	      var decrement = document.getElementById('decrement');
-
-   increment.addEventListener('click', function () {
-  // this function is executed whenever the user clicks the increment button
-  span.value++;
-});
-
-decrement.addEventListener('click', function () {
-  // this function is executed whenever the user clicks the decrement button
-  span.value--;
-});
-</script>
+           
               <p class = "category">Categories: <span>Featured</span></p>
             </div>
           </div>
@@ -77,6 +62,29 @@ decrement.addEventListener('click', function () {
 
           
         </div>
+        <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+        <script type="text/javascript">
+          // Create an instance of the Stripe object with public stripe key
+          function increase(click_id){
+          $.ajax({
+            url: `{% url "add-to-order" %}`,
+            data: {
+        "id" :click_id
+    },            type: 'get',
+            
+          })}
+          function decrease(click_id){
+          $.ajax({
+            url: `{% url "reduce-order-item" %}`,
+            data: {
+        "id" :click_id
+    },            type: 'get',
+            
+          })}
+        </script>
         {%endfor%}
 
       </div>

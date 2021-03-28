@@ -1,5 +1,20 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from accounts.models import *
+from orders.models import *
+from django.contrib import messages
+from menu.models import *
+from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+from datetime import date,datetime
+import random
+import string
 # Create your views here.
+
+def generate_order_id():
+    date_str = date.today().strftime('%Y%m%d')[2:] + str(datetime.now().second)
+    rand_str = "".join([random.choice(string.digits) for count in range(3)])
+    return date_str + rand_str
+
 def cart(request):
     return render( request,'cart_page.html')
 
@@ -20,4 +35,58 @@ def cash_payment(request):
 
 def card_payment(request):
     return render(request, 'payment_5A_card.html')
+
+
+def add_to_cart(request):
+    if request.method == 'GET':
+
+        # get the user profile
+        user_profile = get_object_or_404(Customer, user=request.user)
+        # filter products by id
+        item_id = request.GET.get('id')
+
+        orderitem = Item.objects.get(id=item_id)
+        # check if the user already owns this product
     
+        # create orderItem of the selected product
+        order_item, status = orderItem.objects.get_or_create(Item=orderitem)
+        order_item.quantity = order_item.quantity + 1
+        order_item.save()
+        # create order associated with the user
+        user_order, status = order.objects.get_or_create(owner=user_profile, is_ordered=False)
+        user_order.items.add(order_item)
+        if status:
+            # generate a reference code
+            user_order.order_id = generate_order_id()
+            user_order.save()
+
+        # show confirmation message and redirect back to the same page
+        messages.info(request, "item added to cart")
+    return render(request, 'menu.html')
+def reduce_order_item(request):
+    if request.method == 'GET':
+
+        # get the user profile
+        user_profile = get_object_or_404(Customer, user=request.user)
+        # filter products by id
+        item_id = request.GET.get('id')
+
+        orderitem = Item.objects.get(id=item_id)
+        print("yay debug")
+
+        if order.objects.filter(owner=user_profile)[0].items.filter(Item=orderitem).exists():
+            order_item = orderItem.objects.filter(Item=orderitem)[0]
+            if order_item.quantity > 0:
+                order_item.quantity -= 1
+                order_item.save()
+            else:
+                order.items.remove(order_item)
+                order.save()
+        messages.info(request, "Removed from cart cart")
+    return render(request, 'menu.html')
+
+
+
+
+
+
