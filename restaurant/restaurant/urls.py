@@ -20,6 +20,7 @@ from accounts.views import customer_login
 from orders.views import cart
 from staff.views import waiter_notif_view, kitchen_queue_view, manager_home_view, manager_report_view
 from home_pages.views import index_view, customer_home_view
+from games.views import snake_view, ticTacToe_view
 
 urlpatterns = [
     path('', index_view, name='default_home'),
@@ -31,5 +32,7 @@ urlpatterns = [
     path('customer-home/', customer_home_view, name='customer_home'),
     path('kitchen-queue/', kitchen_queue_view, name='kitchen_queue'),
     path('manager-home/', manager_home_view, name='mananger_home'),
-    path('manager-report/', manager_report_view, name='manager_report')
+    path('manager-report/', manager_report_view, name='manager_report'),
+    path('snake/', snake_view, name='snake'),
+    path('tic-tac-toe/', ticTacToe_view, name="tic_tac_toe")
 ]
