@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Games Page</title>
+    <title>Rewards Login</title>
 
     <style>
-        
-       ul {
+        ul {
            list-style-type: none;
            margin: 0px;
            padding: 0px;
@@ -38,85 +37,97 @@
            padding: 10%;
        }
 
-        .gamebox {
-            height: 500px;
-            width: 500px;
+         .navbar a:hover {
+            background: #353640;
+         }
+
+
+
+         .header {
+             text-align: center;
+             font-size: 100px;
+         }
+
+         .form-box {
+             width: 500px;
+             height: 500px;
+             background: black;
+             margin: 12% auto;
+             padding: 50px 0;
+             color: white;
+             border-radius: 25px;
+             float: left;
+             border: 5px solid white;
+         }
+
+         h1 {
+             text-align: center;
+             margin-bottom: 40px;
+
+         }
+
+         
+
+         .submit-btn {
+            margin: 400px auto 20px;
+            width: 80%;
+            display: block;
+            outline: none;
+            padding: 10px 0;
+            border: 1px solid #fff;
+            cursor: pointer;
+            background: transparent;
+            color: #fff;
+            font-size: 16px;
             border-radius: 25px;
-            color: white;
-            text-align: center;
-            border: 5px solid white;
-            margin: 20px auto;
-            padding: 5px;
-            float: left;
-            margin-top: 30px;
 
-        }
-
-        .header {
-            font-size: 60px;
-            text-align: center;
-        }
+         }
 
 
-        div#g1 {
-            background: black;
-        }
-
-       
-
-        h0 {
-            font-size: 30px;
-            color: black;
-            
-        }
-        
 
     </style>
+
 </head>
 
 
 <body>
+    <div class="navbar">
+        <ul>
+            
+            <li><a href="#">Help</a></li>
+            <li><a href="{% url 'homepage' %}">Go Back</a></li>
+            <li><a href="{% url 'set-childmode' %}">Child Mode</a></li>
+            <li><a href="#">Refill Drink</a></li>
+            <li><a href="#">Login/Sign-Up</a></li>
+            <li><a href="{% url 'homepage' %}">Home</a></li>
+    
+        </ul>
+    
+    </div>
 
+    
+    <div class="form-box">
+        <h1>Game 1</h1>
 
-
-<div class="navbar">
-    <ul>
         
-        <li><a href="#">Help</a></li>
-        <li><a href="{% url 'homepage' %}">Go Back</a></li>
-        <li><a href="{% url 'set-childmode' %}">Child Mode</a></li>
-        <li><a href="#">Refill Drink</a></li>
-        <li><a href="#">Login/Sign-Up</a></li>
-        <li><a href="{% url 'homepage' %}">Home</a></li>
+        <button type="button" class="submit-btn"><a href="{% url 'games-snake' %}">Play</a></button>
 
-    </ul>
+    </div>
+    
+    <div class="form-box">
+        <h1>Game 2</h1>
 
-</div>
+        
+        <button type="button" class="submit-btn"><a href="{% url 'games-tictactoe' %}">Play</a></button>
 
-
-
-
-<div class="gamebox" id="g1">
-    <h1 class="header">
-        Game 1
-    </h1>
-
-</div>
-
-<div class="gamebox" id="g1">
-    <h1 class="header">
-        Game 2
-    </h1>
-
-</div>
+    </div>
 
 
 
 
     
+    
 </body>
-
-
 
 
 
