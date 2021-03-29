@@ -28,14 +28,24 @@
       <div class = "menu-container">
         
         <div class = "menu-btns">
-        	<div class="btn-hover">
-          <button type = "button" class = "menu-btn active-btn" id = "featured">Breakfast</button>
+        	<!--<div class="btn-hover">-->
+          <!--<button type = "button" class = "menu-btn active-btn" id = "featured">Breakfast</button>-->
+          <ul>
+            <li> <a href ="{% url 'categories' category_id=1 %}" style ="color: black">Lunch</a></li>
+            <li> <a href ="{% url 'categories' category_id=3 %}" style ="color: black">Dinner</a></li>
+            <li> <a href ="{% url 'categories' category_id=4 %}" style ="color: black">Kids menu</a></li>
+            <li> <a href ="{% url 'categories' category_id=2 %}" style ="color: black">Drinks</a></li>
+
+          </ul>
       </div>
       <div class="btn-hover">
-          <button type = "button" class = "menu-btn" id = "today-special">Lunch </button>
+          <!--<button type = "button" class = "menu-btn" id = "today-special">Lunch </button>-->
+          <ul>
+            <!--<li> <a href ="{% url 'categories' category_id=1 %}" style ="color: black">Dinner</a></li>-->
+          </ul>
       </div>
         </div>
-        {%for item in itms %}
+        {%for item in itms%}
  
         <div class = "food-items">
           <!-- item -->

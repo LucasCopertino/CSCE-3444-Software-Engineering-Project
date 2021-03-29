@@ -15,11 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from menu.views import menu_home
+from menu.views import menu_home, cat_g
 from accounts.views import customer_login,sign_up
 from orders.views import *
 from home_pages.views import *
 from django.contrib.auth import views as auth_views
+from django.conf.urls import url
+from menu import views
 urlpatterns = [
     path('admin/', admin.site.urls,name='admin1'),
         path('',index, name="blank"),
@@ -41,6 +43,7 @@ urlpatterns = [
         path('homepage/', home_page, name='homepage'),
 
     path('accounts/',include('django.contrib.auth.urls')),
-
-    path('menu/', menu_home, name='menu_home') #set a path for a views.py function to be activated. eg localhost:/8000/menu/ will activate views.py's function 'menu_home'
+    path('categories/<int:category_id>', views.cat_g, name='categories'),
+    path('menu/', menu_home, name='menu_home'), #set a path for a views.py function to be activated. eg localhost:/8000/menu/ will activate views.py's function 'menu_home'
+        path('dinner/', menu_home, name='dinner_menu')
 ]
