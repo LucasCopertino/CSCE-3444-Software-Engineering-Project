@@ -51,15 +51,19 @@ def add_to_cart(request):
         # create orderItem of the selected product
         order_item, status = orderItem.objects.get_or_create(Item=orderitem)
         order_item.quantity = order_item.quantity + 1
+        order_item.owner = user_profile
+        order_item.cost= order_item.get_cost()
         order_item.save()
         # create order associated with the user
         user_order, status = order.objects.get_or_create(owner=user_profile, is_ordered=False)
         user_order.items.add(order_item)
+        user_order.cost=user_order.get_cart_total()
+        user_order.save()
         if status:
             # generate a reference code
             user_order.order_id = generate_order_id()
             user_order.save()
-
+       
         # show confirmation message and redirect back to the same page
         messages.info(request, "item added to cart")
     return render(request, 'menu.html')
@@ -76,17 +80,31 @@ def reduce_order_item(request):
 
         if order.objects.filter(owner=user_profile)[0].items.filter(Item=orderitem).exists():
             order_item = orderItem.objects.filter(Item=orderitem)[0]
+            order_item.owner = user_profile
+
             if order_item.quantity > 0:
                 order_item.quantity -= 1
+                order_item.cost = order_item.get_cost()
                 order_item.save()
             else:
-                order.items.remove(order_item)
-                order.save()
-        messages.info(request, "Removed from cart cart")
+                order_item.delete()
+        user_order, status = order.objects.get_or_create(owner=user_profile, is_ordered=False)
+        user_order.items.add(order_item)
+        user_order.cost = user_order.get_cart_total()
+        user_order.save()
+        messages.info(request, "Removed from cart")
     return render(request, 'menu.html')
 
+def cart(request):
+    carts_customer = get_object_or_404(Customer, user=request.user)
+    customer_order_items = orderItem.objects.filter(owner=carts_customer)
+    customer_order = order.objects.filter(owner=carts_customer, is_ordered=False)
+    context = {}
 
+    if customer_order.exists():
+        context = {'items':customer_order_items,'order':customer_order[0] }
+        print("h")
+    return render(request,'cart_page.html', context)
 
-
-
-
+def checkout(request):
+    x = 0

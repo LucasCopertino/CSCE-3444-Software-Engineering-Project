@@ -8,9 +8,12 @@ class orderItem(models.Model):
     Item = models.OneToOneField(Item, on_delete=models.SET_NULL, null=True)
     quantity = models.IntegerField(null=False,default=0)
     owner = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
-
+    cost = models.DecimalField(max_digits=6,decimal_places=2, default=10.0)
     def __str__(self):
         return '{0} - {1}'.format(self.Item.name, self.quantity)
+    def get_cost(self):
+        return self.quantity * self.Item.price
+    
 class order(models.Model):
     owner = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
     is_ordered = models.BooleanField(default=False)
@@ -28,7 +31,7 @@ class order(models.Model):
         return self.items.all()
 
     def get_cart_total(self):
-        return sum([item.Item.price for item in self.items.all()])
+        return sum([item.Item.price*item.quantity for item in self.items.all()])
 
     def __str__(self):
         return '{0} - {1}'.format(self.owner, self.order_id)
