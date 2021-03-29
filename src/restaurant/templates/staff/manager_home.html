@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Manager Home</title>
+    </head>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&family=Kaushan+Script&family=Montserrat:wght@200;300;400;500;600;700;800;900&display=swap');
+
+        :root{
+            --Inter: 'Inter', sans-serif;
+            --Kaushan: 'Kaushan Script', cursive;
+            --Mont: 'Montserrat', sans-serif;
+        }
+
+        .logout-container{
+            float: right;
+            
+        }
+
+        .logout-container button{
+            background-color: black;
+            
+            font-family: var(--Inter);
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 4px;
+            padding-left: 20px;
+            padding-right: 20px;
+
+        }
+
+        .logout-container a{
+            text-decoration: none;
+            color: white;
+        }
+
+        .logout-container button:hover{
+            box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.75);
+        }
+
+
+        .main-header{
+            font-family: var(--Inter);
+            text-align: center;
+
+        }
+
+        .main-buttons {
+            text-align: center;
+        }
+
+        .main-buttons button{
+            background-color: black;
+            color: white;
+            font-family: var(--Inter);
+            font-size: 40px;
+            font-weight: bold;
+            padding: 100px;
+            border-radius: 4px;
+            margin: 20px;
+        }
+
+        .main-buttons a{
+            text-decoration: none;
+            color: white;
+        }
+
+        .main-buttons button:hover{
+            box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.75);
+        }
+
+        .back-button{
+            background-color: black;
+            border: none;
+            border-radius: 4px;
+            padding: 20px;
+        }
+
+        .back-button a{
+            text-decoration: none;
+            font-family: var(--Inter);
+            font-size: 16px;
+            font-weight: bold;
+            
+            color: white;
+        }
+
+        .back-button:hover{
+            box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.75);
+        }
+    </style>
+
+
+    <body>
+        <div class="logout-container">
+            <button><a href="#log-out">Log Out</a></button>
+        </div>
+
+        <div class="main-header">
+            <h1>Manager Home View</h1>
+        </div>
+        
+        
+
+        <div class='main-buttons'>
+            <button><a href='#report'>End of Day Report</a></button>
+            <button><a href='#edit-menu'>Edit Menu</a></button>
+        </div>
+        <br>
+
+        
+        <button class="back-button"><a href='#back'>Back</a></button>
+        
+    </body>
+</html>

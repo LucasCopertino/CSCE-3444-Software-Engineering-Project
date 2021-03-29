@@ -13,13 +13,13 @@
         <!--Main Page Buttons-->
         <div class="main-buttons">
             <button class="button"><a href="{% url 'menu_home' %}">Menu</a></button>
-            <button class="button">Games</button>
+            <button class="button"><a href="{% url 'games_home' %}">Games</a></button>
             <button class="button"> <a href="{% url 'finish-pay' %}">Place Order</a></button>
             <button class="button"><a href="{% url 'pay' %}">Pay Now</a></button>
         </div>
 
         <!--Back Button-->
-        <button class="back-button"><a href="#back">Back</a></button>
+        <button class="back-button"><a href="{% url 'blank' %}">Back</a></button>
         
 {% endblock %}
 

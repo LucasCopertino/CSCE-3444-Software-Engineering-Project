@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games Page</title>
+
+    <style>
+        
+       ul {
+           list-style-type: none;
+           margin: 0px;
+           padding: 0px;
+           overflow: hidden;
+           background-color: black;
+           font-family: Arial, Helvetica, sans-serif;
+           border-radius: 8px;
+       }
+
+       li {
+           float: right;
+           border-right: 1px solid white;
+       }
+
+       li a {
+           display: block;
+           color: white;
+           text-align: center;
+           padding: 10px 16px;
+           text-decoration: none;
+       }
+
+       .nav-right {
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           padding: 10%;
+       }
+
+        .gamebox {
+            height: 500px;
+            width: 500px;
+            border-radius: 25px;
+            color: white;
+            text-align: center;
+            border: 5px solid white;
+            margin: 20px auto;
+            padding: 5px;
+            float: left;
+            margin-top: 30px;
+
+        }
+
+        .header {
+            font-size: 60px;
+            text-align: center;
+        }
+
+
+        div#g1 {
+            background: black;
+        }
+
+       
+
+        h0 {
+            font-size: 30px;
+            color: black;
+            
+        }
+        
+
+    </style>
+</head>
+
+
+<body>
+
+
+
+<div class="navbar">
+    <ul>
+        
+        <li><a href="#">Help</a></li>
+        <li><a href="{% url 'homepage' %}">Go Back</a></li>
+        <li><a href="{% url 'set-childmode' %}">Child Mode</a></li>
+        <li><a href="#">Refill Drink</a></li>
+        <li><a href="#">Login/Sign-Up</a></li>
+        <li><a href="{% url 'homepage' %}">Home</a></li>
+
+    </ul>
+
+</div>
+
+
+
+
+<div class="gamebox" id="g1">
+    <h1 class="header">
+        Game 1
+    </h1>
+
+</div>
+
+<div class="gamebox" id="g1">
+    <h1 class="header">
+        Game 2
+    </h1>
+
+</div>
+
+
+
+
+    
+</body>
+
+
+
+
+
+
+</html>
