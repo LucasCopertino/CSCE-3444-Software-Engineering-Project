@@ -1,6 +1,7 @@
 {% extends 'order_base.html' %}
 
 {% block content %}
+
     <h1 style="text-align:center;">
         Enter your card information and press "Pay".
     </h1>
@@ -12,9 +13,33 @@
    
      <!--Main Page Buttons-->
      <div class="main-buttons">
-        <button class="button">Process payment</button>
+        <button class="button"  onclick="work('{{order.cost}}')">Process payment</button>
     </div>
-   
+    <script src="https://js.stripe.com/v3/"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        // Create an instance of the Stripe object with public stripe key
+        var stripe = Stripe("pk_test_51IMeMeCiuu3zPBMk89bXdF2Xa5iy9gJo6pEZoKmPoWSAB1QlpxuN0Cnxj2omWn0wpPHZXB3Awk42Vy0esrXXOuAd00MQ0AJkhp");
+        function work(click_id){
+        $.ajax({
+          url: '{% url "card" %}',  
+          type: 'get',
+          data: {
+              "id" :click_id
+          },
+          success: function(response){
+            return stripe.redirectToCheckout({sessionId:response.sessionId})
+          }
+      
+      
+      
+        });
+      }
+      </script>
+      
     <footer>
         <!--Back Button-->
          <button class="back-button"><a href="#back">Back</a></button>

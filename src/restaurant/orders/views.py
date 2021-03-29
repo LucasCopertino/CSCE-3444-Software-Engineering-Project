@@ -8,6 +8,12 @@ from django.contrib.auth.decorators import login_required
 from datetime import date,datetime
 import random
 import string
+import stripe
+from django.http import HttpResponseRedirect, JsonResponse
+from flask import jsonify
+STRIPE_PUB_KEY = 'pk_test_51IMeMeCiuu3zPBMk89bXdF2Xa5iy9gJo6pEZoKmPoWSAB1QlpxuN0Cnxj2omWn0wpPHZXB3Awk42Vy0esrXXOuAd00MQ0AJkhp'
+STRIPE_PRIV_KEY = 'sk_test_51IMeMeCiuu3zPBMkGAyiJKf2ABr0YmkU7DyZ3IHs0cJhIaTl7zjCGWpdirVZhRNxhKzWWhs4OQEf3zyzUeL2wkW100wiwO2OKK'
+stripe.api_key = STRIPE_PRIV_KEY
 # Create your views here.
 
 def generate_order_id():
@@ -33,8 +39,41 @@ def choose_method(request):
 def cash_payment(request):
     return render(request, 'payment_5B_cash.html')
 
-def card_payment(request):
+def card(request):
     return render(request, 'payment_5A_card.html')
+
+def card_payment(request):
+    carts_customer = get_object_or_404(Customer, user=request.user)
+    customer_order = order.objects.filter(owner=carts_customer, is_ordered=False)[0]
+    context = {
+        'order':customer_order
+    }
+
+    try:
+        client_stripe = "pk_test_51IMeMeCiuu3zPBMk89bXdF2Xa5iy9gJo6pEZoKmPoWSAB1QlpxuN0Cnxj2omWn0wpPHZXB3Awk42Vy0esrXXOuAd00MQ0AJkhp"
+        
+        session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items = [
+                {
+                    'price_data':{
+                        'currency':'usd',
+                        'unit_amount':int(customer_order.cost*100),
+                        'product_data':{
+                            'name':customer_order.owner.user.username,
+                            'images':['https://i.imgur.com/EHyR2nP.png']  ##how will we send images to stripe? do we need to create s3 buckets to store product images
+                        },
+                    },
+                    'quantity':1
+                }],
+                mode='payment',
+                success_url='http://127.0.0.1:8000/menu',
+                cancel_url='http://localhost:8000/menu')
+    
+    except Exception as e:
+        return JsonResponse(str(e), safe=False)
+    return JsonResponse({'sessionId':session.id})
+
 
 
 def add_to_cart(request):
@@ -106,5 +145,3 @@ def cart(request):
         print("h")
     return render(request,'cart_page.html', context)
 
-def checkout(request):
-    x = 0

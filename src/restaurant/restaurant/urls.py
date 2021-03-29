@@ -33,6 +33,8 @@ urlpatterns = [
     path('pay3/',how_many_split, name="pay3"),
     path('cash-payment/',cash_payment, name="cash"),
     path('card-payment/',card_payment, name="card"),
+        path('card/',card, name="card0"),
+
     path('sign-up',sign_up,name="sign_up"),
 
     path('login/', auth_views.LoginView.as_view, name='login'),
