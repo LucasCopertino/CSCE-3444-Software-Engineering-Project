@@ -14,7 +14,7 @@ def menu_home(request):
 
     return render(request, 'menu.html',context) 
 def cat_g(request, category_id):
-    categories= Category.objects.get(pk=category_id)
+    categories= category.objects.get(pk=category_id)
     cats = category.objects.all()
     category_posts = Item.objects.filter(cat=categories)
     return render(request, 'menu.html', {'cats': cats,'categories':categories,'category_posts':category_posts})
