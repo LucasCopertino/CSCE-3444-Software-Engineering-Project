@@ -8,7 +8,7 @@ class orderItem(models.Model):
     Item = models.OneToOneField(Item, on_delete=models.SET_NULL, null=True)
     quantity = models.IntegerField(null=False,default=0)
     owner = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
-    cost = models.DecimalField(max_digits=6,decimal_places=2, default=10.0)
+    cost = models.DecimalField(max_digits=7,decimal_places=3, default=10.0)
     def __str__(self):
         return '{0} - {1}'.format(self.Item.name, self.quantity)
     def get_cost(self):
@@ -19,7 +19,7 @@ class order(models.Model):
     is_ordered = models.BooleanField(default=False)
 
     items = models.ManyToManyField(orderItem)
-    cost = models.DecimalField(max_digits=6,decimal_places=2, default=10.0)
+    cost = models.DecimalField(max_digits=7,decimal_places=2, default=10.0)
     table_num = models.IntegerField( null=False, default=0)
     time = models.DateTimeField(null=True)
     total_items = models.IntegerField(default=1)

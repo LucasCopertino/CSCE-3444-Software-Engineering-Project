@@ -9,7 +9,7 @@ stripe.api_key = STRIPE_PRIV_KEY
 # Create your models here.
 
 class Customer(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,null=True)
     pay_id = models.CharField(max_length=200, null=True, blank=True)
 
     def __str__(self):
