@@ -19,12 +19,16 @@ from menu.views import menu_home, cat_g
 from accounts.views import customer_login,sign_up
 from orders.views import *
 from home_pages.views import *
+from games.views import *
+from staff.views import *
 from django.contrib.auth import views as auth_views
 from django.conf.urls import url
 from menu import views
 urlpatterns = [
     path('admin/', admin.site.urls,name='admin1'),
         path('',index, name="blank"),
+        path('add-to-order', add_to_cart, name='add-to-order'),
+        path('reduce-order-item', reduce_order_item, name='reduce-order-item'),
 
     path('cart/',cart, name="cart"),
         path('finish-pay/',choose_method, name="finish-pay"),
@@ -33,6 +37,8 @@ urlpatterns = [
     path('pay3/',how_many_split, name="pay3"),
     path('cash-payment/',cash_payment, name="cash"),
     path('card-payment/',card_payment, name="card"),
+        path('card/',card, name="card0"),
+
     path('sign-up',sign_up,name="sign_up"),
 
     path('login/', auth_views.LoginView.as_view, name='login'),

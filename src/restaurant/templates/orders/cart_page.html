@@ -3,8 +3,19 @@
 {% block content %}
     <h1 style="text-align:center;">Cart</h1>
 
-    <div class = totalBox>
-        <p>cart items listed here</p>
+    <div>
+        {% for item in items %}
+        <div style="display: flex;">
+            <p>{{item.Item.name}}</p>
+            <p style="margin-left: 10px;"> x</p>
+
+            <p style="margin-left: 10px;">{{item.quantity}} = {{item.cost}}</p>
+        </div>
+        
+
+        {%endfor%}
+        <p style="margin-left: 10px;">Total = {{order.cost}}</p>
+
     </div>
 
      <!--Main Page Buttons-->
