@@ -43,6 +43,18 @@ urlpatterns = [
         path('homepage/', home_page, name='homepage'),
 
     path('accounts/',include('django.contrib.auth.urls')),
+
+    path('menu/', menu_home, name='menu_home'), #set a path for a views.py function to be activated. eg localhost:/8000/menu/ will activate views.py's function 'menu_home'
     path('categories/<int:category_id>', views.cat_g, name='categories'),
-    path('menu/', menu_home, name='menu_home')#set a path for a views.py function to be activated. eg localhost:/8000/menu/ will activate views.py's function 'menu_home'
+
+    path('games/', games_home, name='games_home'), #set path for games home page
+    path('snake/', games_snake, name='games-snake'), #set path for snake
+    path('tictactoe/', games_ttt, name='games-tictactoe'), #set path for tic tac toe
+    path('childmode/', set_childmode, name='set-childmode'),
+    path('deactivatechild/', deactivate_child, name='deactivate-child'),
+
+    path('waiter-view/', waiter_home, name='waiter_home'), #set path for waiter notifications
+    path('kitchen-view/', kitchen_home, name='kitchen_home'),    #set path for kitchen queue
+    path('manager-home/', manager_home, name='manager_home'),    #set path for manager pages
+    path('manager-report/', manager_report, name='manager_report')
 ]
