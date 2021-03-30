@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       
+         <script
+         src="https://code.jquery.com/jquery-3.4.1.min.js"
+         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+         crossorigin="anonymous"></script>
+         <script>
+
+         function reload_queue(){
+            $.ajax({
+              url: '{% url "kitchen_home" %}',  
+              type: 'get',
+              success: function(){
+                 location.reload()
+              }
+             
+          
+          
+          
+            });
+          }
+          setInterval(reload_queue,2000);
+        </script>
+
+    </head>
+    {% for order in orders %}
+    <div>{{order.order_id}}</div>
+    {%endfor%}
+</html>

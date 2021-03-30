@@ -1,8 +1,7 @@
+{% extends 'base.html' %}
+
 {% load static %} <!--This is a django-html tag to load the location of the static files we need like stylesheets and javascript files-->
-
-
-<!DOCTYPE html>
-<html>
+{% block content %}
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,7 +16,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
     
   </head>
-  <body>
   	<nav style="text-align: right; padding-right: 10px;"> <a href="#" style="text-decoration: none; color: white">Login          <i class="fa fa-user" aria-hidden="true" style="color: black"></i>
 </a>
 <a href="{% url 'cart' %}" style="color: black; padding-left: 20px;"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
@@ -95,8 +93,6 @@
 
     
 
-
+{% endblock %}
     
     
-  </body>
-</html>
