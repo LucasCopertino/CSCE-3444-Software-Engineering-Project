@@ -44,6 +44,5 @@ urlpatterns = [
 
     path('accounts/',include('django.contrib.auth.urls')),
     path('categories/<int:category_id>', views.cat_g, name='categories'),
-    path('menu/', menu_home, name='menu_home'), #set a path for a views.py function to be activated. eg localhost:/8000/menu/ will activate views.py's function 'menu_home'
-        path('dinner/', menu_home, name='dinner_menu')
+    path('menu/', menu_home, name='menu_home')#set a path for a views.py function to be activated. eg localhost:/8000/menu/ will activate views.py's function 'menu_home'
 ]
