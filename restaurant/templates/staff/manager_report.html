@@ -3,6 +3,9 @@
     <head>
         <title>Manager End of Day Report</title>
     </head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&family=Kaushan+Script&family=Montserrat:wght@200;300;400;500;600;700;800;900&display=swap');
 
@@ -12,13 +15,16 @@
             --Mont: 'Montserrat', sans-serif;
         }
 
+        body {
+            font-family: var(--Inter);
+        }
+
         .logout-container{
             float: right;
         }
 
         .logout-container button{
             background-color: black;
-            
             font-family: var(--Inter);
             font-size: 20px;
             font-weight: bold;
@@ -43,14 +49,36 @@
             text-align: center;
         }
 
-        .report{
+        .table-name {
+            margin-left: 70px;
+        }
+
+        table {
+            table-layout: fixed;
+            margin-left: auto;
+            margin-right: auto;
             font-family: var(--Inter);
+            align-content: center;
+            border-collapse: collapse;
+            width: 90%;
+            margin-bottom: 30px;
+        }
+
+        #totals {
+            
+            width: 90%;
+            align-content: center;
+        }
+
+        td, tr {
+            width: 10%;
+            border: 1px solid darkgray;
             text-align: left;
-            border: solid black 8px;
-            border-radius: 8px;
-            margin-left: 10%;
-            margin-right: 10%;
-            padding: 20px;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
         }
 
         .back-button{
@@ -84,9 +112,186 @@
             <h1>Manager End of Day Report</h1>
         </div>
         <!--Report goes here-->
-        <div class='report'>
-            <p>Report goes in here</p>
-        </div>
+        <!--Start of table-->
+        <h2 class="table-name">Appetizers</h2>
+        <table>
+            <tr>
+                <!--Table Headers-->
+                <th>Name</th>
+                <th>Points per Item</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total Points</th>
+                <th>Item Totals</th>
+                <th>Tax</th>
+            </tr>
+            <!--Items go here-->
+            <tr>
+                <th>Pancakes</th>
+                <th>50</th>
+                <th>20</th>
+                <th>30.00</th>
+                <th>1000</th>
+                <th>600.00</th>
+                <th>49.50</th>
+            </tr>
+            <tr>
+                <th>Burger</th>
+                <th>100</th>
+                <th>40</th>
+                <th>50.00</th>
+                <th>4000</th>
+                <th>2000.00</th>
+                <th>165.00</th>
+            </tr>
+        </table>
+        <!--End of Table-->
+                <!--Start of table-->
+        <h2 class="table-name">Entrees</h2>
+        <table>
+            <tr>
+                <!--Table Headers-->
+                <th>Name</th>
+                <th>Points per Item</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total Points</th>
+                <th>Item Totals</th>
+                <th>Tax</th>
+            </tr>
+            <!--Items go here-->
+            <tr>
+                <th>Pancakes</th>
+                <th>50</th>
+                <th>20</th>
+                <th>30.00</th>
+                <th>1000</th>
+                <th>600.00</th>
+                <th>49.50</th>
+            </tr>
+        </table>
+        <!--End of Table-->
+        <h2 class="table-name">Sides</h2>
+        <table>
+            <tr>
+                <!--Table Headers-->
+                <th>Name</th>
+                <th>Points per Item</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total Points</th>
+                <th>Item Totals</th>
+                <th>Tax</th>
+            </tr>
+            <!--Items go here-->
+            <tr>
+                <th>Pancakes</th>
+                <th>50</th>
+                <th>20</th>
+                <th>30.00</th>
+                <th>1000</th>
+                <th>600.00</th>
+                <th>49.50</th>
+            </tr>
+        </table>
+        <!--End of Table-->
+        <h2 class="table-name">Desserts</h2>
+        <table>
+            <tr>
+                <!--Table Headers-->
+                <th>Name</th>
+                <th>Points per Item</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total Points</th>
+                <th>Item Totals</th>
+                <th>Tax</th>
+            </tr>
+            <!--Items go here-->
+            <tr>
+                <th>Pancakes</th>
+                <th>50</th>
+                <th>20</th>
+                <th>30.00</th>
+                <th>1000</th>
+                <th>600.00</th>
+                <th>49.50</th>
+            </tr>
+        </table>
+        <!--End of Table-->
+        <h2 class="table-name">Drinks</h2>
+        <table>
+            <tr>
+                <!--Table Headers-->
+                <th>Name</th>
+                <th>Points per Item</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total Points</th>
+                <th>Item Totals</th>
+                <th>Tax</th>
+            </tr>
+            <!--Items go here-->
+            <tr>
+                <th>Pancakes</th>
+                <th>50</th>
+                <th>20</th>
+                <th>30.00</th>
+                <th>1000</th>
+                <th>600.00</th>
+                <th>49.50</th>
+            </tr>
+        </table>
+        <!--End of Table-->
+        <h2 class="table-name">Bar Drinks</h2>
+        <table>
+            <tr>
+                <!--Table Headers-->
+                <th>Name</th>
+                <th>Points per Item</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total Points</th>
+                <th>Item Totals</th>
+                <th>Tax</th>
+            </tr>
+            <!--Items go here-->
+            <tr>
+                <th>Pancakes</th>
+                <th>50</th>
+                <th>20</th>                
+                <th>30.00</th>
+                <th>1000</th>
+                <th>600.00</th>
+                <th>49.50</th>
+            </tr>
+        </table>
+        <!--End of Table-->
+        <hr>
+        <!--End of Day Totals-->
+        <h2 class="table-name">End of Day Totals</h2>
+        <table id="totals">
+            <tr>
+                <!--Table Headers-->
+                <th>Total Items Sold</th>
+                <th>Total Points Distributed</th>
+                <th>Subtotal</th>
+                <th>Total Tips</th>
+                <th>Total Tax</th>
+                <th>Total Revenue</th>
+            </tr>
+            <!--Items go here-->
+            <tr>
+                <th>20</th>
+                <th>50</th>
+                <th>600.00</th>
+                <th>100.00</th>
+                <th>49.50</th>
+                <th>10000.00</th>
+            </tr>
+        </table>
+        <!--End of Table-->
+
         <button class="back-button"><a href="#back">Back</a></button>
         
     </body>
