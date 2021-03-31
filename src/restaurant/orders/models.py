@@ -24,7 +24,7 @@ class order(models.Model):
     time = models.DateTimeField(null=True)
     total_items = models.IntegerField(default=1)
     order_id = models.CharField(max_length=50, null=False, default='abc')
-    status = models.CharField(max_length=50, choices=STATUS_CHOICES)
+    status = models.CharField(max_length=50, default="created")
     def __str__(self):
         return self.order_id
     def get_cart_items(self):

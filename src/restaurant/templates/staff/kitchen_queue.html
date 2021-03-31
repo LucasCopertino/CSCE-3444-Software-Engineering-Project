@@ -21,7 +21,26 @@
          
            });
          }
-         setInterval(reload_queue,2000);
+         function changeStat(pk){
+             opt = document.getElementById('status')
+             statt = opt.options[opt.selectedIndex].text
+           $.ajax({
+             url: '{% url "change-stat" %}',  
+             type: 'get', 
+             data: {
+        'pk':pk,
+        'stat':statt
+    },            type: 'get',
+             success: function(){
+                location.reload()
+             }
+            
+         
+         
+         
+           });
+         }
+         setInterval(reload_queue,1000*60*2);
        </script>
     </head>
 
@@ -200,15 +219,14 @@
             <div class='column'>
                 <h2>Status and delete here</h2>
 
-                <select class="status-dropdown" name='status'>
-                    <option value='not-started'>Not Started</option>
-                    <option value="in-progress">In Progress</option>
-                    <option value="complete">Complete</option>
-                    <option value="canceled">Canceled</option>
+                <select class="status-dropdown" name='status' id="status">
+                    <option value="in-progress">in progress</option>
+                    <option value="complete">finished</option>
                 </select>
 
                 <button class="delete-order">Delete</button>
-                
+                <button class="delete-order" onclick="changeStat({{order.pk}})">Change Stat</button>
+
             </div>
         </div>
         {%endfor%}
