@@ -1,6 +1,7 @@
 from django.db import models
 from menu.models import Item
 from accounts.models import Customer
+import decimal
 # Create your models here.
 
 STATUS_CHOICES = [('Created', 'created'), ('In progress', 'in progress'), ('Finished','finished'),('Delivered','delivered')]
@@ -17,6 +18,7 @@ class orderItem(models.Model):
 class order(models.Model):
     owner = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
     is_ordered = models.BooleanField(default=False)
+    tip = models.DecimalField(max_digits=7,decimal_places=2, default=0.0)
 
     items = models.ManyToManyField(orderItem)
     cost = models.DecimalField(max_digits=7,decimal_places=2, default=10.0)
@@ -32,6 +34,14 @@ class order(models.Model):
 
     def get_cart_total(self):
         return sum([item.Item.price*item.quantity for item in self.items.all()])
+    def add_tip(self):
+        rate = float(decimal.Decimal(self.tip)/decimal.Decimal(100))
+        tip1 = decimal.Decimal(float(self.cost)*rate)
+        return self.cost+tip1
 
     def __str__(self):
         return '{0} - {1}'.format(self.owner, self.order_id)
+class Help(models.Model):
+    orderx = models.OneToOneField(order, on_delete=models.SET_NULL, null=True)
+    solved = models.BooleanField(default=False)
+    unresolved = models.BooleanField(default=True)

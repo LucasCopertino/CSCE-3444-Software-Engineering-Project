@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from accounts.models import *
 from orders.models import *
 from django.contrib import messages
@@ -44,7 +44,7 @@ def card(request):
 
 def card_payment(request):
     carts_customer = get_object_or_404(Customer, user=request.user)
-    customer_order = order.objects.filter(owner=carts_customer, is_ordered=False)[0]
+    customer_order = get_object_or_404(order,owner=carts_customer, is_ordered=False)
     context = {
         'order':customer_order
     }
@@ -69,7 +69,8 @@ def card_payment(request):
                 mode='payment',
                 success_url='http://127.0.0.1:8000/menu',
                 cancel_url='http://localhost:8000/menu')
-    
+        customer_order.is_ordered=True
+        customer_order.save()
     except Exception as e:
         return JsonResponse(str(e), safe=False)
     return JsonResponse({'sessionId':session.id})
@@ -144,4 +145,16 @@ def cart(request):
         context = {'items':customer_order_items,'order':customer_order[0] }
         print("h")
     return render(request,'cart_page.html', context)
-
+def choose_tip(request):
+    return render(request, 'payment_1.5_tip.html')
+def tip(request):
+    if request.method == 'POST':
+       tip_rate = request.POST.get('submit')
+       cust = get_object_or_404(Customer,user=request.user)
+       ordery = order.objects.filter(owner=cust,is_ordered=False)
+       orderx = ordery[0]
+       orderx.tip = tip_rate
+       orderx.save()
+       orderx.cost = orderx.add_tip()
+       orderx.save()
+    return redirect('pay2')

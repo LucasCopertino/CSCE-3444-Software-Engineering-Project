@@ -35,9 +35,14 @@ urlpatterns = [
     path('pay/', start_payment, name="pay"),
     path('pay2/',split_payment, name="pay2"),
     path('pay3/',how_many_split, name="pay3"),
+            path('choose-tip/',choose_tip, name="choose-tip"),
+
+        path('tip/',tip, name="tip"),
+
     path('cash-payment/',cash_payment, name="cash"),
     path('card-payment/',card_payment, name="card"),
         path('card/',card, name="card0"),
+        path('help/',HelpFunc, name="help"),
 
     path('sign-up',sign_up,name="sign_up"),
 
@@ -63,5 +68,7 @@ urlpatterns = [
     path('waiter-view/', waiter_home, name='waiter_home'), #set path for waiter notifications
     path('kitchen-view/', kitchen_home, name='kitchen_home'),    #set path for kitchen queue
     path('manager-home/', manager_home, name='manager_home'),    #set path for manager pages
-    path('manager-report/', manager_report, name='manager_report')
+    path('manager-report/', manager_report, name='manager_report'),
+    path('delete-help/',delete_help_request, name="delete_help"),
+
 ]

@@ -105,6 +105,29 @@ body {
 }
 
 </style>
+<script
+src="https://code.jquery.com/jquery-3.4.1.min.js"
+integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+crossorigin="anonymous"></script>
+<script>
+      function deleteOrder(pk){
+             opt = document.getElementById('notif')
+           $.ajax({
+             url: '{% url "delete_help" %}',  
+             type: 'get', 
+             data: {
+        'pk':pk,
+    },            type: 'get',
+             success: function(){
+                location.reload()
+             }
+            
+         
+         
+         
+           });
+         }
+  </script>
 </head>
 <body>
 
@@ -119,38 +142,30 @@ body {
 <div class="row">
 	<div class="card">
     	<div class="container">
-        	<h1>Order Complete</h1>
-            <p>Order for Table {{order.table_num}} is ready for pickup</p>
+        	<h1>Kitchen</h1>
+            <p>Order {{order.order_id}} for Table {{order.table_num}} is ready for pickup</p>
         </div>
-        <button class="delete">
-        	<p>Delete</p>
-        </button>
+        <button class="delete" onclick="deleteOrder({{order.pk}})">Resolve</button>
+
     </div>
 </div>
 {% endfor%}
-<div class="row">
-	<div class="card">
-    	<div class="container">
-        	<h1>Table 2</h1>
-            <p>Needs Help</p>
-        </div>
-        <button class="delete">
-        	<p>Delete</p>
-        </button>
-    </div>
-</div>
+{%for help in help_requests %}
 
 <div class="row">
 	<div class="card">
     	<div class="container">
-        	<h1>Kitchen</h1>
-            <p>Order ID #45213 Ready For Table 8</p>
+        	<h1> Help Request </h1>
+            <p> Table {{help.orderx.table_num}} : {{help.orderx.owner.user.username}} needs help</p>
         </div>
-        <button class="delete">
-        	<p>Delete</p>
-        </button>
+        <input type="submit" value="Resolve"  class="delete" onclick="deleteOrder({{help.pk}})" >
+
+
     </div>
 </div>
+
+{% endfor%}
+
 
 
   <button class="to-order-status"><a href="#order-status">Go to Order Status</a></button>

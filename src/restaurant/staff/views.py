@@ -1,10 +1,15 @@
-from django.shortcuts import render, redirect
-from orders.models import order
+from django.shortcuts import render, get_object_or_404,redirect
+from orders.models import order, Help
 from orders.forms import statusForm
+from accounts.models import Customer
+from django.contrib import messages
 def waiter_home(request):
     orders = order.objects.filter(status="finished")
+    helpx = Help.objects.filter(unresolved=True)
     context = {
-        'orders':orders
+        'orders':orders,
+        'help_requests':helpx,
+
     }
 
 
@@ -15,7 +20,7 @@ def waiter_home(request):
     return render(request, 'waiter_notif.html', context) #page for waiter notifications
 
 def kitchen_home(request):
-    order_objs = order.objects.all()
+    order_objs = order.objects.filter(status='in progress')
     order_items = []
     change_stat = statusForm(instance=order_objs[0])
     for s in order_objs:
@@ -45,3 +50,22 @@ def change_stat(request):
         order1.save()
         print(order1.status)
     return redirect('kitchen_home')
+
+def HelpFunc(request):
+ 
+    cust = get_object_or_404(Customer, user=request.user)
+    orderx = order.objects.filter(owner=cust)[0]
+    h = Help.objects.get_or_create(orderx=orderx)
+
+    return redirect('homepage')
+
+def delete_help_request(request):
+    print(request)
+    help_request_uniq = request.GET.get('pk')
+
+    help_request,status = Help.objects.get_or_create(pk=help_request_uniq)
+    help_request.unresolved = False
+    help_request.resolved = True
+    help_request.save()
+
+    return redirect('waiter_home')
