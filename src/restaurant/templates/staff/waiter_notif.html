@@ -115,19 +115,19 @@ body {
 <div class="header">
   <h1>Notifications</h1>
 </div>
-
+{%for order in orders %}
 <div class="row">
 	<div class="card">
     	<div class="container">
-        	<h1>Table 6</h1>
-            <p>Lime Soda Needs Refill</p>
+        	<h1>Order Complete</h1>
+            <p>Order for Table {{order.table_num}} is ready for pickup</p>
         </div>
         <button class="delete">
         	<p>Delete</p>
         </button>
     </div>
 </div>
-
+{% endfor%}
 <div class="row">
 	<div class="card">
     	<div class="container">

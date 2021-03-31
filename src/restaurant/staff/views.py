@@ -2,7 +2,17 @@ from django.shortcuts import render, redirect
 from orders.models import order
 from orders.forms import statusForm
 def waiter_home(request):
-    return render(request, 'waiter_notif.html') #page for waiter notifications
+    orders = order.objects.filter(status="finished")
+    context = {
+        'orders':orders
+    }
+
+
+
+
+
+
+    return render(request, 'waiter_notif.html', context) #page for waiter notifications
 
 def kitchen_home(request):
     order_objs = order.objects.all()
