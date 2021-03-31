@@ -22,7 +22,7 @@ def waiter_home(request):
 def kitchen_home(request):
     order_objs = order.objects.filter(status='in progress')
     order_items = []
-    change_stat = statusForm(instance=order_objs[0])
+    change_stat = statusForm(instance=order_objs.first())
     for s in order_objs:
        order_items.append(s.items.all())
 
@@ -44,7 +44,7 @@ def change_stat(request):
     if request.method == 'GET':
         idx= request.GET.get('pk')
         stat = request.GET.get('stat')
-        order1 = order.objects.filter(pk=idx)[0]
+        order1 = order.objects.filter(pk=idx).first()
         order1.status = stat
         print(order1.status)
         order1.save()

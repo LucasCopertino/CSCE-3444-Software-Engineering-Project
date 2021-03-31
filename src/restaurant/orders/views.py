@@ -119,7 +119,7 @@ def reduce_order_item(request):
         print("yay debug")
 
         if order.objects.filter(owner=user_profile)[0].items.filter(Item=orderitem).exists():
-            order_item = orderItem.objects.filter(Item=orderitem)[0]
+            order_item = orderItem.objects.filter(Item=orderitem).first()
             order_item.owner = user_profile
 
             if order_item.quantity > 0:
@@ -142,7 +142,7 @@ def cart(request):
     context = {}
 
     if customer_order.exists():
-        context = {'items':customer_order_items,'order':customer_order[0] }
+        context = {'items':customer_order_items,'order':customer_order.first()}
         print("h")
     return render(request,'cart_page.html', context)
 def choose_tip(request):
@@ -152,7 +152,7 @@ def tip(request):
        tip_rate = request.POST.get('submit')
        cust = get_object_or_404(Customer,user=request.user)
        ordery = order.objects.filter(owner=cust,is_ordered=False)
-       orderx = ordery[0]
+       orderx = ordery.first()
        orderx.tip = tip_rate
        orderx.save()
        orderx.cost = orderx.add_tip()
