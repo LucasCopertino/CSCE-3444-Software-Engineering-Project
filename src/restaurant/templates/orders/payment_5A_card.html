@@ -1,19 +1,17 @@
+<!--
+
+Card Payment Page
+Pressing 'Begin Payment' will take customer to page with payment form for cards.
+
+-->
+
 {% extends 'order_base.html' %}
 
 {% block content %}
 
-    <h1 style="text-align:center;">
-        Enter your card information and press "Pay".
-    </h1>
-
-    <form style="text-align:center;">
-        <label for="cardNumber">Enter card number here:</label><br>
-        <input type="text" num="cardNumber"><br>
-    </form>
-   
      <!--Main Page Buttons-->
      <div class="main-buttons">
-        <button class="button"  onclick="work('{{order.cost}}')">Process payment</button>
+        <button class="button"  onclick="work('{{order.cost}}')">Begin payment</button>
     </div>
     <script src="https://js.stripe.com/v3/"></script>
     <script
