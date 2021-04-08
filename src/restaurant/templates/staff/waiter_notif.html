@@ -165,7 +165,21 @@ crossorigin="anonymous"></script>
 </div>
 
 {% endfor%}
+{%for req in drink_requests %}
 
+<div class="row">
+	<div class="card">
+    	<div class="container">
+        	<h1> Drink Refill </h1>
+            <p> Table {{req.orderx.table_num}} : {{req.orderx.owner.user.username}} needs {{req.drink.name}} refill</p>
+        </div>
+        <input type="submit" value="Resolve"  class="delete" onclick="deleteOrder({{help.pk}})" >
+
+
+    </div>
+</div>
+
+{% endfor%}
 
 
   <button class="to-order-status"><a href="#order-status">Go to Order Status</a></button>

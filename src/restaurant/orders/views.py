@@ -142,7 +142,10 @@ def cart(request):
     context = {}
 
     if customer_order.exists():
-        context = {'items':customer_order_items,'order':customer_order.first()}
+        taxx = customer_order.first().get_tax()
+        customer_order.first().cost += taxx
+        customer_order.first().save()
+        context = {'items':customer_order_items,'order':customer_order.first(),'tax':taxx}
         print("h")
     return render(request,'cart_page.html', context)
 def choose_tip(request):
@@ -158,3 +161,18 @@ def tip(request):
        orderx.cost = orderx.add_tip()
        orderx.save()
     return redirect('pay2')
+def refill_drink(request):
+    catt  = category.objects.filter(name="Drinks").first()
+    drinks = Item.objects.filter(cat=catt)
+    context = {
+        'drinks':drinks
+    }
+    return render(request, 'drink_refill.html',context)
+def refill_request(request):
+    drink_pk = request.GET.get('id')
+    cust = get_object_or_404(Customer, user=request.user)
+    orderx = order.objects.filter(owner=cust)[0]
+
+    drink1 = Item.objects.filter(pk=drink_pk).first()
+    req = Refill.objects.get_or_create(owner=cust,drink=drink1, orderx=orderx)
+    return render(request, 'menu.html')

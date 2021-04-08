@@ -1,14 +1,16 @@
 from django.shortcuts import render, get_object_or_404,redirect
-from orders.models import order, Help
+from orders.models import order, Help, Refill
 from orders.forms import statusForm
 from accounts.models import Customer
 from django.contrib import messages
 def waiter_home(request):
     orders = order.objects.filter(status="finished")
     helpx = Help.objects.filter(unresolved=True)
+    drink_reqs = Refill.objects.filter(unresolved=True)
     context = {
         'orders':orders,
         'help_requests':helpx,
+        'drink_requests':drink_reqs,
 
     }
 
