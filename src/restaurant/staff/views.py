@@ -3,22 +3,19 @@ from orders.models import order, Help
 from orders.forms import statusForm
 from accounts.models import Customer
 from django.contrib import messages
+from accounts.decorators import allowed_users, unauthenticated_user
+
+@allowed_users(allowed_roles=['waiter'])
 def waiter_home(request):
     orders = order.objects.filter(status="finished")
     helpx = Help.objects.filter(unresolved=True)
     context = {
         'orders':orders,
         'help_requests':helpx,
-
     }
-
-
-
-
-
-
     return render(request, 'waiter_notif.html', context) #page for waiter notifications
 
+@allowed_users(allowed_roles=['kitchen'])
 def kitchen_home(request):
     order_objs = order.objects.filter(status='in progress')
     order_items = []
@@ -35,11 +32,14 @@ def kitchen_home(request):
     }
     return render(request, 'kitchen_queue.html', context) #page for kitchen queue
 
+@allowed_users(allowed_roles=['manager'])
 def manager_home(request):
     return render(request, 'manager_home.html') #page for manager home
 
+@allowed_users(allowed_roles=['manager'])
 def manager_report(request):
     return render(request, 'manager_report.html')    #page for manager report
+
 def change_stat(request):
     if request.method == 'GET':
         idx= request.GET.get('pk')
