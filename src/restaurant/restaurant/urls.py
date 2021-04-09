@@ -57,7 +57,13 @@ urlpatterns = [
     path('snake/', games_snake, name='games-snake'), #set path for snake
     path('tictactoe/', games_ttt, name='games-tictactoe'), #set path for tic tac toe
     path('childmode/', set_childmode, name='set-childmode'),
+    path('childmode-error1/', childmode_invalid, name='childmode-invalid'),
+    path('childmode-error2/', childmode_matcherror, name='childmode-matcherror'),
     path('deactivatechild/', deactivate_child, name='deactivate-child'),
+    path('deactivatechild-error/', deactivate_child_error, name='deactivate-child-error'),
+    path('games-locked/', games_home_locked, name='games-home-locked'),
+    path('snake-locked/', games_snake_locked, name='games-snake-locked'),
+    path('tictactoe-locked/', games_ttt_locked, name='games-tictactoe-locked'),
 
     path('waiter-view/', waiter_home, name='waiter_home'), #set path for waiter notifications
     path('kitchen-view/', kitchen_home, name='kitchen_home'),    #set path for kitchen queue

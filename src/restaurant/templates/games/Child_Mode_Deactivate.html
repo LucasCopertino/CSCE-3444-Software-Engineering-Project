@@ -113,9 +113,9 @@
         <ul>
            
             <li><a href="#">Help</a></li>
-            <li><a href="#">Go Back</a></li>
+            <li><a href="{% url 'games-home-locked' %}">Go Back</a></li>
             <li><a href="#">Refill Drink</a></li>
-            <li><a href="#">Login/Sign-Up</a></li>
+            <li><a href="#">Logout</a></li>
             <li><a href="#">Home</a></li>
     
         </ul>
@@ -126,11 +126,13 @@
     <div class="form-box">
         <h1>Enter Password</h1>
 
-        <div class="input-box">
-            <input type="password" placeholder="Password">
-        </div>
+        <form action = "." method = "POST">{% csrf_token %}
+            <div class="input-box">
+                <input type="password" name="attempt" placeholder="Password">
+            </div>
 
-        <button type="button" class="submit-btn">Submit</button>
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
 
     </div>
     
