@@ -110,10 +110,40 @@ src="https://code.jquery.com/jquery-3.4.1.min.js"
 integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 crossorigin="anonymous"></script>
 <script>
-      function deleteOrder(pk){
-             opt = document.getElementById('notif')
+      function deleteHelp(pk){
            $.ajax({
              url: '{% url "delete_help" %}',  
+             type: 'get', 
+             data: {
+        'pk':pk,
+    },            type: 'get',
+             success: function(){
+                location.reload()
+             }
+            
+         
+         
+         
+           });
+         }
+         function deleteRefill(pk){
+           $.ajax({
+             url: '{% url "delete_refill" %}',  
+             type: 'get', 
+             data: {
+        'pk':pk,
+    },            type: 'get',
+             success: function(){
+                location.reload()
+             }
+            
+         
+         
+         
+           });
+         }function deleteOrder(pk){
+           $.ajax({
+             url: '{% url "delete_order" %}',  
              type: 'get', 
              data: {
         'pk':pk,
@@ -158,7 +188,7 @@ crossorigin="anonymous"></script>
         	<h1> Help Request </h1>
             <p> Table {{help.orderx.table_num}} : {{help.orderx.owner.user.username}} needs help</p>
         </div>
-        <input type="submit" value="Resolve"  class="delete" onclick="deleteOrder({{help.pk}})" >
+        <input type="submit" value="Resolve"  class="delete" onclick="deleteHelp({{help.pk}})" >
 
 
     </div>
@@ -173,7 +203,7 @@ crossorigin="anonymous"></script>
         	<h1> Drink Refill </h1>
             <p> Table {{req.orderx.table_num}} : {{req.orderx.owner.user.username}} needs {{req.drink.name}} refill</p>
         </div>
-        <input type="submit" value="Resolve"  class="delete" onclick="deleteOrder({{help.pk}})" >
+        <input type="submit" value="Resolve"  class="delete" onclick="deleteRefill({{req.pk}})" >
 
 
     </div>

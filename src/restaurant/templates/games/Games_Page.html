@@ -94,7 +94,7 @@
     <div class="navbar">
         <ul>
             
-            <li><a href="#">Help</a></li>
+            <li><a href="{% url 'help' %}" onclick="myFunction()">Help</a></li>
             <li><a href="{% url 'homepage' %}">Go Back</a></li>
             <li><a href="{% url 'set-childmode' %}">Child Mode</a></li>
             <li><a href="{% url 'drink_refill'%}">Refill Drink</a></li>
@@ -129,7 +129,11 @@
     
 </body>
 
-
+<script>
+    function myFunction() {
+      alert("Help Requested. A waiter will be at your table soon");
+    }
+    </script>
 
 
 </html>

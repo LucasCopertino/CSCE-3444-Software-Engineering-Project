@@ -19,7 +19,7 @@
         <li><a href="{% url 'finish-pay' %}">Place Order</a></li>
         <li><a href="{% url 'pay' %}">Pay Now</a></li>
 
-        <li class="nav-right"><a href="#help">Help</a></li>
+        <li class="nav-right"><a href="{% url 'help' %}" onclick="myFunction()">Help</a></li>
         <li class="nav-right" style="border-left: 1px solid white;"><a href="{% url 'logout'%}">Logout</a></li>
         
     </ul>
@@ -34,6 +34,11 @@
 
 <!--Back Button-->
 <button class="back-button"><a href="{% url 'blank' %}">Back</a></button>
+<script>
+    function myFunction() {
+      alert("Help Requested. A waiter will be at your table soon");
+    }
+    </script>
 </html>
  
        

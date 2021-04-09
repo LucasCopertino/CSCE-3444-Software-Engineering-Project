@@ -72,5 +72,7 @@ urlpatterns = [
     path('manager-home/', manager_home, name='manager_home'),    #set path for manager pages
     path('manager-report/', manager_report, name='manager_report'),
     path('delete-help/',delete_help_request, name="delete_help"),
+    path('delete-refill/',delete_refill_request, name="delete_refill"),
+    path('delete-order/',delete_order_pickup, name="delete_order"),
 
 ]

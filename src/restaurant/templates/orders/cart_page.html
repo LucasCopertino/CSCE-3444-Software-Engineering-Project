@@ -27,12 +27,15 @@ By pressing the 'place order' button, the customer can begin playment.
         <!-- Print total -->
         <hr style="width:35%;margin:auto">
         <p style="margin-left: 10px; text-align:center;">Tax = {{tax}}</p>
+        <p style="margin-left: 10px; text-align:center;">Tip = {{order.tip}}</p>
 
         <p style="margin-left: 10px; text-align:center;">Total = {{order.cost}}</p>
     </div>
 
      <!--Payment Button-->
      <div class="main-buttons">
+        <button class="button"><a href='{% url 'choose-tip' %}'>Add tip</a></button>
+
         <button class="button"><a href='{% url 'finish-pay' %}'>Place order</a></button>
     </div>
 

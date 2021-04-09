@@ -19,7 +19,7 @@ class order(models.Model):
     owner = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
     is_ordered = models.BooleanField(default=False)
     tip = models.DecimalField(max_digits=7,decimal_places=2, default=0.0)
-
+    delivered = models.BooleanField(default=False)
     items = models.ManyToManyField(orderItem)
     cost = models.DecimalField(max_digits=7,decimal_places=2, default=10.0)
     table_num = models.IntegerField( null=False, default=0)
@@ -38,6 +38,7 @@ class order(models.Model):
     def add_tip(self):
         rate = float(decimal.Decimal(self.tip)/decimal.Decimal(100))
         tip1 = decimal.Decimal(float(self.cost)*rate)
+        self.tip = tip1
         return self.cost+tip1
     def get_tax(self):
         tax1 = float(decimal.Decimal(self.tax)/decimal.Decimal(100))
@@ -46,14 +47,17 @@ class order(models.Model):
     def __str__(self):
         return '{0} - {1}'.format(self.owner, self.order_id)
 class Help(models.Model):
-    orderx = models.OneToOneField(order, on_delete=models.SET_NULL, null=True)
+    orderx = models.ForeignKey(order, on_delete=models.SET_NULL, null=True)
     solved = models.BooleanField(default=False)
     unresolved = models.BooleanField(default=True)
 class Refill(models.Model):
-    orderx = models.OneToOneField(order, on_delete=models.SET_NULL, null=True)
+    orderx = models.ForeignKey(order, on_delete=models.SET_NULL, null=True)
 
     solved = models.BooleanField(default=False)
     unresolved = models.BooleanField(default=True)  
-    owner = models.OneToOneField(Customer, on_delete=models.SET_NULL, null=True)
+    owner = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
     drink = models.OneToOneField(Item, on_delete=models.SET_NULL, null=True)
     
+class Table(models.Model):
+    TableNum = models.IntegerField(null=True)
+    occupied = models.BooleanField(default=False)

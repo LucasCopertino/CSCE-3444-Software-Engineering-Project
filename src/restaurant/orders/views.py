@@ -160,7 +160,7 @@ def tip(request):
        orderx.save()
        orderx.cost = orderx.add_tip()
        orderx.save()
-    return redirect('pay2')
+    return redirect('cart')
 def refill_drink(request):
     catt  = category.objects.filter(name="Drinks").first()
     drinks = Item.objects.filter(cat=catt)
@@ -174,5 +174,5 @@ def refill_request(request):
     orderx = order.objects.filter(owner=cust)[0]
 
     drink1 = Item.objects.filter(pk=drink_pk).first()
-    req = Refill.objects.get_or_create(owner=cust,drink=drink1, orderx=orderx)
+    req = Refill.objects.get_or_create(owner=cust,drink=drink1, orderx=orderx, unresolved=True)
     return render(request, 'menu.html')

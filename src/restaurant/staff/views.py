@@ -4,7 +4,7 @@ from orders.forms import statusForm
 from accounts.models import Customer
 from django.contrib import messages
 def waiter_home(request):
-    orders = order.objects.filter(status="finished")
+    orders = order.objects.filter(status="finished",delivered=False)
     helpx = Help.objects.filter(unresolved=True)
     drink_reqs = Refill.objects.filter(unresolved=True)
     context = {
@@ -57,7 +57,7 @@ def HelpFunc(request):
  
     cust = get_object_or_404(Customer, user=request.user)
     orderx = order.objects.filter(owner=cust)[0]
-    h = Help.objects.get_or_create(orderx=orderx)
+    h = Help.objects.get_or_create(orderx=orderx, unresolved=True)
 
     return redirect('homepage')
 
@@ -70,4 +70,20 @@ def delete_help_request(request):
     help_request.resolved = True
     help_request.save()
 
+    return redirect('waiter_home')
+def delete_refill_request(request):
+    print(request)
+    ref_request_uniq = request.GET.get('pk')
+    ref_request, status = Refill.objects.get_or_create(pk=ref_request_uniq)
+    ref_request.unresolved = False
+    ref_request.resolved = True
+    ref_request.save()
+    return redirect('waiter_home')
+
+def delete_order_pickup(request):
+    print(request)
+    order_request_uniq = request.GET.get('pk')
+    order_request, status = order.objects.get_or_create(pk=order_request_uniq)
+    order_request.delivered = True
+    order_request.save()
     return redirect('waiter_home')
