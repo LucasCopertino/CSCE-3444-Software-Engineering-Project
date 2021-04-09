@@ -74,5 +74,7 @@ urlpatterns = [
     path('delete-help/',delete_help_request, name="delete_help"),
     path('delete-refill/',delete_refill_request, name="delete_refill"),
     path('delete-order/',delete_order_pickup, name="delete_order"),
+    path('pay-resolve/',resolve_pay_by_cash, name="resolve_cash_pay_req"),
+
 
 ]

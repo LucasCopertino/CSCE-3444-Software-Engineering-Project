@@ -3,15 +3,17 @@ from orders.models import order, Help, Refill
 from orders.forms import statusForm
 from accounts.models import Customer
 from django.contrib import messages
+from .models import pay_by_cash 
 def waiter_home(request):
     orders = order.objects.filter(status="finished",delivered=False)
     helpx = Help.objects.filter(unresolved=True)
     drink_reqs = Refill.objects.filter(unresolved=True)
+    pay_reqs = pay_by_cash.objects.filter(unresolved=True)
     context = {
         'orders':orders,
         'help_requests':helpx,
         'drink_requests':drink_reqs,
-
+        'pay_requests':pay_reqs
     }
 
 
@@ -86,4 +88,14 @@ def delete_order_pickup(request):
     order_request, status = order.objects.get_or_create(pk=order_request_uniq)
     order_request.delivered = True
     order_request.save()
+    return redirect('waiter_home')
+def resolve_pay_by_cash(request):
+    order_request_uniq = request.GET.get('pk')
+    order_request, status = pay_by_cash.objects.get_or_create(pk=order_request_uniq)
+    order_request.resolved = True
+    order_request.unresolved = False
+    order_request.order.is_ordered = True
+    order_request.save()
+    order_request.order.status = 'in progress'
+    order_request.order.save()    
     return redirect('waiter_home')

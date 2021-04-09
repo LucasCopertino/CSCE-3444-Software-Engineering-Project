@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'menu', #our update - install the app we created from the terminal 
     'orders',
     'accounts',
-    'crispy_forms'
+    'crispy_forms',
+    'staff',
+    
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 

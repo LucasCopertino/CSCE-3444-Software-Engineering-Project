@@ -156,6 +156,23 @@ crossorigin="anonymous"></script>
          
          
            });
+
+         }
+         function payCash(pk){
+           $.ajax({
+             url: '{% url "resolve_cash_pay_req" %}',  
+             type: 'get', 
+             data: {
+        'pk':pk,
+    },            type: 'get',
+             success: function(){
+                location.reload()
+             }
+            
+         
+         
+         
+           });
          }
   </script>
 </head>
@@ -211,7 +228,21 @@ crossorigin="anonymous"></script>
 
 {% endfor%}
 
+{%for req in pay_requests %}
 
+<div class="row">
+	<div class="card">
+    	<div class="container">
+        	<h1> Cash Payment </h1>
+            <p> Table {{req.order.table_num}} : {{req.order.owner.user.username}} needs to pay with cash </p>
+        </div>
+        <input type="submit" value="Resolve"  class="delete" onclick="payCash({{req.pk}})" >
+
+
+    </div>
+</div>
+
+{% endfor%}
   <button class="to-order-status"><a href="#order-status">Go to Order Status</a></button>
 
 

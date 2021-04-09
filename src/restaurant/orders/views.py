@@ -3,6 +3,7 @@ from accounts.models import *
 from orders.models import *
 from django.contrib import messages
 from menu.models import *
+from staff.models import *
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from datetime import date,datetime
@@ -37,7 +38,13 @@ def how_many_split(request):
 def choose_method(request):
     return render (request, 'payment_4_choose_method.html')
 def cash_payment(request):
-    return render(request, 'payment_5B_cash.html')
+    carts_customer = get_object_or_404(Customer, user=request.user)
+    customer_order = get_object_or_404(order,owner=carts_customer, is_ordered=False)
+    context = {
+        'order':customer_order
+    }  
+    pay_by_cash.objects.create(order=customer_order)
+    return redirect ('menu_home')
 
 def card(request):
     return render(request, 'payment_5A_card.html')
@@ -70,6 +77,8 @@ def card_payment(request):
                 success_url='http://127.0.0.1:8000/menu',
                 cancel_url='http://localhost:8000/menu')
         customer_order.is_ordered=True
+        customer_order.status='in progress'
+
         customer_order.save()
     except Exception as e:
         return JsonResponse(str(e), safe=False)
@@ -176,3 +185,5 @@ def refill_request(request):
     drink1 = Item.objects.filter(pk=drink_pk).first()
     req = Refill.objects.get_or_create(owner=cust,drink=drink1, orderx=orderx, unresolved=True)
     return render(request, 'menu.html')
+
+    

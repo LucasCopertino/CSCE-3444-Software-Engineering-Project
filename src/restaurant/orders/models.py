@@ -26,7 +26,7 @@ class order(models.Model):
     time = models.DateTimeField(null=True)
     total_items = models.IntegerField(default=1)
     order_id = models.CharField(max_length=50, null=False, default='abc')
-    status = models.CharField(max_length=50, default="in progress")
+    status = models.CharField(max_length=50, default="ss")
     tax = models.DecimalField(max_digits=6,decimal_places=2, default=8.25)
     def __str__(self):
         return self.order_id
