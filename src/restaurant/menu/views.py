@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from .models import Item, category
 
 
@@ -7,6 +8,7 @@ from .models import Item, category
 """Overview: Render the menu page to the user
     Return: Returns a render response to the client 
 """
+@login_required
 def menu_home(request):
     items = Item.objects.all() #put all food items in database in this single variable
     context = {'itms':items}

@@ -7,6 +7,9 @@ from games.models import childMode
 def games_home(request):
     return render(request, 'Games_Page.html') #view for games home page
 
+def games_home_guest(request):
+    return render(request, 'Games_Page_Guest.html') #view for games page when not logged in
+
 def games_home_locked(request):
     return render(request, 'Games_Page_Locked.html') #view for games home page if child mode is activated 
 

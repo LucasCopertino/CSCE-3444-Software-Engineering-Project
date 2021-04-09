@@ -54,6 +54,7 @@ urlpatterns = [
     path('categories/<int:category_id>', views.cat_g, name='categories'),
 
     path('games/', games_home, name='games_home'), #set path for games home page
+    path('games-guest/', games_home_guest, name='games-home-guest'), #set path for games home page if not logged in
     path('snake/', games_snake, name='games-snake'), #set path for snake
     path('tictactoe/', games_ttt, name='games-tictactoe'), #set path for tic tac toe
     path('childmode/', set_childmode, name='set-childmode'),

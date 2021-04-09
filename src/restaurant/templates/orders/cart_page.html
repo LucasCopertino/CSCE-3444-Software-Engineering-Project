@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base2.html' %}
 
 {% block content %}
     <h1 style="text-align:center;">Cart</h1>
@@ -24,7 +24,7 @@
     </div>
     <footer>
         <!--Back Button-->
-        <button class="back-button"><a href="#back">Back</a></button>
+        <button class="back-button"><a href="{% url 'menu_home' %}">Back</a></button>
     </footer>       
 
 </body>  
