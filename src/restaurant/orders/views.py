@@ -17,7 +17,7 @@ stripe.api_key = STRIPE_PRIV_KEY
 # Create your views here.
 
 def generate_order_id():
-    date_str = date.today().strftime('%Y%m%d')[2:] + str(datetime.now().second)
+    date_str = datetime.date.today().strftime('%Y%m%d')[2:] + str(datetime.now().second)
     rand_str = "".join([random.choice(string.digits) for count in range(3)])
     return date_str + rand_str
 
@@ -95,7 +95,7 @@ def add_to_cart(request):
 
         orderitem = Item.objects.get(id=item_id)
         # check if the user already owns this product
-    
+
         # create orderItem of the selected product
         order_item, status = orderItem.objects.get_or_create(Item=orderitem)
         order_item.quantity = order_item.quantity + 1
@@ -106,7 +106,12 @@ def add_to_cart(request):
         user_order, status = order.objects.get_or_create(owner=user_profile, is_ordered=False)
         user_order.items.add(order_item)
         user_order.cost=user_order.get_cart_total()
+                ##asociate order with a table
+
+        table = Table.objects.filter(owner=user_profile)[0]
+        user_order.table_num = table.TableNum
         user_order.save()
+        
         if status:
             # generate a reference code
             user_order.order_id = generate_order_id()
