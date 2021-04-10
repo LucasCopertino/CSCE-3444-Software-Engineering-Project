@@ -13,7 +13,10 @@ By pressing the 'place order' button, the customer can begin playment.
     <br>
     <h1 style="text-align:center;">Cart</h1>
     <br>
-
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
     <!--Print Cart Items with quantities and costs-->
     <div>
         {% for item in items %}
@@ -30,6 +33,10 @@ By pressing the 'place order' button, the customer can begin playment.
         <p style="margin-left: 10px; text-align:center;">Tip = {{order.tip}}</p>
 
         <p style="margin-left: 10px; text-align:center;">Total = {{order.cost}}</p>
+
+
+      
+
     </div>
 
      <!--Payment Button-->
@@ -42,8 +49,8 @@ By pressing the 'place order' button, the customer can begin playment.
     <footer>
         <!--Back Button-->
         <button class="back-button"><a href="#back">Back</a></button>
-    </footer>       
-
+    </footer>   
+    
 </body>  
 
 {% endblock %}

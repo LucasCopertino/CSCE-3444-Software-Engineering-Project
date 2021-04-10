@@ -1,0 +1,80 @@
+<!-- Cart Page
+
+This page shows everything currently in the customer cart.
+It displays names of items with their quantities and costs and totals cost.
+By pressing the 'place order' button, the customer can begin playment.
+
+-->
+
+{% extends 'base.html' %}
+
+{% block content %}
+    <!--Page Heading-->
+    <br>
+    <h1 style="text-align:center;">Cart</h1>
+    <br>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+    <!--Print Cart Items with quantities and costs-->
+    <div>
+        {% for item in items %}
+        <div style="display: flex; justify-content: center;">
+            <p style="text-align: center;">{{item.Item.name}}</p>
+            <p style="margin-left: 10px;"> x</p>
+            <p style="margin-left: 10px;">{{item.quantity}} = {{item.cost}}</p>
+        </div>
+        {%endfor%}
+
+        <!-- Print total -->
+        <hr style="width:35%;margin:auto">
+        <p style="margin-left: 10px; text-align:center;">Tax = {{tax}}</p>
+        <p style="margin-left: 10px; text-align:center;">Tip = {{order.tip}}</p>
+
+        <p style="margin-left: 10px; text-align:center;">Total = {{order.cost}}</p>
+        <p style="margin-left: 10px; text-align:center;">Total Free kids meal = {{order.free_kids_meal}}</p>
+
+        <p style="margin-left: 10px; text-align:center;">You can have up to {{max}} free kids meals. Select an amount of free kids meals from the dropdown</p>
+
+        <select class="status-dropdown" id="freebie">
+            {% for freebie in freebies %}
+            <option value={{freebie}}>{{freebie}}</option>
+            {% endfor %}
+        </select>
+        <button onclick="freebie()"><a href='{% url 'free_kids_meal' %}'>select freebies</a></button>
+
+    </div>
+
+     <!--Payment Button-->
+     <div class="main-buttons">
+        <button class="button"><a href='{% url 'choose-tip' %}'>Add tip</a></button>
+
+        <button class="button"><a href='{% url 'finish-pay' %}'>Place order</a></button>
+    </div>
+
+    <footer>
+        <!--Back Button-->
+        <button class="back-button"><a href="#back">Back</a></button>
+    </footer>   
+    <script> 
+    function freebie(){
+        var s = document.getElementById('freebie')
+           $.ajax({
+             url: '{% url "free_kids_meal" %}',  
+             type: 'GET',
+             data:{
+                 'amount':s.value,
+             },
+             success: function(){
+                location.reload()
+             }
+            
+         
+         
+         
+           });
+         }</script>   
+</body>  
+
+{% endblock %}

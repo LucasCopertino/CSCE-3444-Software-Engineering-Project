@@ -5,8 +5,7 @@ from django.contrib import messages
 from menu.models import *
 from staff.models import *
 from django.urls import reverse
-from django.contrib.auth.decorators import login_required
-from datetime import date,datetime
+import datetime
 import random
 import string
 import stripe
@@ -145,18 +144,44 @@ def reduce_order_item(request):
     return render(request, 'menu.html')
 
 def cart(request):
+    rn = datetime.datetime.now()
+   
     carts_customer = get_object_or_404(Customer, user=request.user)
     customer_order_items = orderItem.objects.filter(owner=carts_customer)
     customer_order = order.objects.filter(owner=carts_customer, is_ordered=False)
     context = {}
-
+    freebie = 0
+    taxx = 0.00
+    for order_item in customer_order_items:
+        if order_item.Item.cat.name == 'Entrees':
+            freebie+=1
+    freebies = []
+    for i in range(freebie+1):
+        freebies.append(i)
+   
     if customer_order.exists():
         taxx = customer_order.first().get_tax()
         customer_order.first().cost += taxx
         customer_order.first().save()
-        context = {'items':customer_order_items,'order':customer_order.first(),'tax':taxx}
-        print("h")
-    return render(request,'cart_page.html', context)
+    if rn.hour in range(16,24) and rn.weekday()==6:
+        print(rn.hour)
+        context = {'items':customer_order_items,'order':customer_order.first(),'tax':taxx, 'freebies':freebies, 'max':freebie}
+        return render(request,'sunday_4pm_cart_page.html', context)
+    else:
+         context = {'items':customer_order_items,'order':customer_order.first(),'tax':taxx}
+         return render(request,'cart_page.html', context)
+def choose_meal(request):
+    if request.method == 'GET':
+        amount = request.GET.get('amount')
+        print(amount)
+        carts_customer = get_object_or_404(Customer, user=request.user)
+        customer_order = order.objects.filter(owner=carts_customer, is_ordered=False)[0]
+        if amount:
+            customer_order.free_kids_meal = amount
+
+        customer_order.save()
+        print(customer_order.free_kids_meal)
+    return redirect ('cart')
 def choose_tip(request):
     return render(request, 'payment_1.5_tip.html')
 def tip(request):

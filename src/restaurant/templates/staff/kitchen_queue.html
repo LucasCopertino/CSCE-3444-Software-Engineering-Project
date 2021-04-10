@@ -221,6 +221,8 @@
                     {%endif%}
                     {%endfor%}
                 {%endfor%}
+                <p style="color: black;"> Free Kids Meal(s) : {{order.free_kids_meal}}
+
             </div>
             <div class='column'>
                 <h2 style="text-align: center;"><strong>Time in queue</strong></h2>
@@ -259,7 +261,9 @@
     var secondsLabel = document.getElementById("seconds");
     var totalSeconds = 0;
     setInterval(setTime, 1000);
-
+    
+      
+        
     function setTime()
     {
         ++totalSeconds;

@@ -31,6 +31,8 @@ urlpatterns = [
         path('reduce-order-item', reduce_order_item, name='reduce-order-item'),
 
     path('cart/',cart, name="cart"),
+        path('free-kids-meal/',choose_meal, name="free_kids_meal"),
+
         path('finish-pay/',choose_method, name="finish-pay"),
     path('pay/', start_payment, name="pay"),
     path('pay2/',split_payment, name="pay2"),

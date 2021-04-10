@@ -19,6 +19,7 @@ class order(models.Model):
     owner = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
     is_ordered = models.BooleanField(default=False)
     tip = models.DecimalField(max_digits=7,decimal_places=2, default=0.0)
+    free_kids_meal =  models.IntegerField( null=False, default=0)
     delivered = models.BooleanField(default=False)
     items = models.ManyToManyField(orderItem)
     cost = models.DecimalField(max_digits=7,decimal_places=2, default=10.0)
