@@ -19,7 +19,7 @@ By pressing the 'place order' button, the customer can begin playment.
     crossorigin="anonymous"></script>
     <!--Print Cart Items with quantities and costs-->
     <div>
-        <p style="margin-left: 10px; text-align:center;">Order {{order.order_id}} for Table {{order.table_num}} was started on {{order.time}}</p>
+        <p style="margin-left: 10px; text-align:center;">Order #{{order.order_id}} for Table {{order.table_num}} was started on {{order.time}}</p>
         <hr style="width:35%;margin:auto; margin-bottom: 20px;">
 
         {% for item in items %}

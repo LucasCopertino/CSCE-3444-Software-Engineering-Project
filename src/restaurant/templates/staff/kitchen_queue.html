@@ -216,7 +216,7 @@
                 {%for item in items%}
                 <p style="color: black;">
                     {% for s in item %}
-                    {% if s.owner == order.owner%}
+                    {% if s.order_id == order.order_id%}
                     {{s.Item.name}} : {{s.quantity}}</p>
                     {%endif%}
                     {%endfor%}

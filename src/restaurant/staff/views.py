@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404,redirect
-from orders.models import order, Help, Refill
+from orders.models import order, Help, Refill, orderItem
 from orders.forms import statusForm
 from accounts.models import Customer
 from django.contrib import messages
@@ -95,7 +95,13 @@ def resolve_pay_by_cash(request):
     order_request.resolved = True
     order_request.unresolved = False
     order_request.order.is_ordered = True
-    order_request.save()
     order_request.order.status = 'in progress'
-    order_request.order.save()    
+
+    customer_profile = order_request.order.owner
+    for item in orderItem.objects.filter(owner=customer_profile):
+        item.is_ordered = True
+        item.save()
+    order_request.order.save()  
+    order_request.save()  
+   
     return redirect('waiter_home')

@@ -21,8 +21,6 @@ def generate_order_id():
     rand_str = "".join([random.choice(string.digits) for count in range(3)])
     return date_str + rand_str
 
-def cart(request):
-    return render( request,'cart_page.html')
 
 def start_payment(request):
     return render (request, 'payment_1_start.html')
@@ -54,6 +52,10 @@ def card_payment(request):
     context = {
         'order':customer_order
     }
+    customer_order_items = orderItem.objects.filter(owner=carts_customer)
+    for item in customer_order_items:
+        item.is_ordered = True
+        item.save()
 
     try:
         client_stripe = "pk_test_51IMeMeCiuu3zPBMk89bXdF2Xa5iy9gJo6pEZoKmPoWSAB1QlpxuN0Cnxj2omWn0wpPHZXB3Awk42Vy0esrXXOuAd00MQ0AJkhp"
@@ -111,7 +113,9 @@ def add_to_cart(request):
         table = Table.objects.filter(owner=user_profile)[0]
         user_order.table_num = table.TableNum
         user_order.save()
-        
+        #assoicate order item with order some more (create more relationships)
+        order_item.order_id = user_order.order_id
+        order_item.save()
         if status:
             # generate a reference code
             user_order.order_id = generate_order_id()
@@ -152,7 +156,7 @@ def cart(request):
     rn = datetime.datetime.now()
    
     carts_customer = get_object_or_404(Customer, user=request.user)
-    customer_order_items = orderItem.objects.filter(owner=carts_customer)
+    customer_order_items = orderItem.objects.filter(owner=carts_customer, is_ordered=False)
     customer_order = order.objects.filter(owner=carts_customer, is_ordered=False)
     context = {}
     freebie = 0

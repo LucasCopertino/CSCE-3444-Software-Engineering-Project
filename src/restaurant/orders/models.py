@@ -11,6 +11,9 @@ class orderItem(models.Model):
     quantity = models.IntegerField(null=False,default=0)
     owner = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
     cost = models.DecimalField(max_digits=7,decimal_places=3, default=10.0)
+    is_ordered = models.BooleanField(default=False)
+    order_id = models.CharField(max_length=50, null=False, default='abc')
+   
     def __str__(self):
         return '{0} - {1}'.format(self.Item.name, self.quantity)
     def get_cost(self):
