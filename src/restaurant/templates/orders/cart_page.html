@@ -19,6 +19,9 @@ By pressing the 'place order' button, the customer can begin playment.
     crossorigin="anonymous"></script>
     <!--Print Cart Items with quantities and costs-->
     <div>
+        <p style="margin-left: 10px; text-align:center;">Order {{order.order_id}} for Table {{order.table_num}} was started on {{order.time}}</p>
+        <hr style="width:35%;margin:auto; margin-bottom: 20px;">
+
         {% for item in items %}
         <div style="display: flex; justify-content: center;">
             <p style="text-align: center;">{{item.Item.name}}</p>
@@ -28,7 +31,7 @@ By pressing the 'place order' button, the customer can begin playment.
         {%endfor%}
 
         <!-- Print total -->
-        <hr style="width:35%;margin:auto">
+        <hr style="width:35%;margin:auto; margin-top:20px">
         <p style="margin-left: 10px; text-align:center;">Tax = {{tax}}</p>
         <p style="margin-left: 10px; text-align:center;">Tip = {{order.tip}}</p>
 

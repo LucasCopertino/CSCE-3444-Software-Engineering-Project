@@ -2,6 +2,7 @@ from django.db import models
 from menu.models import Item
 from accounts.models import Customer
 import decimal
+import datetime
 # Create your models here.
 
 STATUS_CHOICES = [('Created', 'created'), ('In progress', 'in progress'), ('Finished','finished'),('Delivered','delivered')]
@@ -24,7 +25,7 @@ class order(models.Model):
     items = models.ManyToManyField(orderItem)
     cost = models.DecimalField(max_digits=7,decimal_places=2, default=10.0)
     table_num = models.IntegerField( null=False, default=0)
-    time = models.DateTimeField(null=True)
+    time = models.DateTimeField(auto_now_add=True, null=False)
     total_items = models.IntegerField(default=1)
     order_id = models.CharField(max_length=50, null=False, default='abc')
     status = models.CharField(max_length=50, default="ss")

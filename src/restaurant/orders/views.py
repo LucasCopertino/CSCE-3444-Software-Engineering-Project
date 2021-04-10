@@ -17,7 +17,7 @@ stripe.api_key = STRIPE_PRIV_KEY
 # Create your views here.
 
 def generate_order_id():
-    date_str = datetime.date.today().strftime('%Y%m%d')[2:] + str(datetime.now().second)
+    date_str = datetime.date.today().strftime('%Y%m%d')[2:] + str(datetime.datetime.now().second)
     rand_str = "".join([random.choice(string.digits) for count in range(3)])
     return date_str + rand_str
 
