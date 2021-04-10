@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static '/orders/styleCartAndPayment.css' %}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Home Page</title>
+    
+</head>
+<!--Nav Bar -->
+<nav>
+    <ul>
+                <li class="nav-right"><a href="{% url 'help' %}" onclick="myFunction()">Help</a></li>
+        <li class="nav-right" style="border-left: 1px solid white;"><a href="{% url 'logout'%}">Logout</a></li>
+        
+    </ul>
+</nav> <!--End of Nav-->
+<body>
+
+<select class="status-dropdown" name='status'id="table-select">
+    {%for table in tables %}
+    <option value={{table.TableNum}}>{{table.TableNum}}</option>
+    {% endfor %}
+
+</select>
+<button class="button" onclick="table_select()" >Pick Table</button>
+
+<button class="button" ><a href="{% url 'customer-homepage' %}">Go to Homepage</a></button>
+
+<script>
+    function myFunction() {
+      alert("Help Requested. A waiter will be at your table soon");
+    }
+    
+    function table_select(){
+        var s = document.getElementById('table-select')
+           $.ajax({
+             url: '{% url "table-selection" %}',  
+             type: 'GET',
+             data:{
+                 'table_id':s.value,
+             },
+         
+         
+         
+         
+           });
+           alert("Table Selected, Go to homepage");
+
+         }  
+    </script>
+</body>
+
+</html>

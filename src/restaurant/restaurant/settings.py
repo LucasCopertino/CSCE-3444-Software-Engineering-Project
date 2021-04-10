@@ -130,5 +130,5 @@ STATIC_URL = '/static/' #this defines the static files we need for the website l
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),#BASE_DIR here is 'RESTAURANT/' directory
 )
-LOGIN_REDIRECT_URL='customer-homepage'
+LOGIN_REDIRECT_URL='select_table'
 LOGOUT_REDIRECT_URL='homepage'

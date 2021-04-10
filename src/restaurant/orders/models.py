@@ -62,3 +62,4 @@ class Refill(models.Model):
 class Table(models.Model):
     TableNum = models.IntegerField(null=True)
     occupied = models.BooleanField(default=False)
+    owner = models.OneToOneField(Customer, null=True, on_delete=models.SET_NULL, blank=True)

@@ -52,6 +52,9 @@ urlpatterns = [
         path('logout/', auth_views.LogoutView.as_view, name='logout'),
 
         path('select-role/', index, name='index'),
+                path('select-table/', select_table, name='select_table'),
+                path('table-selection/', table_selection, name='table-selection'),
+
     path('customer-homepage/', customer_home_page, name='customer-homepage'),
         path('homepage/', home_page, name='homepage'),
 
