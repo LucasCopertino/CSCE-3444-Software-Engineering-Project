@@ -5,6 +5,8 @@ from django.shortcuts import render
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from .decorators import unauthenticated_user, allowed_users
+from django.contrib.auth.models import Group
 
 
 #sign up view
@@ -15,6 +17,8 @@ def sign_up(request):
         if form.is_valid():
             user = form.save()
             login(request,user)
+            group=Group.objects.get(name='customer')
+            user.groups.add(group)
             return render(request,'login_customer_home.html')
     context['form']=form
     return render(request,'sign_up.html',context)

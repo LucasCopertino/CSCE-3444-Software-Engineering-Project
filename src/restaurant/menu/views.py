@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from .models import Item, category
+from accounts.decorators import allowed_users, unauthenticated_user
+from django.contrib.auth.models import Group
 
 
 # Create your views here.
@@ -7,6 +9,7 @@ from .models import Item, category
 """Overview: Render the menu page to the user
     Return: json object, html page 
 """
+
 def menu_home(request):
     items = Item.objects.all() #put all food items in database in this single variable
     context = {'itms':items}

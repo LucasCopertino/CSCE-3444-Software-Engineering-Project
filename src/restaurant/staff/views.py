@@ -3,11 +3,17 @@ from orders.models import order, Help, Refill, orderItem
 from orders.forms import statusForm
 from accounts.models import Customer
 from django.contrib import messages
+<<<<<<< HEAD
 from .models import pay_by_cash 
 
 """ Overview: A function to that manages the waiter's home page
     Returns: Json objects, html page
 """
+=======
+from accounts.decorators import allowed_users, unauthenticated_user
+
+@allowed_users(allowed_roles=['waiter'])
+>>>>>>> origin/permissions
 def waiter_home(request):
     orders = order.objects.filter(status="finished",delivered=False)
     helpx = Help.objects.filter(unresolved=True)
@@ -16,6 +22,7 @@ def waiter_home(request):
     context = {
         'orders':orders,
         'help_requests':helpx,
+<<<<<<< HEAD
         'drink_requests':drink_reqs,
         'pay_requests':pay_reqs
     }
@@ -25,6 +32,12 @@ def waiter_home(request):
 """ Overview: A function to that manages the kitchen's home page
     Returns: Json objects, html page
 """
+=======
+    }
+    return render(request, 'waiter_notif.html', context) #page for waiter notifications
+
+@allowed_users(allowed_roles=['kitchen'])
+>>>>>>> origin/permissions
 def kitchen_home(request):
     order_objs = order.objects.filter(status='in progress')
     order_items = []
@@ -41,6 +54,7 @@ def kitchen_home(request):
     }
     return render(request, 'kitchen_queue.html', context) #page for kitchen queue
 
+<<<<<<< HEAD
 """ Overview: A function to that manages the manager's home page
     Returns: Json objects, html page
 """
@@ -57,6 +71,16 @@ def manager_report(request):
 """ Overview: A function to that handles changing the status of an order in the kitchen queue 
     Returns:reolads page
 """
+=======
+@allowed_users(allowed_roles=['manager'])
+def manager_home(request):
+    return render(request, 'manager_home.html') #page for manager home
+
+@allowed_users(allowed_roles=['manager'])
+def manager_report(request):
+    return render(request, 'manager_report.html')    #page for manager report
+
+>>>>>>> origin/permissions
 def change_stat(request):
     if request.method == 'GET':
         idx= request.GET.get('pk')
