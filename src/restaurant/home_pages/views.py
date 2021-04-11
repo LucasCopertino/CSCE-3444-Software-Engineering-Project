@@ -26,8 +26,8 @@ def home_page(request):
 def logOut(request):
     person = request.user
     if Customer.objects.filter(user=person).exists:
-        if Table.objects.filter(owner=Customer.objects.filter(user=person), occupied=True).exists():
-            tables = Table.objects.filter(owner=Customer.objects.filter(user=person), occupied=True)
+        if Table.objects.filter(owner=Customer.objects.filter(user=person)[0], occupied=True).exists():
+            tables = Table.objects.filter(owner=Customer.objects.filter(user=person)[0], occupied=True)
             for table in tables:
                 table.occupied = False
                 table.owner = None
