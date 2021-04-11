@@ -40,7 +40,7 @@ class order(models.Model):
     free_kids_meal =  models.IntegerField( null=False, default=0)
     delivered = models.BooleanField(default=False)
     items = models.ManyToManyField(orderItem)
-    cost = models.DecimalField(max_digits=7,decimal_places=2, default=10.0)
+    cost = models.DecimalField(max_digits=7,decimal_places=2, default=0.00)
     table_num = models.IntegerField( null=False, default=0)
     time = models.DateTimeField(auto_now_add=True, null=False)
     total_items = models.IntegerField(default=1)

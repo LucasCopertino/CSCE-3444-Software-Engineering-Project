@@ -5,7 +5,7 @@ from accounts.models import Customer
 from django.contrib import messages
 from accounts.decorators import allowed_users, unauthenticated_user
 from .models import pay_by_cash 
-
+from orders.views import generate_order_id
 
 """ Overview: A function to that manages the waiter's home page
     Returns: Json objects, html page
@@ -75,7 +75,9 @@ def change_stat(request):
 def HelpFunc(request):
  
     cust = get_object_or_404(Customer, user=request.user)
-    orderx = order.objects.filter(owner=cust)[0]
+    orderx = order.objects.get_or_create(owner=cust)[0]
+    orderx.order_id = generate_order_id()
+    orderx.save()
     h = Help.objects.get_or_create(orderx=orderx, unresolved=True)
 
     return redirect('homepage')

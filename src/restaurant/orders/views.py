@@ -152,14 +152,14 @@ def add_to_cart(request):
         table = Table.objects.filter(owner=user_profile)[0]
         user_order.table_num = table.TableNum
         user_order.save()
-        #assoicate order item with order some more (create more relationships)
-        order_item.order_id = user_order.order_id
-        order_item.save()
+       
         if status:
             # generate a reference code
             user_order.order_id = generate_order_id()
             user_order.save()
-       
+        #assoicate order item with order some more (create more relationships)
+        order_item.order_id = user_order.order_id
+        order_item.save()
         # show confirmation message and redirect back to the same page
         messages.info(request, "item added to cart")
     return render(request, 'menu.html')
