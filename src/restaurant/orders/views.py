@@ -8,6 +8,7 @@ from django.urls import reverse
 import datetime
 import random
 import string
+from django.contrib.auth.decorators import login_required
 import stripe
 from django.http import HttpResponseRedirect, JsonResponse
 from flask import jsonify
@@ -50,25 +51,12 @@ def how_many_split(request):
 Overview: View for choosing the payment type
 Returns: a html page
 
-
-
-<<<<<<< HEAD
- """
-def choose_method(request):
-    return render (request, 'payment_4_choose_method.html')
 """
-Overview: View for cash payment
-Returns: actually redirects back to the menu
 
-
-
- """
-=======
 @login_required
 def choose_method(request):
     return render (request, 'payment_4_choose_method.html')
 
->>>>>>> origin/continuity_update
 def cash_payment(request):
     carts_customer = get_object_or_404(Customer, user=request.user) #get the customer by using the authentication modela and comparing with our customer model
     customer_order = get_object_or_404(order,owner=carts_customer, is_ordered=False) #get the customer's order by making use of databse relationships
