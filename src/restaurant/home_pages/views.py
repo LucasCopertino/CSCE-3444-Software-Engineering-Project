@@ -1,14 +1,20 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from orders.models import Table
+from accounts.models import Customer
 from accounts.decorators import allowed_users
 
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
-@login_required
+
+"""Overview:Home page view for authenticated customer
+    Return:  html page 
+"""
+@login_required(login_url='/login/')
+
 def customer_home_page(request):
     return render(request, 'login_customer_home.html')
-    
 """Overview:Home page view for unauthenticated customer
     Return: html page 
 """
