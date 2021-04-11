@@ -5,7 +5,7 @@ from .models import Item, category
 # Create your views here.
 
 """Overview: Render the menu page to the user
-    Return: Returns a render response to the client 
+    Return: json object, html page 
 """
 def menu_home(request):
     items = Item.objects.all() #put all food items in database in this single variable
@@ -13,6 +13,10 @@ def menu_home(request):
 
 
     return render(request, 'menu.html',context) 
+
+"""Overview: Renders category menu items to the user
+    Return: json object, html page 
+"""
 def cat_g(request, category_id):
     categories= category.objects.get(pk=category_id)
     cats = category.objects.all()

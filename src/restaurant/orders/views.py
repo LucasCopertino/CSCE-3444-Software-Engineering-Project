@@ -16,11 +16,25 @@ STRIPE_PRIV_KEY = 'sk_test_51IMeMeCiuu3zPBMkGAyiJKf2ABr0YmkU7DyZ3IHs0cJhIaTl7zjC
 stripe.api_key = STRIPE_PRIV_KEY
 # Create your views here.
 
+
+"""
+Overview: Generate hashed order id by using the date and time order was created
+Returns: A string containing the order id
+
+
+
+ """
 def generate_order_id():
     date_str = datetime.date.today().strftime('%Y%m%d')[2:] + str(datetime.datetime.now().second)
     rand_str = "".join([random.choice(string.digits) for count in range(3)])
     return date_str + rand_str
+"""
+Overview: View for starting the payment process
+Returns: a html page
 
+
+
+ """
 
 def start_payment(request):
     return render (request, 'payment_1_start.html')
@@ -31,35 +45,59 @@ def split_payment(request):
 
 def how_many_split(request):
     return render (request, 'payment_3_how_many_split.html')
+"""
+Overview: View for choosing the payment type
+Returns: a html page
 
+
+
+ """
 def choose_method(request):
     return render (request, 'payment_4_choose_method.html')
+"""
+Overview: View for cash payment
+Returns: actually redirects back to the menu
+
+
+
+ """
 def cash_payment(request):
-    carts_customer = get_object_or_404(Customer, user=request.user)
-    customer_order = get_object_or_404(order,owner=carts_customer, is_ordered=False)
+    carts_customer = get_object_or_404(Customer, user=request.user) #get the customer by using the authentication modela and comparing with our customer model
+    customer_order = get_object_or_404(order,owner=carts_customer, is_ordered=False) #get the customer's order by making use of databse relationships
     context = {
         'order':customer_order
-    }  
-    pay_by_cash.objects.create(order=customer_order)
+    }  #a json object to return to our client
+    pay_by_cash.objects.create(order=customer_order) #create a pay by cash object in the database for the waiter to resolve 
     return redirect ('menu_home')
+"""
+Overview: View for starting the card payment
+Returns: a html page
 
+
+
+ """
 def card(request):
     return render(request, 'payment_5A_card.html')
+"""
+Overview: card the payment process
+Returns: a json response to our stripe account on stripe.com 
 
+
+ """
 def card_payment(request):
-    carts_customer = get_object_or_404(Customer, user=request.user)
-    customer_order = get_object_or_404(order,owner=carts_customer, is_ordered=False)
+    carts_customer = get_object_or_404(Customer, user=request.user) #get the customer by using the authentication modela and comparing with our customer model
+    customer_order = get_object_or_404(order,owner=carts_customer, is_ordered=False) #get the customer's order by making use of databse relationships
     context = {
         'order':customer_order
-    }
-    customer_order_items = orderItem.objects.filter(owner=carts_customer)
-    for item in customer_order_items:
-        item.is_ordered = True
+    }  #a json object to return to our client
+    customer_order_items = orderItem.objects.filter(owner=carts_customer) #get all the order items belonging to customer
+    for item in customer_order_items: #for loop to change the state of the items so they are sorted 
+        item.is_ordered = True #now they don't have to show up where they are not needed
         item.save()
-
+#stripe payment process
     try:
         client_stripe = "pk_test_51IMeMeCiuu3zPBMk89bXdF2Xa5iy9gJo6pEZoKmPoWSAB1QlpxuN0Cnxj2omWn0wpPHZXB3Awk42Vy0esrXXOuAd00MQ0AJkhp"
-        
+        #create stripe session and supply necessary information 
         session = stripe.checkout.Session.create(
             payment_method_types=['card'],
             line_items = [
@@ -78,14 +116,19 @@ def card_payment(request):
                 success_url='http://127.0.0.1:8000/menu',
                 cancel_url='http://localhost:8000/menu')
         customer_order.is_ordered=True
-        customer_order.status='in progress'
+        customer_order.status='in progress' #change the state of the customer order for better sorting. 
 
         customer_order.save()
     except Exception as e:
         return JsonResponse(str(e), safe=False)
     return JsonResponse({'sessionId':session.id})
 
+"""
+Overview: increase item in cart / create an order
+Returns: a json response to our stripe account on stripe.com 
 
+
+ """
 
 def add_to_cart(request):
     if request.method == 'GET':
@@ -124,6 +167,12 @@ def add_to_cart(request):
         # show confirmation message and redirect back to the same page
         messages.info(request, "item added to cart")
     return render(request, 'menu.html')
+"""
+Overview: reduce item in cart / delete item from order
+Returns: a html page
+
+
+ """
 def reduce_order_item(request):
     if request.method == 'GET':
 
@@ -135,50 +184,68 @@ def reduce_order_item(request):
         orderitem = Item.objects.get(id=item_id)
         print("yay debug")
 
-        if order.objects.filter(owner=user_profile)[0].items.filter(Item=orderitem).exists():
-            order_item = orderItem.objects.filter(Item=orderitem).first()
-            order_item.owner = user_profile
+        if order.objects.filter(owner=user_profile)[0].items.filter(Item=orderitem).exists(): #ensure that an order still exists for the customer
+            order_item = orderItem.objects.filter(Item=orderitem).first() #get the first item that matches query since there will always be only one object in oiur queryset
+            order_item.owner = user_profile #set relationships
 
+            #reduce the item quantity and ensure negatives dont happen
             if order_item.quantity > 0:
                 order_item.quantity -= 1
-                order_item.cost = order_item.get_cost()
+                order_item.cost = order_item.get_cost() #recalculate cost of the order
                 order_item.save()
             else:
-                order_item.delete()
+                order_item.delete() #if items in cart is 0 delete the item
         user_order, status = order.objects.get_or_create(owner=user_profile, is_ordered=False)
         user_order.items.add(order_item)
         user_order.cost = user_order.get_cart_total()
         user_order.save()
         messages.info(request, "Removed from cart")
     return render(request, 'menu.html')
+"""
+Overview: Show customer order details 
+            Perform sunday 4pm weekend deal
+            get and set tax
 
+Returns: A html page, json objects
+
+
+ """
 def cart(request):
-    rn = datetime.datetime.now()
+    rn = datetime.datetime.now()  #check time cart is accessed
    
     carts_customer = get_object_or_404(Customer, user=request.user)
     customer_order_items = orderItem.objects.filter(owner=carts_customer, is_ordered=False)
     customer_order = order.objects.filter(owner=carts_customer, is_ordered=False)
     context = {}
-    freebie = 0
-    taxx = 0.00
-    for order_item in customer_order_items:
+    freebie = 0 #store number of entrees
+    taxx = 0.00 #placeholder for json object attribute 
+    for order_item in customer_order_items: #search for all adult entrees in order and take count
         if order_item.Item.cat.name == 'Entrees':
             freebie+=1
-    freebies = []
+    freebies = [] #list to store range of number of kids meals to select from 
     for i in range(freebie+1):
         freebies.append(i)
-   
+   #gget and set tax on order
     if customer_order.exists():
         taxx = customer_order.first().get_tax()
         customer_order.first().cost += taxx
         customer_order.first().save()
+    #check time to see if it is after sunday on 4pm 
     if rn.hour in range(16,24) and rn.weekday()==6:
         print(rn.hour)
+        #return different json object to client since it is a sunday at 4. Return a json object with frre kids meals information and options
         context = {'items':customer_order_items,'order':customer_order.first(),'tax':taxx, 'freebies':freebies, 'max':freebie}
         return render(request,'sunday_4pm_cart_page.html', context)
     else:
+        #retutn this json object every other day there is not a free kids meal deal
          context = {'items':customer_order_items,'order':customer_order.first(),'tax':taxx}
          return render(request,'cart_page.html', context)
+"""
+Overview: Choose number of free kids meal
+Returns: redirects to the cart
+
+
+ """
 def choose_meal(request):
     if request.method == 'GET':
         amount = request.GET.get('amount')
@@ -186,13 +253,18 @@ def choose_meal(request):
         carts_customer = get_object_or_404(Customer, user=request.user)
         customer_order = order.objects.filter(owner=carts_customer, is_ordered=False)[0]
         if amount:
-            customer_order.free_kids_meal = amount
+            customer_order.free_kids_meal = amount #set number of free kids meal on order to the number sent from frontend with jQuery. This is useful in the kitchen view
 
         customer_order.save()
         print(customer_order.free_kids_meal)
     return redirect ('cart')
 def choose_tip(request):
     return render(request, 'payment_1.5_tip.html')
+"""
+Overview: card the payment process
+Returns:redirect to cart
+
+ """
 def tip(request):
     if request.method == 'POST':
        tip_rate = request.POST.get('submit')
@@ -201,9 +273,14 @@ def tip(request):
        orderx = ordery.first()
        orderx.tip = tip_rate
        orderx.save()
-       orderx.cost = orderx.add_tip()
+       orderx.cost = orderx.add_tip() #call class funcition
        orderx.save()
     return redirect('cart')
+"""
+Overview: Show the refull drink page and display drinks for refill
+Returns:json object, html page
+
+ """
 def refill_drink(request):
     catt  = category.objects.filter(name="Drinks").first()
     drinks = Item.objects.filter(cat=catt)
@@ -211,13 +288,18 @@ def refill_drink(request):
         'drinks':drinks
     }
     return render(request, 'drink_refill.html',context)
+"""
+Overview: create a refill request for the waiter view to handle
+Returns:json object, html page
+
+ """
 def refill_request(request):
     drink_pk = request.GET.get('id')
     cust = get_object_or_404(Customer, user=request.user)
     orderx = order.objects.filter(owner=cust)[0]
 
     drink1 = Item.objects.filter(pk=drink_pk).first()
-    req = Refill.objects.get_or_create(owner=cust,drink=drink1, orderx=orderx, unresolved=True)
+    req = Refill.objects.get_or_create(owner=cust,drink=drink1, orderx=orderx, unresolved=True) #create a refill request or get from backend if exists
     return render(request, 'menu.html')
 
     

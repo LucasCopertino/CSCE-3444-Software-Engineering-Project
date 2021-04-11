@@ -8,17 +8,22 @@ STRIPE_PRIV_KEY = 'sk_test_51IMeMeCiuu3zPBMkGAyiJKf2ABr0YmkU7DyZ3IHs0cJhIaTl7zjC
 stripe.api_key = STRIPE_PRIV_KEY
 # Create your models here.
 
+""" Customer objec in database"""
 class Customer(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,null=True)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,null=True) #unique relaionship with a1uthentication model
     pay_id = models.CharField(max_length=200, null=True, blank=True)
 
     def __str__(self):
         return self.user.username
+""" 
+Overview:Create a customer profile after a user signs up
+Type: Function
+ """
 def post_save_profile_create(sender, instance, created, *args, **kwargs):
     user_profile, created = Customer.objects.get_or_create(user=instance)
 
     if user_profile.pay_id is None or user_profile.pay_id == '':
-        new_stripe_id = stripe.Customer.create(email='test@gmail.com')
+        new_stripe_id = stripe.Customer.create(email='test@gmail.com') 
         user_profile.pay_id = new_stripe_id['id']
         user_profile.save()
 post_save.connect(post_save_profile_create, sender=settings.AUTH_USER_MODEL)
