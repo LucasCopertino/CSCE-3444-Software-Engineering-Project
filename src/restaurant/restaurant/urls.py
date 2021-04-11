@@ -40,6 +40,7 @@ urlpatterns = [
             path('choose-tip/',choose_tip, name="choose-tip"),
 
         path('tip/',tip, name="tip"),
+        path('tip-btn/',tip_btns, name="tip_btns"),
 
     path('cash-payment/',cash_payment, name="cash"),
     path('card-payment/',card_payment, name="card"),

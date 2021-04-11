@@ -276,6 +276,27 @@ def tip(request):
        orderx.cost = orderx.add_tip() #call class funcition
        orderx.save()
     return redirect('cart')
+
+
+"""
+Overview: Handle the tip buttons on the tip selection page
+Returns:json object, html page
+
+ """
+
+def tip_btns(request):
+    if request.method == 'GET':
+         tip_rate = request.GET.get('btnVal')
+         print("tip rate is ", tip_rate)
+         cust = get_object_or_404(Customer,user=request.user)
+         ordery = order.objects.filter(owner=cust,is_ordered=False)       
+         orderx = ordery.first()
+         orderx.tip = tip_rate
+         orderx.save()
+         orderx.cost = orderx.add_tip() #call class funcition
+         orderx.save()
+         return redirect('cart')
+
 """
 Overview: Show the refull drink page and display drinks for refill
 Returns:json object, html page
@@ -302,4 +323,4 @@ def refill_request(request):
     req = Refill.objects.get_or_create(owner=cust,drink=drink1, orderx=orderx, unresolved=True) #create a refill request or get from backend if exists
     return render(request, 'menu.html')
 
-    
+

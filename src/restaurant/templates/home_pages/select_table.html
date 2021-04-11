@@ -32,7 +32,6 @@
 </select>
 <button class="button" onclick="table_select()" >Pick Table</button>
 
-<button class="button" ><a href="{% url 'customer-homepage' %}">Go to Homepage</a></button>
 
 <script>
     function myFunction() {
@@ -49,10 +48,13 @@
              },
          
          
+             success: function(){
+                window.location.href = '{% url "customer-homepage" %}'
+             }
+            
          
          
            });
-           alert("Table Selected, Go to homepage");
 
          }  
     </script>
