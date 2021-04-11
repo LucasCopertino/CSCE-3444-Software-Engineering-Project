@@ -1,12 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-<<<<<<< HEAD
-from orders.models import Table
-from accounts.models import Customer
-=======
 from accounts.decorators import allowed_users
 
->>>>>>> origin/permissions
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
