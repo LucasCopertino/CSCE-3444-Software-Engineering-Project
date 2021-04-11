@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Child Mode</title>
+    <title>Rewards Login</title>
 
     <style>
-
         ul {
            list-style-type: none;
            margin: 0px;
@@ -42,6 +41,8 @@
             background: #353640;
          }
 
+
+
          .header {
              text-align: center;
              font-size: 100px;
@@ -49,13 +50,14 @@
 
          .form-box {
              width: 500px;
-             background: rgba(0,0,0,0.8);
+             height: 500px;
+             background: black;
              margin: 12% auto;
              padding: 50px 0;
              color: white;
-             box-shadow: 0 0 20px 2px rgba(0,0,0,0.5);
              border-radius: 25px;
-
+             float: left;
+             border: 5px solid white;
          }
 
          h1 {
@@ -64,29 +66,10 @@
 
          }
 
-         .input-box {
-            margin: 31px auto;
-            width: 80%;
-            border-bottom: 1px solid #fff;
-            padding-top: 10px;
-            padding-bottom: 5px;
-
-         }
-
-         .input-box input {
-            width: 90%;
-            border: none;
-            outline: none;
-            background: transparent;
-            color: #fff;
-         }
-
-         ::placeholder {
-             color: #ccc;
-         }
+         
 
          .submit-btn {
-            margin: 40px auto 20px;
+            margin: 400px auto 20px;
             width: 80%;
             display: block;
             outline: none;
@@ -96,6 +79,7 @@
             background: transparent;
             color: #fff;
             font-size: 16px;
+            border-radius: 25px;
 
          }
 
@@ -103,65 +87,49 @@
 
     </style>
 
-
 </head>
 
 
 <body>
-
     <div class="navbar">
         <ul>
             
-            <li ><a href="{% url 'help' %}" onclick="myFunction()">Help</a></li>
-            <li><a href="{% url 'games_home' %}">Go Back</a></li>
-<<<<<<< HEAD
-            <li><a href="{% url 'drink_refill'%}">Refill Drink</a></li>
-            <li><a href="#">Login/Sign-Up</a></li>
-            <li><a href="{% url 'homepage' %}">Home</a></li>
-=======
+            <li><a href="#">Help</a></li>
+            <li><a href="{% url 'homepage' %}">Go Back</a></li>
+            <li><a href="{% url 'set-childmode' %}">Child Mode</a></li>
             <li><a href="#">Refill Drink</a></li>
-            <li><a href="{% url 'logout'%}">Logout</a></li>
-            <li><a href="{% url 'customer-homepage' %}">Home</a></li>
->>>>>>> origin/continuity_update
+            <li><a href="{% url 'login'%}">Login/Sign-Up</a></li>
+            <li><a href="{% url 'homepage' %}">Home</a></li>
     
         </ul>
     
     </div>
 
-   
+    
     <div class="form-box">
-        <h1>Set 4 Character Password</h1>
-<!-- Set up for the form to input Child mode password -->
-        <form action = "." method = "POST">{% csrf_token %}
-            <div class="input-box">
-                <input type="password" name="att1" placeholder="Password">
-            </div>
+        <h1>Game 1</h1>
 
-            <div class="input-box">
-                <input type="password" name="att2" placeholder="Confirm Password">
-            </div>
-
-            <button type="submit" class="submit-btn">Submit</button>
-        </form>
+        
+        <button type="button" class="submit-btn"><a href="{% url 'games-snake' %}">Play</a></button>
 
     </div>
     
+    <div class="form-box">
+        <h1>Game 2</h1>
+
+        
+        <button type="button" class="submit-btn"><a href="{% url 'games-tictactoe' %}">Play</a></button>
+
+    </div>
+
+
+
+
     
-
-
-
-
-
     
 </body>
 
 
-
-<script>
-    function myFunction() {
-      alert("Help Requested. A waiter will be at your table soon");
-    }
-    </script>
 
 
 </html>

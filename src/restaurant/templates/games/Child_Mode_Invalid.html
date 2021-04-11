@@ -63,6 +63,11 @@
              margin-bottom: 40px;
 
          }
+         
+         footer {
+         	 text-align: center;
+             margin-bottom: 40px;
+         }
 
          .input-box {
             margin: 31px auto;
@@ -112,17 +117,11 @@
     <div class="navbar">
         <ul>
             
-            <li ><a href="{% url 'help' %}" onclick="myFunction()">Help</a></li>
+            <li><a href="#">Help</a></li>
             <li><a href="{% url 'games_home' %}">Go Back</a></li>
-<<<<<<< HEAD
-            <li><a href="{% url 'drink_refill'%}">Refill Drink</a></li>
-            <li><a href="#">Login/Sign-Up</a></li>
-            <li><a href="{% url 'homepage' %}">Home</a></li>
-=======
             <li><a href="#">Refill Drink</a></li>
             <li><a href="{% url 'logout'%}">Logout</a></li>
             <li><a href="{% url 'customer-homepage' %}">Home</a></li>
->>>>>>> origin/continuity_update
     
         </ul>
     
@@ -140,6 +139,8 @@
             <div class="input-box">
                 <input type="password" name="att2" placeholder="Confirm Password">
             </div>
+            
+            <footer>Passwords invalid, must be 4 characters.</footer>
 
             <button type="submit" class="submit-btn">Submit</button>
         </form>
@@ -157,11 +158,7 @@
 
 
 
-<script>
-    function myFunction() {
-      alert("Help Requested. A waiter will be at your table soon");
-    }
-    </script>
+
 
 
 </html>

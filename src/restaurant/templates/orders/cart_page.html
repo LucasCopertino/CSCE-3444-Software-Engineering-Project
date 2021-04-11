@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!-- Cart Page
 
 This page shows everything currently in the customer cart.
@@ -7,6 +8,9 @@ By pressing the 'place order' button, the customer can begin playment.
 -->
 
 {% extends 'base.html' %}
+=======
+{% extends 'base2.html' %}
+>>>>>>> origin/continuity_update
 
 {% block content %}
     <!--Page Heading-->
@@ -51,9 +55,15 @@ By pressing the 'place order' button, the customer can begin playment.
 
     <footer>
         <!--Back Button-->
+<<<<<<< HEAD
         <button class="back-button"><a href="#back">Back</a></button>
     </footer>   
     
+=======
+        <button class="back-button"><a href="{% url 'menu_home' %}">Back</a></button>
+    </footer>       
+
+>>>>>>> origin/continuity_update
 </body>  
 
 {% endblock %}

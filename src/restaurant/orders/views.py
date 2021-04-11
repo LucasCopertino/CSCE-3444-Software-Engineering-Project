@@ -36,6 +36,7 @@ Returns: a html page
 
  """
 
+@login_required
 def start_payment(request):
     return render (request, 'payment_1_start.html')
 
@@ -51,6 +52,7 @@ Returns: a html page
 
 
 
+<<<<<<< HEAD
  """
 def choose_method(request):
     return render (request, 'payment_4_choose_method.html')
@@ -61,6 +63,12 @@ Returns: actually redirects back to the menu
 
 
  """
+=======
+@login_required
+def choose_method(request):
+    return render (request, 'payment_4_choose_method.html')
+
+>>>>>>> origin/continuity_update
 def cash_payment(request):
     carts_customer = get_object_or_404(Customer, user=request.user) #get the customer by using the authentication modela and comparing with our customer model
     customer_order = get_object_or_404(order,owner=carts_customer, is_ordered=False) #get the customer's order by making use of databse relationships

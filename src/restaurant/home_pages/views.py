@@ -5,14 +5,10 @@ from accounts.decorators import allowed_users
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
-
-"""Overview:Home page view for authenticated customer
-    Return:  html page 
-"""
-@login_required(login_url='/login/')
-
+@login_required
 def customer_home_page(request):
     return render(request, 'login_customer_home.html')
+    
 """Overview:Home page view for unauthenticated customer
     Return: html page 
 """

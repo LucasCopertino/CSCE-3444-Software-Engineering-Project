@@ -64,6 +64,11 @@
 
          }
 
+         footer {
+         	 text-align: center;
+             margin-bottom: 40px;
+         }
+
          .input-box {
             margin: 31px auto;
             width: 80%;
@@ -111,18 +116,12 @@
 
     <div class="navbar">
         <ul>
-            
-            <li ><a href="{% url 'help' %}" onclick="myFunction()">Help</a></li>
-            <li><a href="{% url 'games_home' %}">Go Back</a></li>
-<<<<<<< HEAD
-            <li><a href="{% url 'drink_refill'%}">Refill Drink</a></li>
-            <li><a href="#">Login/Sign-Up</a></li>
-            <li><a href="{% url 'homepage' %}">Home</a></li>
-=======
+           
+            <li><a href="#">Help</a></li>
+            <li><a href="{% url 'games-home-locked' %}">Go Back</a></li>
             <li><a href="#">Refill Drink</a></li>
-            <li><a href="{% url 'logout'%}">Logout</a></li>
-            <li><a href="{% url 'customer-homepage' %}">Home</a></li>
->>>>>>> origin/continuity_update
+            <li><a href="#">Logout</a></li>
+            <li><a href="#">Home</a></li>
     
         </ul>
     
@@ -130,16 +129,14 @@
 
    
     <div class="form-box">
-        <h1>Set 4 Character Password</h1>
-<!-- Set up for the form to input Child mode password -->
+        <h1>Enter Password</h1>
+
         <form action = "." method = "POST">{% csrf_token %}
             <div class="input-box">
-                <input type="password" name="att1" placeholder="Password">
+                <input type="password" name="attempt" placeholder="Password">
             </div>
 
-            <div class="input-box">
-                <input type="password" name="att2" placeholder="Confirm Password">
-            </div>
+            <footer>Passcode is invalid, please try again.</footer>
 
             <button type="submit" class="submit-btn">Submit</button>
         </form>
@@ -157,11 +154,7 @@
 
 
 
-<script>
-    function myFunction() {
-      alert("Help Requested. A waiter will be at your table soon");
-    }
-    </script>
+
 
 
 </html>

@@ -94,21 +94,12 @@
     <div class="navbar">
         <ul>
             
-<<<<<<< HEAD
-            <li><a href="{% url 'help' %}" onclick="myFunction()">Help</a></li>
-            <li><a href="{% url 'homepage' %}">Go Back</a></li>
-            <li><a href="{% url 'set-childmode' %}">Child Mode</a></li>
-            <li><a href="{% url 'drink_refill'%}">Refill Drink</a></li>
-            <li><a href="#">Login/Sign-Up</a></li>
-            <li><a href="{% url 'homepage' %}">Home</a></li>
-=======
-            <li><a href="#">Help</a></li>
-            <li><a href="{% url 'customer-homepage' %}">Go Back</a></li>
-            <li><a href="{% url 'set-childmode' %}">Child Mode</a></li>
-            <li><a href="#">Refill Drink</a></li>
-            <li><a href="{% url 'logout'%}">Logout</a></li>
-            <li><a href="{% url 'customer-homepage' %}">Home</a></li>
->>>>>>> origin/continuity_update
+            <li><a href="{% url 'deactivate-child' %}">Help</a></li>
+            <li><a href="{% url 'deactivate-child' %}">Go Back</a></li>
+            <li><a href="{% url 'deactivate-child' %}">Unlock Child Mode</a></li>
+            <li><a href="{% url 'deactivate-child' %}">Refill Drink</a></li>
+            <li><a href="{% url 'deactivate-child' %}">Logout</a></li>
+            <li><a href="{% url 'deactivate-child' %}">Home</a></li>
     
         </ul>
     
@@ -119,7 +110,7 @@
         <h1>Game 1</h1>
 
         
-        <button type="button" class="submit-btn"><a href="{% url 'games-snake' %}">Play</a></button>
+        <button type="button" class="submit-btn"><a href="{% url 'games-snake-locked' %}">Play</a></button>
 
     </div>
     
@@ -127,7 +118,7 @@
         <h1>Game 2</h1>
 
         
-        <button type="button" class="submit-btn"><a href="{% url 'games-tictactoe' %}">Play</a></button>
+        <button type="button" class="submit-btn"><a href="{% url 'games-tictactoe-locked' %}">Play</a></button>
 
     </div>
 
@@ -138,11 +129,7 @@
     
 </body>
 
-<script>
-    function myFunction() {
-      alert("Help Requested. A waiter will be at your table soon");
-    }
-    </script>
+
 
 
 </html>
