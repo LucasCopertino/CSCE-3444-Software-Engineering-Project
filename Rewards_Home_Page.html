@@ -5,131 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rewards Login</title>
-
-    <style>
-        ul {
-           list-style-type: none;
-           margin: 0px;
-           padding: 0px;
-           overflow: hidden;
-           background-color: black;
-           font-family: Arial, Helvetica, sans-serif;
-           border-radius: 8px;
-       }
-
-       li {
-           float: right;
-           border-right: 1px solid white;
-       }
-
-       li a {
-           display: block;
-           color: white;
-           text-align: center;
-           padding: 10px 16px;
-           text-decoration: none;
-       }
-
-       .nav-right {
-           display: flex;
-           justify-content: center;
-           align-items: center;
-           padding: 10%;
-       }
-
-         .navbar a:hover {
-            background: #353640;
-         }
-
-
-
-         .header {
-             text-align: center;
-             font-size: 100px;
-         }
-
-         .form-box {
-             width: 1100px;
-             height: 1200px;
-             background: rgba(0,0,0,0.8);
-             margin: 12% auto;
-             padding: 50px 0;
-             color: white;
-             box-shadow: 0 0 20px 2px rgba(0,0,0,0.5);
-             border-radius: 25px;
-
-         }
-
-         h1 {
-             text-align: center;
-             margin-bottom: 40px;
-
-         }
-
-         .input-box {
-            margin: 31px auto;
-            width: 80%;
-            border-bottom: 1px solid #fff;
-            padding-top: 10px;
-            padding-bottom: 5px;
-
-         }
-
-         .input-box input {
-            width: 90%;
-            border: none;
-            outline: none;
-            background: transparent;
-            color: #fff;
-         }
-
-         ::placeholder {
-             color: #ccc;
-         }
-
-         body {
-            font-family: Arial, Helvetica, sans-serif;
-         }
-         
-         .coupon {
-             border: 5px solid black;
-             width:25%;
-             border-radius: 15px;
-             float: left;
-             max-width: 380px;
-             margin-left: 40px;
-             margin-top: 40px;
-
-         }
-
-         .container {
-             padding: 1px 50px;
-             width: 40%;
-
-         }
-        
-        .promo {
-            background-color: #ccc;
-            padding: 10px;
-        
-        }
-
-        .expire {
-            color: red;
-        }
-
-        .points {
-            height: 200px;
-            width: 200px;
-            margin-top: 700px;
-            text-align: center;
-        }
-
-
-
-       
-
-    </style>
+    <link rel="stylesheet" href="Rewards.css">
 
 </head>
 
@@ -138,9 +14,10 @@
     <div class="navbar">
         <ul>
 
-            <li><a href="#">Help</a></li>
-            <li><a href="#">Go Back</a></li>
-            <li><a href="#">Refill Drink</a></li>
+            <!--Nav Bar -->
+            <li class="back-button"><a href="#">Go Back</a></li>
+            <li class="nav-right"><a href="#">Refill Drink</a></li>
+            <li class="nav-right"><a href="#">Help</a></li>
             <li><a href="#">Home</a></li>
             
     
@@ -154,39 +31,57 @@
 
 
  
-
-    <div class="coupon"><img src="pc1.jpg" style="width: 100%; height: 20%;">
+    <!--Coupon container & img source -->
+    <div class="coupon"><img src="https://www.mexicanplease.com/wp-content/uploads/2019/10/Entomatadas-Recipe-13-500x500.jpg" style="width: 100%; height: 20%;">
     <div class="container" style="background-color: white;">
-        <h2>20% off Purchase</h2>
+        <h2>30% Off</h2>
         <p>
-            20% off your purchase if you buy meal 1
+            30% off a meal of your choice 
         </p>
     </div>
 
     <div class="container">
         <p>Coupon Code: <span class="promo:"">CVP891</p>
+        <p>1,500 Points</p>
         <p class="expire"> Expires: 12/12/21</p>
     </div>
     
     </div>
 
-    <div class="coupon"><img src="drink.jpg" style="width: 100%; height: 30%;">
+    <div class="coupon"><img src="https://lh3.googleusercontent.com/proxy/1s06QCreg85_s6C3HM92dVu4KqP-GPEwak5SkrmaMRql2PLNFLCEew9bpkcGbRY6VcOo2Jc_a2mKJMrPOP8oFhpKlp0w9YJYJPUVJc6naitUz34kXX3qqxdb4cV_JoSyUSNSxiQVST3sAfnk" style="width: 100%; height: 30%;">
         <div class="container" style="background-color: white;">
             <h2>Free Drink</h2>
             <p>
-                Free Drink of your choice
+                Free Non-alcoholic Drink of your choice
             </p>
         </div>
     
         <div class="container">
-            <p>Coupon Code: <span class="promo:"">JLE176</p>
+            <p>Coupon Code: <span class="promo:"">JL1W76</p>
+            <p>1,500 Points</p>
             <p class="expire"> Expires: 12/12/21</p>
         </div>
         
         </div>
 
+    <div class="coupon"><img src="https://www.tablefortwoblog.com/wp-content/uploads/2016/11/mexican-churros-tablefortwoblog-4-500x500.jpg" style="width: 100%; height: 30%;">
+        <div class="container" style="background-color: white;">
+            <h2>Free Dessert</h2>
+            <p>
+                Free Dessert of your choice
+            </p>
+        </div>
+                
+        <div class="container">
+            <p>Coupon Code: <span class="promo:"">LODF72</p>
+            <p>1,500 Points</p>
+            <p class="expire"> Expires: 12/12/21</p>
+        </div>
+                    
+        </div>
 
-        <div class="coupon"><img src="free.jpg" style="width: 100%; height: 30%;">
+
+        <div class="coupon"><img src="https://www.wandercooks.com/wp-content/uploads/2017/04/simple-mexican-chicken-mole-recipe-ft-e1492645203391-500x500.jpg" style="width: 100%; height: 30%;">
             <div class="container" style="background-color: white;">
                 <h2>Free Meal</h2>
                 <p>
@@ -196,15 +91,52 @@
         
             <div class="container">
                 <p>Coupon Code: <span class="promo:"">RPQ422</p>
+                <p>1,500 Points</p>
                 <p class="expire"> Expires: 12/12/21</p>
             </div>
             
             </div>
 
+
+        <div class="coupon"><img src="https://www.spendwithpennies.com/wp-content/uploads/2021/03/Tequila-Sunrise-SpendWithPennies-5-1-500x500.jpg" style="width: 100%; height: 30%;">
+            <div class="container" style="background-color: white;">
+                <h2>Free Drink</h2>
+                <p>
+                    Free Alcholic Drink of your choice
+                </p>
+            </div>
+            
+            <div class="container">
+                <p>Coupon Code: <span class="promo:"">SFF2L5</p>
+                <p>1,500 Points</p>
+                <p class="expire"> Expires: 12/12/21</p>
+            </div>
+                
+            </div>
+
+        <div class="coupon"><img src="https://lh3.googleusercontent.com/proxy/IvJi2zggCTfZVp8jsU7kuFcAOK_QjGWN1UB9x3Q12NXMjxxocxukc9nVtF6t2dmKeugiTIjVOfvVIS3QLGUgwrU-K204NZI1hCGJydD0dmaVXoytoXGwm_xheJX-" style="width: 100%; height: 30%;">
+            <div class="container" style="background-color: white;">
+                <h2>15% off Total</h2>
+                <p>
+                    15% off your total order
+                </p>
+            </div>
+                
+            <div class="container">
+                <p>Coupon Code: <span class="promo:"">PWL328</p>
+                <p>1,500 Points</p>
+                <p class="expire"> Expires: 12/12/21</p>
+            </div>
+                    
+            </div>
+
+        
+        <!--Points  div -->
         <div>
             <p class="points">
                 Points:
             </p>
+            
         </div>
 
     

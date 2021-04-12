@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&family=Kaushan+Script&family=Montserrat:wght@200;300;400;500;600;700;800;900&display=swap');
+
+:root{
+    --Inter: 'Inter', sans-serif;
+    --Kaushan: 'Kaushan Script', cursive;
+    --Mont: 'Montserrat', sans-serif;
+}
+
+/* Navigation Bar Styles */
+ul{
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+    background-color: black;
+    font-family: var(--Inter);
+    border-radius: 4px;
+}
+
+li{
+    float: left;
+    border-right: 1px solid white;
+}
+
+li a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 10px 16px;
+    text-decoration: none;
+    font-family: var(--Inter);
+    font-weight: bold;
+}
+
+.nav-right{
+    float: right;
+}
+
+/* Button Alignment and Hover Effect */
+.main-buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5% 5% 0% 5%;
+    
+}
+
+.button{
+    background-color: black;
+    color: white;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    padding: 30px;
+    font-family: var(--Inter);
+    font-size: 40px;
+    font-weight: bold;
+    margin: 20px;
+    display: block;
+    border-radius: 4px;
+}
+
+.button a{
+    color:white;
+    text-decoration: none;
+}
+
+.button:hover{
+    box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.75);
+}
+
+
+.back-button{
+    font-family: var(--Inter);
+    font-size: 16px;
+    background-color: black;
+    border: none;
+    border-radius: 4px;
+    padding: 20px;
+    position:absolute;
+    bottom: 0px;
+}
+
+.back-button a{
+    text-decoration: none;
+    color: white;
+}
+
+.back-button:hover{
+    box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.75);
+}
+
+:root{
+    --Inter: 'Inter', sans-serif;
+    --Kaushan: 'Kaushan Script', cursive;
+    --Mont: 'Montserrat', sans-serif;
+}
+
+.goBackButton{
+    background-color: white;
+    width: 150px;
+    height: 75px;
+}
+.refillDrinkButton{
+    background-color:white;
+    width: 150px;
+    height: 75px;
+}
+.helpButton{
+    background-color:white;
+    width: 150px;
+    height: 75px;
+}
+
+
+.button-name{
+    margin-top: 5%;
+    padding: 180px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 4px;
+    background-color: black;
+    border: none;
+}
+
+.button-name:hover{
+    box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.75);
+}
+
+
+/* Box Style for Game Boxes */
+.form-box {
+      width: 500px;
+      height: 500px;
+      background: black;
+      margin: 12% auto;
+      padding: 50px 0;
+      color: white;
+      border-radius: 25px;
+      border: 5px solid white;
+      float:left;
+      margin-left:20px;
+    }
+.form-box2 {
+    width: 500px;
+    height: 500px;
+    background: black;
+    margin: 12% auto;
+    padding: 50px 0;
+    color: white;
+    border-radius: 25px;
+    border: 5px solid white;
+    float:right;
+    margin-right:20px;
+
+}
+
+h1 {
+      text-align: center;
+      margin-bottom: 40px;
+
+}
+
+  
+/* Subtmit Button Styles */
+.submit-btn {
+     margin: 40px auto 20px;
+     width: 80%;
+     display: block;
+     outline: none;
+     padding: 10px 0;
+     border: 1px solid #fff;
+     cursor: pointer;
+     background: transparent;
+     color: #fff;
+     font-size: 16px;
+     border-radius: 25px;
+
+}
+
+
+.submit-btn:hover {
+    margin: 40px auto 20px;
+    width: 80%;
+    display: block;
+    outline: none;
+    padding: 10px 0;
+    border: 1px solid #fff;
+    cursor: pointer;
+    background-color:yellow;
+    color:blue;
+    font-size: 16px;
+    border-radius: 25px;
+
+}
+
+
+
+/* Container styles for the game box */
+#wrapper {
+
+    margin-right: auto;
+    margin-left: auto;
+    width: 1500px;
+    
+    
+
+}
+.images {
+   
+    width:300px;
+    height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.images img {
+    border-radius: 15px;
+    border: 2px white solid;
+}
