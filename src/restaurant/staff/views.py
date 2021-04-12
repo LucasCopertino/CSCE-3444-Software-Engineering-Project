@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404,redirect
-from orders.models import order, Help, Refill, orderItem
+from orders.models import order, Help, Refill, orderItem, Table
 from orders.forms import statusForm
 from accounts.models import Customer
 from django.contrib import messages
@@ -56,6 +56,7 @@ def manager_home(request):
 @allowed_users(allowed_roles=['manager'])
 def manager_report(request):
     return render(request, 'manager_report.html')    #page for manager report
+@allowed_users(allowed_roles=['kitchen'])
 
 def change_stat(request):
     if request.method == 'GET':
@@ -86,6 +87,8 @@ def HelpFunc(request):
 """ Overview: A function to that handles help request aand allows waiters resolve them
     Returns:reloads the page
 """
+@allowed_users(allowed_roles=['waiter'])
+
 def delete_help_request(request):
     print(request)
     help_request_uniq = request.GET.get('pk')
@@ -101,6 +104,8 @@ def delete_help_request(request):
 """ Overview: A function to that handles refill request aand allows waiters resolve them
     Returns:reloads the page
 """
+@allowed_users(allowed_roles=['waiter'])
+
 def delete_refill_request(request):
     print(request)
     ref_request_uniq = request.GET.get('pk')
@@ -115,6 +120,8 @@ def delete_refill_request(request):
 """ Overview: A function to that allows waiters resolve completed orders
     Returns:reloads the page
 """
+@allowed_users(allowed_roles=['waiter'])
+
 def delete_order_pickup(request):
     print(request)
     order_request_uniq = request.GET.get('pk')
@@ -127,6 +134,8 @@ def delete_order_pickup(request):
 """ Overview: A function to that allows waiters resolve cash payment requests
     Returns:reloads the page
 """
+@allowed_users(allowed_roles=['waiter'])
+
 def resolve_pay_by_cash(request):
     order_request_uniq = request.GET.get('pk')
     order_request, status = pay_by_cash.objects.get_or_create(pk=order_request_uniq)
@@ -143,3 +152,29 @@ def resolve_pay_by_cash(request):
     order_request.save()  
    
     return redirect('waiter_home')
+
+@allowed_users(allowed_roles=['waiter'])
+
+def show_table_map(request):
+    if (Table.objects.filter(occupied=True).exists()):
+        table_objs = Table.objects.filter(occupied=True)
+        for table_obj in table_objs:
+            user_profile = Customer.objects.filter(user=table_obj.owner.user)[0]
+
+            if order.objects.filter(owner=user_profile, delivered=False).exists():
+                order1 = order.objects.filter(owner=user_profile, delivered=False)[0]
+                if order1.is_ordered == False:
+                    table_obj.order_status = "browsing"
+                else:
+                    table_obj.order_status = "In Kitchen"
+                if order1.status=="finished":
+                    table_obj.order_status = "Ready for delivery"
+
+                table_obj.save()
+        context = {
+            'tables':table_objs
+        }
+        return render(request, 'waiter_table_map.html', context)
+    else:
+        return render(request, 'waiter_table_map.html')
+    

@@ -3,6 +3,8 @@ from menu.models import Item
 from accounts.models import Customer
 import decimal
 import datetime
+from django.conf import settings
+
 # Create your models here.
 
 STATUS_CHOICES = [('Created', 'created'), ('In progress', 'in progress'), ('Finished','finished'),('Delivered','delivered')]
@@ -108,3 +110,5 @@ class Table(models.Model):
     TableNum = models.IntegerField(null=True)
     occupied = models.BooleanField(default=False)
     owner = models.OneToOneField(Customer, null=True, on_delete=models.SET_NULL, blank=True)
+    order_status = models.CharField(max_length=12, null=True, blank=True, default='browsing')
+    waiter_assigned = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)

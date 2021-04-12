@@ -23,16 +23,7 @@ def home_page(request):
 
     return render(request, 'guest_home.html')
 
-def logOut(request):
-    person = request.user
-    if Customer.objects.filter(user=person).exists:
-        if Table.objects.filter(owner=Customer.objects.filter(user=person)[0], occupied=True).exists():
-            tables = Table.objects.filter(owner=Customer.objects.filter(user=person)[0], occupied=True)
-            for table in tables:
-                table.occupied = False
-                table.owner = None
-                table.save()
-    return redirect('logout')
+
 """Overview:Page to select table number after login
     Return: json object, html page 
 """
@@ -60,3 +51,18 @@ def table_selection(request):
         print(table.TableNum)
         table.save()
         return redirect('select_table')
+
+"""Overview:Function to free user's tables and log out user
+    Return: to the guest homepage
+"""  
+
+def logOut(request):
+    person = request.user
+    if Customer.objects.filter(user=person).exists:
+        if Table.objects.filter(owner=Customer.objects.filter(user=person)[0], occupied=True).exists():
+            tables = Table.objects.filter(owner=Customer.objects.filter(user=person)[0], occupied=True)
+            for table in tables:
+                table.occupied = False
+                table.owner = None
+                table.save()
+    return redirect('logout')

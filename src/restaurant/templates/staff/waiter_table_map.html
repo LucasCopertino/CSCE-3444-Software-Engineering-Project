@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+
+
+<html lang = "en">
+<head> 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>Table Map</title>
+    <link rel="stylesheet" href="{% static 'orders/styleCartAndPayment.css' %}">
+
+    <style>
+        .table1{
+            background-color:white;
+            width: 200px;
+            min-height: 150px;  
+            padding: 10px;
+            border: 2px solid darkgreen;
+            box-sizing: border-box;
+            float:left;
+            margin: 0.5%;
+        }
+
+        .table2{
+            background-color:white;
+            width: 200px;
+            min-height: 150px;  
+            padding: 10px;
+            border: 2px solid darkgreen;
+            box-sizing: border-box;
+            float:right;
+            margin: 0.5%;
+        }
+
+        .tableRow{
+            background-color: white;
+            width:80%;
+            min-height: 160px;
+            padding: 10px;
+            box-sizing: border-box;
+            float: right;
+        }
+        
+    </style>
+
+</head> 
+
+    <body>
+        <!--Nav Bar -->
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+
+                <li class="nav-right"><a href="#refill">Refill drink</a></li>
+                <li class="nav-right"><a href="#help">Help</a></li>
+                <li class="nav-right" style="border-left: 1px solid white;"><a href="#login-signup">Login/Sign-Up</a></li>
+            </ul>
+        </nav> <!--End of Nav-->
+
+        <h1 style="text-align:center;">
+            Table Map
+        </h1>
+        <br>
+
+        <!--Display boxes representing 10 tables-->
+        <!--first row of tables-->
+        <div class=tableRow>
+            {% for table in tables %}
+            <div class=table1>
+                <p>
+                    Table {{table.TableNum}} <!--Table 1 displayed here-->
+                </p>
+                <br>
+                <p>
+                    Customer: {{table.owner}}
+                </p>
+                <br>
+
+                <p>
+                    Assigned waiter: {{table.waiter_assigned.username}}
+                </p>
+                <br>
+
+                <p>
+                    Status: {{table.order_status}}
+                </p>
+            </div>  
+            {% endfor %}
+        </div>    
+        
+       
+        <!--Back Button-->
+        <button class="back-button"><a href="#back">Back</a></button>
+        
+
+    </body>

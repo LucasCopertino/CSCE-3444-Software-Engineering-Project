@@ -82,6 +82,8 @@ urlpatterns = [
     path('tictactoe-locked/', games_ttt_locked, name='games-tictactoe-locked'),
 
     path('waiter-view/', waiter_home, name='waiter_home'), #set path for waiter notifications
+        path('table-map/',show_table_map, name="table_map"),
+
     path('kitchen-view/', kitchen_home, name='kitchen_home'),    #set path for kitchen queue
     path('manager-home/', manager_home, name='manager_home'),    #set path for manager pages
     path('manager-report/', manager_report, name='manager_report'),
