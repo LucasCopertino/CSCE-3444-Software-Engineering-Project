@@ -29,3 +29,6 @@ def cat_g(request, category_id):
 
 
     #return 0
+def item_view(request, item_id):
+    item = Item.objects.filter(pk=item_id)[0]
+    return render(request, 'menu_item_details.html', {'item':item})

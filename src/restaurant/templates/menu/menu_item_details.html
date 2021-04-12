@@ -1,13 +1,14 @@
-<!DOCTYPE html>
+{% extends 'base2.html' %}
 
+{% load static %} <!--This is a django-html tag to load the location of the static files we need like stylesheets and javascript files-->
+{% block content %}
 
-<html lang = "en">
 <head> 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <title>Item Details</title>
-    <link rel="stylesheet" href="styleCartAndPayment.css">
+    <link rel="stylesheet" href="{% static '/menu/styles.css' %}" type="text/css">
 
     <style>
         .itemInfoBox{
@@ -30,20 +31,10 @@
         -->
     
 
-        <!--Nav Bar -->
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-
-                <li class="nav-right"><a href="#refill">Refill drink</a></li>
-                <li class="nav-right"><a href="#help">Help</a></li>
-                <li class="nav-right" style="border-left: 1px solid white;"><a href="#login-signup">Login/Sign-Up</a></li>
-            </ul>
-        </nav> <!--End of Nav-->
-
+      
         <!--Display item name-->
         <h1 style="text-align: center;">
-                Item Name
+                {{item.name}}
         </h1>
         <br>
 
@@ -58,26 +49,22 @@
             <!--<div style="margin-left: auto; margin-right: auto; width: 400px;">    -->
                 <!--Display item price-->
                 <p>
-                    Price: $99.99
+                    Price: ${{item.price}}
                 </p>
+                <br>
 
                 <!--Display item calorie count-->
                 <p>
-                    Calories: 900
-                </p>
+                    Calories: {{item.calory_info}}
+                    </p>
                 <br>
 
                 <!--Display item description-->
                 <p>
-                    This item is made of bla bla bla and sounds very tasty you will love it
+                    Description: {{item.description}}
                 </p>
-                <br>
 
-                <!--Get customer comments--> 
-                <p>
-                    Add customizations to this item here:
-                </p>
-                <input type="text" id="comment" name="comment" size="50">
+            
         </div>
 
         <!--Main Page Buttons-->
@@ -88,5 +75,6 @@
         <!--Back Button-->
         <button class="back-button"><a href="#back">Back</a></button>
         
-
+       
     </body>
+    {% endblock %}
