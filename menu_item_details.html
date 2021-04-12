@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+
+<html lang = "en">
+<head> 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>Item Details</title>
+    <link rel="stylesheet" href="styleCartAndPayment.css">
+
+    <style>
+        .itemInfoBox{
+            background-color:white;
+            width: 500px;
+            min-height: 250px;  
+            padding: 25px;
+            border: 2px solid darkgreen;
+            box-sizing: border-box;
+            margin-left: auto; 
+            margin-right: auto; 
+        }
+    </style>
+
+</head> 
+
+    <body>
+        <!--
+            Each item has a name, picture, price, calorie count, and description.
+        -->
+    
+
+        <!--Nav Bar -->
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+
+                <li class="nav-right"><a href="#refill">Refill drink</a></li>
+                <li class="nav-right"><a href="#help">Help</a></li>
+                <li class="nav-right" style="border-left: 1px solid white;"><a href="#login-signup">Login/Sign-Up</a></li>
+            </ul>
+        </nav> <!--End of Nav-->
+
+        <!--Display item name-->
+        <h1 style="text-align: center;">
+                Item Name
+        </h1>
+        <br>
+
+        <!--Display item picture-->
+        <div style="margin-left: auto; margin-right: auto; width: 400px;">    
+            <img src="food_image.png" alt="Picture of food">
+        </div>
+        <br>
+
+        <!--Display all associated text-->>
+        <div class=itemInfoBox >
+            <!--<div style="margin-left: auto; margin-right: auto; width: 400px;">    -->
+                <!--Display item price-->
+                <p>
+                    Price: $99.99
+                </p>
+
+                <!--Display item calorie count-->
+                <p>
+                    Calories: 900
+                </p>
+                <br>
+
+                <!--Display item description-->
+                <p>
+                    This item is made of bla bla bla and sounds very tasty you will love it
+                </p>
+                <br>
+
+                <!--Get customer comments--> 
+                <p>
+                    Add customizations to this item here:
+                </p>
+                <input type="text" id="comment" name="comment" size="50">
+        </div>
+
+        <!--Main Page Buttons-->
+        <div class="main-buttons">
+            <button class="button">Add to cart buttons here</button>
+        </div>
+
+        <!--Back Button-->
+        <button class="back-button"><a href="#back">Back</a></button>
+        
+
+    </body>
