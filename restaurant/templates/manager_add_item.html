@@ -1,0 +1,92 @@
+
+
+{% load static %} <!--This is a django-html tag to load the location of the static files we need like stylesheets and javascript files-->
+{% block content %}
+
+<head> 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>Item Details</title>
+    <link rel="stylesheet" href="{% static '/menu/styles.css' %}" type="text/css">
+
+    <style>
+        .itemInfoBox{
+            background-color:white;
+            width: 500px;
+            min-height: 250px;  
+            padding: 25px;
+            border: 2px solid darkgreen;
+            box-sizing: border-box;
+            margin-top: 40px;
+            margin-left: auto; 
+            margin-right: auto; 
+        }
+
+        .picture{
+            height: 400px;
+            width: 400px;
+        }
+    </style>
+
+</head> 
+
+    <body>
+        <!--
+            Each item has a name, picture, price, calorie count, and description.
+        -->
+    
+
+
+        <!--Display all associated text-->
+        <div class=itemInfoBox >
+            <!--<div style="margin-left: auto; margin-right: auto; width: 400px;">    -->
+                <form>
+                <p>
+                    <label for="name">Item Name: </label>
+                    <input type="text" id="name" name="name">
+                </p>
+                <br>
+                <p>
+                    <label for="category">Category: </label>
+                    <input type="text" id="category" name="category">
+                </p>
+                <br>
+                <p>
+                    <label for="image">Upload Image: </label>
+                    <input type="file" id="image" name="image">
+                </p>
+                <br>
+                <!--Display item price-->
+                <p>
+                    <label for="price">Price: </label>
+                    <input type="number" id="price" name="price">
+                </p>
+                <br>
+
+                <!--Display item calorie count-->
+                <p>
+                    <label for="calories">Calories: </label>
+                    <input type="number" id="calories" name="calories">
+                </p>
+                <br>
+
+                <!--Display item description-->
+                <p>
+                    <label for="description">Description: </label>
+                    <input type="text" id="description" name="description">
+                </p>
+                <br>
+
+                <input type="submit" value="Add Item">
+                </form>
+            
+        </div>
+
+
+        <!--Back Button-->
+        <button class="back-button"><a href="#back">Back</a></button>
+        
+       
+    </body>
+    {% endblock %}
