@@ -9,7 +9,10 @@
     
     <title>Item Details</title>
     <link rel="stylesheet" href="{% static '/menu/styles.css' %}" type="text/css">
-
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
     <style>
         .itemInfoBox{
             background-color:white;
@@ -69,12 +72,27 @@
 
         <!--Main Page Buttons-->
         <div class="main-buttons">
-            <button class="button">Add to cart buttons here</button>
+            <button class="button" onclick="increase('{{item.pk}}')">Add to cart buttons here</button>
         </div>
 
         <!--Back Button-->
         <button class="back-button"><a href="#back">Back</a></button>
-        
+        <script type="text/javascript">
+            // Create an instance of the Stripe object with public stripe key
+            function increase(click_id){
+            $.ajax({
+              url: `{% url "add-to-order" %}`,
+              data: {
+          "id" :click_id
+      },            type: 'get',
+      success: function(){
+        alert('{{item.name}} added to order')
+
+      }
+
+              
+            })}
+            </script>
        
     </body>
     {% endblock %}

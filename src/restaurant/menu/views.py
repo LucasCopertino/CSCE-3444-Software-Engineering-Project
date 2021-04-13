@@ -10,7 +10,7 @@ from django.contrib.auth.models import Group
 """Overview: Render the menu page to the user
     Return: json object, html page 
 """
-@login_required
+#@login_required
 def menu_home(request):
     items = Item.objects.all() #put all food items in database in this single variable
     context = {'itms':items}

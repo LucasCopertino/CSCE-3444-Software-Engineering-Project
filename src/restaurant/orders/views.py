@@ -37,7 +37,7 @@ Returns: a html page
 
  """
 
-@login_required
+#@login_required
 def start_payment(request):
     return render (request, 'payment_1_start.html')
 
@@ -53,7 +53,7 @@ Returns: a html page
 
 """
 
-@login_required
+#@login_required
 def choose_method(request):
     return render (request, 'payment_4_choose_method.html')
 
@@ -178,7 +178,6 @@ def reduce_order_item(request):
         item_id = request.GET.get('id')
 
         orderitem = Item.objects.get(id=item_id)
-        print("yay debug")
 
         if order.objects.filter(owner=user_profile)[0].items.filter(Item=orderitem).exists(): #ensure that an order still exists for the customer
             order_item = orderItem.objects.filter(Item=orderitem).first() #get the first item that matches query since there will always be only one object in oiur queryset
@@ -191,11 +190,13 @@ def reduce_order_item(request):
                 order_item.save()
             else:
                 order_item.delete() #if items in cart is 0 delete the item
-        user_order, status = order.objects.get_or_create(owner=user_profile, is_ordered=False)
-        user_order.items.add(order_item)
-        user_order.cost = user_order.get_cart_total()
-        user_order.save()
-        messages.info(request, "Removed from cart")
+            user_order, status = order.objects.get_or_create(owner=user_profile, is_ordered=False)
+            user_order.items.add(order_item)
+            user_order.cost = user_order.get_cart_total()
+            user_order.save()
+            print("yay debug")
+
+            messages.info(request, "Removed from cart")
     return render(request, 'menu.html')
 """
 Overview: Show customer order details 
