@@ -8,7 +8,6 @@ from django.contrib.auth.models import User
 from accounts.models import Customer
 import datetime
 from orders.models import orderItem, order, Table, Refill
-from django.test import RequestFactory
 
 # Create your tests here.
 class TestViews(TestCase):
