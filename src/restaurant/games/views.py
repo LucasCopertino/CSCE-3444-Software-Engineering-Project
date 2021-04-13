@@ -25,7 +25,7 @@ def games_ttt(request):
 def games_ttt_locked(request):
     return render(request, 'tictactoe_locked.html') #view for tic tac toe if child mode is activated
 
-@login_required                         #login required, cannot set a child mode lock without being logged in
+#@login_required                         #login required, cannot set a child mode lock without being logged in
 def set_childmode(request):
     if request.method == "POST":                #once a passcode is submitted
         field1 = request.POST.get('att1')          #store the submitted passcodes from both fields
@@ -43,7 +43,7 @@ def set_childmode(request):
 
 def childmode_invalid(request):                         #views for invalid child mode passcode attempts
     return render(request, 'Child_Mode_Invalid.html')
-
+    
 def childmode_matcherror(request):
     return render(request, 'Child_Mode_MatchError.html')
 
