@@ -28,10 +28,16 @@ def games_ttt_locked(request):
 
 @login_required                         #login required, cannot set a child mode lock without being logged in
 def set_childmode(request):
+    currentUser = get_object_or_404(Customer, user=request.user) #get current user
+    try:                                                        #check to make sure there isn't already a passcode, if there is, get rid of it
+        cleanPass = childMode.objects.get(customer=currentUser)
+        cleanPass.delete()
+    except childMode.DoesNotExist:
+        pass
+
     if request.method == "POST":                #once a passcode is submitted
         field1 = request.POST.get('att1')          #store the submitted passcodes from both fields
         field2 = request.POST.get('att2')
-        currentUser = get_object_or_404(Customer, user=request.user) #get current user
         if (checkValid(field1, field2, request) == 1):              #check to make sure the passcode is valid
             pcode = childMode(passcode=field1, customer=currentUser)
             pcode.save()                                               #once passcode is valid, save and redirect to the locked game page
@@ -48,6 +54,7 @@ def childmode_invalid(request):                         #views for invalid child
 def childmode_matcherror(request):
     return render(request, 'Child_Mode_MatchError.html')
 
+@login_required
 def deactivate_child(request):                          #view for page to deactivate child mode
     if request.method == "POST":
         currentUser = get_object_or_404(Customer, user=request.user)        #get current user logged in
