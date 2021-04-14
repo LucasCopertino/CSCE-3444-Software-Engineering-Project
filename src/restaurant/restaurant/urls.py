@@ -91,6 +91,10 @@ urlpatterns = [
     path('delete-refill/',delete_refill_request, name="delete_refill"),
     path('delete-order/',delete_order_pickup, name="delete_order"),
     path('pay-resolve/',resolve_pay_by_cash, name="resolve_cash_pay_req"),
+    path('create-item/', createItem, name="create_item"),
+    path('update-item/<str:pk>', updateItem, name="update_item"),
+    path('manager-menu/', manager_menu, name="manager_menu"),
+    path('delete-item/<str:pk>', deleteItem, name="delete_item"),
 
 
 ]

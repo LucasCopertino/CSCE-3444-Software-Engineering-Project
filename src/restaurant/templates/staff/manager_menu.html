@@ -1,0 +1,7 @@
+<a href="{% url 'create_item' %}">Create Item</a>
+{% for item in itms %}
+    <p>{{item.name}} {{item.price}} <a class = "btn btn-sm btn-info" href ="{% url 'update_item' item.id%}">Update</a> <a class = "btn btn-sm btn-danger" href ="{% url 'delete_item' item.id%}">Delete</a></p>
+    
+    
+
+{% endfor %}
