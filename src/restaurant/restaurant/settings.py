@@ -132,4 +132,4 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),#BASE_DIR here is 'RESTAURANT/' directory
 )
 LOGIN_REDIRECT_URL='select_table'
-LOGOUT_REDIRECT_URL='homepage'
+LOGOUT_REDIRECT_URL='index'

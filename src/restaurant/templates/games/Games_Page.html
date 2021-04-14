@@ -1,10 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rewards Login</title>
+    <title>Games</title>
 
     <style>
         ul {
@@ -69,7 +70,7 @@
          
 
          .submit-btn {
-            margin: 400px auto 20px;
+            margin: 50px auto 20px;
             width: 80%;
             display: block;
             outline: none;
@@ -81,6 +82,12 @@
             font-size: 16px;
             border-radius: 25px;
 
+         }
+
+         img {
+            width: 400px;
+            height: 300px;
+            margin-left: 50px;
          }
 
 
@@ -95,12 +102,9 @@
         <ul>
             
             <li><a href="{% url 'help' %}" onclick="myFunction()">Help</a></li>
-            <li><a href="{% url 'set-childmode' %}">Child Mode</a></li>
+            <li><a href="{% url 'free_table'%}">Logout</a></li>
             <li><a href="{% url 'drink_refill'%}">Refill Drink</a></li>
-            <li><a href="#">Login/Sign-Up</a></li>
-            <li><a href="#">Help</a></li>
-            <li><a href="{% url 'customer-homepage' %}">Go Back</a></li>
-            <li class="nav-right" style="border-left: 1px solid white;"><a href="{% url 'free_table'%}">Logout</a></li>
+            <li><a href="{% url 'set-childmode' %}">Child Mode</a></li>
             <li><a href="{% url 'customer-homepage' %}">Home</a></li>
     
         </ul>
@@ -111,7 +115,7 @@
     <div class="form-box">
         <h1>Game 1</h1>
 
-        
+        <img src="{% static '/games/GIF_Snake.GIF' %}" alt="Snake Game Image">
         <button type="button" class="submit-btn"><a href="{% url 'games-snake' %}">Play</a></button>
 
     </div>
@@ -119,7 +123,7 @@
     <div class="form-box">
         <h1>Game 2</h1>
 
-        
+        <img src="{% static '/games/GIF_TTT.GIF' %}" alt="Tic Tac Toe Game Image">
         <button type="button" class="submit-btn"><a href="{% url 'games-tictactoe' %}">Play</a></button>
 
     </div>

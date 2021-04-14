@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from accounts.models import Customer
 from games.models import childMode
@@ -34,7 +35,7 @@ def set_childmode(request):
         if (checkValid(field1, field2, request) == 1):              #check to make sure the passcode is valid
             pcode = childMode(passcode=field1, customer=currentUser)
             pcode.save()                                               #once passcode is valid, save and redirect to the locked game page
-            return render(request, 'Games_Page_Locked.html')
+            return redirect('games-home-locked')
         elif (checkValid(field1, field2, request) == 2):
             return render(request, 'Child_Mode_MatchError.html')
         else:
@@ -55,7 +56,7 @@ def deactivate_child(request):                          #view for page to deacti
         attempt = request.POST.get('attempt')                                   #store the passcode entered by the user to check if it is right
         if (checkPass(attempt, passcode) == 1):
             childMode_obj.delete()                                              #if passcode is right, delete it and then redirect to unlocked games page
-            return render(request, 'Games_Page.html')
+            return redirect('games_home')
         else:
             return render(request, 'Child_Mode_Deactivate_I.html')
     return render(request, 'Child_Mode_Deactivate.html')
