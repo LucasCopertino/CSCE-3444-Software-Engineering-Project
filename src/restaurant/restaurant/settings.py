@@ -132,4 +132,11 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),#BASE_DIR here is 'RESTAURANT/' directory
 )
 LOGIN_REDIRECT_URL='select_table'
+<<<<<<< HEAD
 LOGOUT_REDIRECT_URL='homepage'
+=======
+LOGOUT_REDIRECT_URL='index'
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True #if user closes the browser, they are logged out
+SESSION_COOKIE_AGE = 600              #after 10 minutes of no activity, user is logged out
+SESSION_SAVE_EVERY_REQUEST = True      
+>>>>>>> origin/security_cleanup_update

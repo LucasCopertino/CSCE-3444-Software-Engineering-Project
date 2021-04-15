@@ -113,13 +113,9 @@
         <ul>
            
             <li ><a href="{% url 'help' %}" onclick="myFunction()">Help</a></li>
-            <li><a href="#">Go Back</a></li>
-            <li><a href="{% url 'drink_refill'%}">Refill Drink</a></li>
-            <li><a href="#">Login/Sign-Up</a></li>
-            <li><a href="#">Help</a></li>
-            <li><a href="{% url 'games-home-locked' %}">Go Back</a></li>
+            <li><a href="#">Logout</a></li>
             <li><a href="#">Refill Drink</a></li>
-            <li class="nav-right" style="border-left: 1px solid white;"><a href="{% url 'free_table'%}">Logout</a></li>
+            <li><a href="{% url 'games-home-locked' %}">Go Back</a></li>
             <li><a href="#">Home</a></li>
     
         </ul>
@@ -149,9 +145,11 @@
     
 </body>
 
-
-
-
+<script>
+    function myFunction() {
+      alert("Help Requested. A waiter will be at your table soon");
+    }
+    </script>
 
 
 </html>
