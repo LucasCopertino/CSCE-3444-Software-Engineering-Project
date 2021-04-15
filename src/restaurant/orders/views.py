@@ -337,6 +337,7 @@ def refill_request(request):
     req = Refill.objects.get_or_create(owner=cust,drink=drink1, orderx=orderx, unresolved=True) #create a refill request or get from backend if.count()>0
     return render(request, 'menu.html')
 
+<<<<<<< HEAD
 #@login_required
 def free_dessert(request):
   cust = get_object_or_404(Customer, user=request.user)  
@@ -388,3 +389,8 @@ def remove_free_dessert_hold(order_id):
         ordery.save()
     else:
         pass
+=======
+
+
+
+>>>>>>> origin/manager_update

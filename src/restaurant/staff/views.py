@@ -6,6 +6,8 @@ from django.contrib import messages
 from accounts.decorators import allowed_users, unauthenticated_user
 from .models import pay_by_cash 
 from orders.views import generate_order_id
+from .forms import ItemForm
+from menu.models import Item
 
 """ Overview: A function to that manages the waiter's home page
     Returns: Json objects, html page
@@ -55,9 +57,29 @@ def manager_home(request):
 
 #@allowed_users(allowed_roles=['manager'])
 def manager_report(request):
+<<<<<<< HEAD
     return render(request, 'manager_report.html')    #page for manager report
 #@allowed_users(allowed_roles=['kitchen'])
+=======
+    orderItems = orderItem.objects.all()
+    orders= order.objects.all()
 
+    tax=0
+    tips=0
+    total=0
+    cost=0
+    for i in orders: 
+    
+        tax+=i.tax
+        tips+=i.tip
+    for i in orderItems:
+        q=i.quantity*i.cost
+        cost+=q
+    total = tax+tips+cost
+    return render(request, 'manager_report.html', {'orderItems':orderItems, 'orders':orders, 'tax':tax, 'tips':tips, 'cost':cost, 'total':total})
+>>>>>>> origin/manager_update
+
+@allowed_users(allowed_roles=['kitchen'])
 def change_stat(request):
     if request.method == 'GET':
         idx= request.GET.get('pk')
@@ -87,8 +109,12 @@ def HelpFunc(request):
 """ Overview: A function to that handles help request aand allows waiters resolve them
     Returns:reloads the page
 """
+<<<<<<< HEAD
 #@allowed_users(allowed_roles=['waiter'])
 
+=======
+@allowed_users(allowed_roles=['waiter'])
+>>>>>>> origin/manager_update
 def delete_help_request(request):
     print(request)
     help_request_uniq = request.GET.get('pk')
@@ -104,8 +130,12 @@ def delete_help_request(request):
 """ Overview: A function to that handles refill request aand allows waiters resolve them
     Returns:reloads the page
 """
+<<<<<<< HEAD
 #@allowed_users(allowed_roles=['waiter'])
 
+=======
+@allowed_users(allowed_roles=['waiter'])
+>>>>>>> origin/manager_update
 def delete_refill_request(request):
     print(request)
     ref_request_uniq = request.GET.get('pk')
@@ -120,8 +150,12 @@ def delete_refill_request(request):
 """ Overview: A function to that allows waiters resolve completed orders
     Returns:reloads the page
 """
+<<<<<<< HEAD
 #@allowed_users(allowed_roles=['waiter'])
 
+=======
+@allowed_users(allowed_roles=['waiter'])
+>>>>>>> origin/manager_update
 def delete_order_pickup(request):
     print(request)
     order_request_uniq = request.GET.get('pk')
@@ -134,8 +168,12 @@ def delete_order_pickup(request):
 """ Overview: A function to that allows waiters resolve cash payment requests
     Returns:reloads the page
 """
+<<<<<<< HEAD
 #@allowed_users(allowed_roles=['waiter'])
 
+=======
+@allowed_users(allowed_roles=['waiter'])
+>>>>>>> origin/manager_update
 def resolve_pay_by_cash(request):
     order_request_uniq = request.GET.get('pk')
     order_request, status = pay_by_cash.objects.get_or_create(pk=order_request_uniq)
@@ -153,8 +191,12 @@ def resolve_pay_by_cash(request):
    
     return redirect('waiter_home')
 
+<<<<<<< HEAD
 #@allowed_users(allowed_roles=['waiter'])
 
+=======
+@allowed_users(allowed_roles=['waiter'])
+>>>>>>> origin/manager_update
 def show_table_map(request):
     if (Table.objects.filter(occupied=True).count()>0()):
         table_objs = Table.objects.filter(occupied=True)
@@ -175,6 +217,45 @@ def show_table_map(request):
             'tables':table_objs
         }
         return render(request, 'waiter_table_map.html', context)
+<<<<<<< HEAD
     
     return render(request, 'waiter_table_map.html')
     
+=======
+    else:
+        return render(request, 'waiter_table_map.html')
+    
+def createItem(request):
+    form = ItemForm()
+    if request.method == 'POST':
+        form = ItemForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/manager-menu')#change to whatever page we want after creating new item
+    context={'form':form}
+    return render(request, 'create_item.html', context)
+
+def updateItem(request, pk):
+    item = Item.objects.get(id=pk)
+    form = ItemForm(instance=item)
+    if request.method == 'POST':
+        form = ItemForm(request.POST, instance=item)
+        if form.is_valid():
+            form.save()
+            return redirect('/manager-menu')#change to whatever page we want after creating new item
+    context={'form':form}
+    return render(request, 'create_item.html', context)
+
+def manager_menu(request):
+    items = Item.objects.all() #put all food items in database in this single variable
+    context = {'itms':items}
+    return render(request, 'manager_menu.html',context) 
+
+def deleteItem(request, pk):
+    item = Item.objects.get(id=pk)
+    if request.method == "POST":
+        item.delete()
+        return redirect('/manager-menu')
+    context = {'item':item}
+    return render(request, 'delete.html', context)
+>>>>>>> origin/manager_update

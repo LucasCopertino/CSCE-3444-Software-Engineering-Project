@@ -85,7 +85,12 @@
         </div>
         <!--Report goes here-->
         <div class='report'>
-            <p>Report goes in here</p>
+            {% for i in orderItems %}
+                <p>{{i.Item.name}} {{ i.quantity}} x ${{i.cost}}</p>
+            {% endfor %}
+            <p>Total tax: {{tax}}</p>
+            <p>Total tips: {{tips}}</p>
+            <p>Total revenue: {{total}}</p>
         </div>
         <button class="back-button"><a href="#back">Back</a></button>
         
