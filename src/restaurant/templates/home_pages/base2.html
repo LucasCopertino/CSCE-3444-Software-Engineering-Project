@@ -10,10 +10,10 @@
 <nav>
     <ul>
         <li><a href="{% url 'customer-homepage' %}">Home</a></li>
-        <li><a href="{% url 'menu_home' %}">Menu</a></li>
+       <li> <a href ="{% url 'categories' category_id=1 %}">Menu</a></li>
         <li><a href="{% url 'games_home' %}">Games</a></li>
         <li><a href="{% url 'finish-pay' %}">Place Order</a></li>
-        <li><a href="{% url 'pay' %}">Pay Now</a></li>
+        <li><a href="{% url 'cart' %}">Cart</a></li>
 
         <li class="nav-right"><a href="#help">Help</a></li>
         <li class="nav-right" style="border-left: 1px solid white;"><a href="{% url 'free_table'%}">Logout</a></li>

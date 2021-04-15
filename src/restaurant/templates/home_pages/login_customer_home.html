@@ -14,10 +14,7 @@
 <nav>
     <ul>
         <li><a href="{% url 'customer-homepage' %}">Home</a></li>
-        <li><a href="{% url 'menu_home' %}">Menu</a></li>
-        <li><a href="{% url 'games_home' %}">Games</a></li>
-        <li><a href="{% url 'finish-pay' %}">Place Order</a></li>
-        <li><a href="{% url 'pay' %}">Pay Now</a></li>
+       
 
         <li class="nav-right"><a href="{% url 'help' %}" onclick="myFunction()">Help</a></li>
         <li class="nav-right" style="border-left: 1px solid white;"><a href="{% url 'free_table'%}">Logout</a></li>
@@ -26,10 +23,10 @@
 </nav> <!--End of Nav-->
    <!--Main Page Buttons-->
    <div class="main-buttons">
-    <button class="button"><a href="{% url 'menu_home' %}">Menu</a></button>
+    <button class="button"><a href="{% url 'categories' category_id=1 %}">Menu</a></button>
     <button class="button"><a href="{% url 'games_home' %}">Games</a></button>
     <button class="button"> <a href="{% url 'finish-pay' %}">Place Order</a></button>
-    <button class="button"><a href="{% url 'pay' %}">Pay Now</a></button>
+    <button class="button"> <a href="{% url 'cart' %}">Cart</a></button>
 </div>
 
 <!--Back Button-->
@@ -39,6 +36,10 @@
       alert("Help Requested. A waiter will be at your table soon");
     }
     </script>
+    
+    
+    <!--Insert cherry cactus welcome logo-->
+    <img src="https://i.imgur.com/QXzT2uM.png" alt="cherry cactus logo" width=30% height=30% style= display:block;margin-left:auto;margin-right:auto;width:50%;>
 </html>
  
        
