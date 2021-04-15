@@ -49,8 +49,10 @@ class order(models.Model):
     order_id = models.CharField(max_length=50, null=False, default='abc')
     status = models.CharField(max_length=50, default="ss")
     tax = models.DecimalField(max_digits=6,decimal_places=2, default=8.25)
-   
-
+    free_dessert = models.BooleanField(default=False)
+    free_dessert_hold = models.BooleanField(default=True)
+    free_dessert_cost = models.DecimalField(max_digits=7,decimal_places=2, default=0.0)
+    free_dessert_tries = models.IntegerField( null=False, default=0)
     """
         Overview: function that returns all the items in cart
     """

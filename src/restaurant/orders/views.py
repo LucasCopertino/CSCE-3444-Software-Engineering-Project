@@ -83,6 +83,8 @@ Returns: a json response to our stripe account on stripe.com
 def card_payment(request):
     carts_customer = get_object_or_404(Customer, user=request.user) #get the customer by using the authentication modela and comparing with our customer model
     customer_order = get_object_or_404(order,owner=carts_customer, is_ordered=False) #get the customer's order by making use of databse relationships
+    remove_free_dessert_hold(customer_order.order_id)
+
     context = {
         'order':customer_order
     }  #a json object to return to our client
@@ -151,13 +153,16 @@ def add_to_cart(request):
 
         table = Table.objects.filter(owner=user_profile)[0]
         user_order.table_num = table.TableNum
+            
         user_order.save()
-       
         if status:
             # generate a reference code
             user_order.order_id = generate_order_id()
             user_order.save()
+        remove_free_dessert_hold(user_order.order_id)
+
         #assoicate order item with order some more (create more relationships)
+
         order_item.order_id = user_order.order_id
         order_item.save()
         # show confirmation message and redirect back to the same page
@@ -193,6 +198,8 @@ def reduce_order_item(request):
             user_order, status = order.objects.get_or_create(owner=user_profile, is_ordered=False)
             user_order.items.add(order_item)
             user_order.cost = user_order.get_cart_total()
+            remove_free_dessert_hold(user_order.order_id)
+
             user_order.save()
             print("yay debug")
 
@@ -212,7 +219,9 @@ def cart(request):
    
     carts_customer = get_object_or_404(Customer, user=request.user)
     customer_order_items = orderItem.objects.filter(owner=carts_customer, is_ordered=False)
-    customer_order = order.objects.filter(owner=carts_customer, is_ordered=False)
+    customer_order,status = order.objects.get_or_create(owner=carts_customer, is_ordered=False)
+    remove_free_dessert_hold(customer_order.order_id)
+
     context = {}
     freebie = 0 #store number of entrees
     taxx = 0.00 #placeholder for json object attribute 
@@ -223,19 +232,19 @@ def cart(request):
     for i in range(freebie+1):
         freebies.append(i)
    #gget and set tax on order
-    if customer_order.exists():
-        taxx = customer_order.first().get_tax()
-        customer_order.first().cost += taxx
-        customer_order.first().save()
+    #if customer_order:
+     #   taxx = customer_order.get_tax()
+      #  customer_order.cost += taxx
+       # customer_order.save()
     #check time to see if it is after sunday on 4pm 
     if rn.hour in range(16,24) and rn.weekday()==6:
         print(rn.hour)
         #return different json object to client since it is a sunday at 4. Return a json object with frre kids meals information and options
-        context = {'items':customer_order_items,'order':customer_order.first(),'tax':taxx, 'freebies':freebies, 'max':freebie}
+        context = {'items':customer_order_items,'order':customer_order,'tax':taxx, 'freebies':freebies, 'max':freebie}
         return render(request,'sunday_4pm_cart_page.html', context)
     else:
         #retutn this json object every other day there is not a free kids meal deal
-         context = {'items':customer_order_items,'order':customer_order.first(),'tax':taxx}
+         context = {'items':customer_order_items,'order':customer_order,'tax':taxx}
          return render(request,'cart_page.html', context)
 """
 Overview: Choose number of free kids meal
@@ -321,3 +330,53 @@ def refill_request(request):
     return render(request, 'menu.html')
 
 
+def free_dessert(request):
+  cust = get_object_or_404(Customer, user=request.user)  
+  ordery = order.objects.filter(owner=cust,is_ordered=False)[0]
+  cat = category.objects.filter(name='Desserts')[0]
+  print(request.GET.get('win'))
+  if request.GET.get('win')=='true' and ordery.free_dessert==False: #ensure that free deserts vouchers are limited to one per order
+      ordery.free_dessert = True
+      ordery.save()
+      order_items = orderItem.objects.filter(order_id=ordery.order_id)
+      count = 10000
+      for item in order_items:
+          print(count)
+
+          if item.Item.cat == cat and count==10000:
+              ordery.cost -= item.Item.price
+              ordery.save()
+
+              print(item.cost)
+              ordery.free_dessert_cost = item.Item.price
+            
+              ordery.save()
+              count=1
+          else:
+              pass
+      if count == 10000:
+          ordery.free_dessert_hold == True
+          ordery.save()
+  ordery.free_dessert_tries = request.GET.get('tries')
+  ordery.save()
+  return redirect('cart')
+
+def remove_free_dessert_hold(order_id):
+    cat = category.objects.filter(name='Desserts').first()
+    ordery = order.objects.filter(order_id=order_id).first()
+    order_items = orderItem.objects.filter(order_id=ordery.order_id)
+    count = 10000
+    if ordery.free_dessert_hold == True:
+        for item in order_items:
+            if item.Item.cat == cat and count<1:
+                ordery.cost -= item.cost
+                ordery.free_dessert_cost = item.cost
+                ordery.free_dessert = True
+                ordery.save()
+                count=1
+            else:
+                pass
+        ordery.free_dessert_hold = False
+        ordery.save()
+    else:
+        pass
