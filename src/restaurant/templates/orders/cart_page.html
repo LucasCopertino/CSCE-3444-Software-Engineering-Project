@@ -42,13 +42,13 @@ By pressing the 'place order' button, the customer can begin playment.
       
 
     </div>
-    {% if order.free_dessert is False and order.free_dessert_tries < 4 %}
+    {% if order.free_dessert is False and order.free_dessert_tries < 3 %}
     <div class="main-buttons">
     <button onclick="myFunction()">Try your luck at a free desert</button>
     <p id="gen"></p>
     <div>
         <script>
-            var tries = 0;
+            var tries = {{order.free_dessert_tries}};
             function freebie(stt, tries){
             $.ajax({
                 url: '{% url "free_dessert" %}',  
@@ -70,11 +70,13 @@ By pressing the 'place order' button, the customer can begin playment.
                  }else{
                      triess = 3-tries
                      alert(triess + ' tries left');
+                     if (tries == 0){
+                        alert('You have run out of tries. Better luck on your next order!')
+
+                     }
                    }
                    tries++;
-                   if (tries>=4){
-                       alert('You have run out of tries')
-                   }
+                   
               }
        </script>
 </div>

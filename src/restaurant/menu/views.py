@@ -21,6 +21,7 @@ def menu_home(request):
 """Overview: Renders category menu items to the user
     Return: json object, html page 
 """
+#@login_required
 def cat_g(request, category_id):
     categories= category.objects.get(pk=category_id)
     cats = category.objects.all()
@@ -29,6 +30,7 @@ def cat_g(request, category_id):
 
 
     #return 0
+#@login_required
 def item_view(request, item_id):
     item = Item.objects.filter(pk=item_id)[0]
     return render(request, 'menu_item_details.html', {'item':item})
