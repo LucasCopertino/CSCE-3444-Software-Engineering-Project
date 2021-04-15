@@ -184,29 +184,31 @@ def reduce_order_item(request):
         user_profile = get_object_or_404(Customer, user=request.user)
         # filter products by id
         item_id = request.GET.get('id')
+        
 
         orderitem = Item.objects.get(id=item_id)
+        print(orderitem.name)
 
-        if order.objects.filter(owner=user_profile)[0].items.filter(Item=orderitem).count()>0(): #ensure that an order still.count()>0 for the customer
-            order_item = orderItem.objects.filter(Item=orderitem).first() #get the first item that matches query since there will always be only one object in oiur queryset
-            order_item.owner = user_profile #set relationships
+     #ensure that an order still.count()>0 for the customer
+        order_item = orderItem.objects.filter(Item=orderitem).first() #get the first item that matches query since there will always be only one object in oiur queryset
+        order_item.owner = user_profile #set relationships
 
-            #reduce the item quantity and ensure negatives dont happen
-            if order_item.quantity > 0:
-                order_item.quantity -= 1
-                order_item.cost = order_item.get_cost() #recalculate cost of the order
-                order_item.save()
-            else:
-                order_item.delete() #if items in cart is 0 delete the item
-            user_order, status = order.objects.get_or_create(owner=user_profile, is_ordered=False)
-            user_order.items.add(order_item)
-            user_order.cost = user_order.get_cart_total()
-            remove_free_dessert_hold(user_order.order_id)
+        #reduce the item quantity and ensure negatives dont happen
+        if order_item.quantity > 0:
+            order_item.quantity -= 1
+            order_item.cost = order_item.get_cost() #recalculate cost of the order
+            order_item.save()
+        else:
+            order_item.delete() #if items in cart is 0 delete the item
+        user_order, status = order.objects.get_or_create(owner=user_profile, is_ordered=False)
+        user_order.items.add(order_item)
+        user_order.cost = user_order.get_cart_total()
+        remove_free_dessert_hold(user_order.order_id)
 
-            user_order.save()
-            print("yay debug")
+        user_order.save()
+        print("yay debug")
 
-            messages.info(request, "Removed from cart")
+        messages.info(request, "Removed from cart")
     return render(request, 'menu.html')
 """
 Overview: Show customer order details 

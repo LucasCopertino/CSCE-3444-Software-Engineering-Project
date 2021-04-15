@@ -15,7 +15,7 @@ def allowed_users(allowed_roles=[]):
         def wrapper_func(request, *args, **kwargs):
 
             group =None
-            if request.user.groups.count()>0():
+            if request.user.groups.count()>0:
                 group=request.user.groups.all()[0].name
             if group in allowed_roles:
                 return view_func(request, *args, **kwargs)

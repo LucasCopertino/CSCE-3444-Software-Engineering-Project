@@ -173,12 +173,12 @@ def resolve_pay_by_cash(request):
 #@allowed_users(allowed_roles=['waiter'])
 
 def show_table_map(request):
-    if (Table.objects.filter(occupied=True).count()>0()):
+    if (Table.objects.filter(occupied=True).count()>0):
         table_objs = Table.objects.filter(occupied=True)
         for table_obj in table_objs:
             user_profile = Customer.objects.filter(user=table_obj.owner.user)[0]
 
-            if order.objects.filter(owner=user_profile, delivered=False).count()>0():
+            if order.objects.filter(owner=user_profile, delivered=False).count()>0:
                 order1 = order.objects.filter(owner=user_profile, delivered=False)[0]
                 if order1.is_ordered == False:
                     table_obj.order_status = "browsing"

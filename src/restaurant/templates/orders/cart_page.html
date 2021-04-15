@@ -42,7 +42,7 @@ By pressing the 'place order' button, the customer can begin playment.
       
 
     </div>
-    {% if order.free_dessert is False and order.free_dessert_tries < 3 %}
+    {% if order.free_dessert is False and order.free_dessert_tries < 3 and order.free_dessert_hold is False %}
     <div class="main-buttons">
     <button onclick="myFunction()">Try your luck at a free desert</button>
     <p id="gen"></p>
