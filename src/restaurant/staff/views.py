@@ -74,7 +74,7 @@ def manager_report(request):
     total = tax+tips+cost
     return render(request, 'manager_report.html', {'orderItems':orderItems, 'orders':orders, 'tax':tax, 'tips':tips, 'cost':cost, 'total':total})
 
-@allowed_users(allowed_roles=['kitchen'])
+#@allowed_users(allowed_roles=['kitchen'])
 def change_stat(request):
     if request.method == 'GET':
         idx= request.GET.get('pk')

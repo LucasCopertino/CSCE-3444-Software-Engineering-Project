@@ -134,5 +134,5 @@ STATICFILES_DIRS = (
 LOGIN_REDIRECT_URL='select_table'
 LOGOUT_REDIRECT_URL='index'
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True #if user closes the browser, they are logged out
-SESSION_COOKIE_AGE = 600              #after 10 minutes of no activity, user is logged out
+SESSION_COOKIE_AGE = 600 * 3             #after 10 minutes of no activity, user is logged out
 SESSION_SAVE_EVERY_REQUEST = True      
