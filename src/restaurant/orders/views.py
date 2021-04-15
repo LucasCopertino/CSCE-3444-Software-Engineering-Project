@@ -155,7 +155,8 @@ def add_to_cart(request):
 
         table = Table.objects.filter(owner=user_profile)[0]
         user_order.table_num = table.TableNum
-            
+        taxx = user_order.get_tax()
+        user_order.cost += taxx
         user_order.save()
         if status:
             # generate a reference code
@@ -204,7 +205,9 @@ def reduce_order_item(request):
         user_order.items.add(order_item)
         user_order.cost = user_order.get_cart_total()
         remove_free_dessert_hold(user_order.order_id)
-
+    
+        taxx = user_order.get_tax()
+        user_order.cost += taxx
         user_order.save()
         print("yay debug")
 
@@ -230,19 +233,14 @@ def cart(request):
 
     context = {}
     freebie = 0 #store number of entrees
-    taxx = 0.00 #placeholder for json object attribute 
+    taxx = customer_order.get_tax() #placeholder for json object attribute 
     for order_item in customer_order_items: #search for all adult entrees in order and take count
         if order_item.Item.cat.name == 'Entrees':
             freebie+=1
     freebies = [] #list to store range of number of kids meals to select from 
     for i in range(freebie+1):
         freebies.append(i)
-   #gget and set tax on order
-    #if customer_order:
-     #   taxx = customer_order.get_tax()
-      #  customer_order.cost += taxx
-       # customer_order.save()
-    #check time to see if it is after sunday on 4pm 
+   
     if rn.hour in range(16,24) and rn.weekday()==6:
         print(rn.hour)
         #return different json object to client since it is a sunday at 4. Return a json object with frre kids meals information and options
