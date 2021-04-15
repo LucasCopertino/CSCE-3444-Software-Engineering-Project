@@ -25,12 +25,8 @@ def index(request):
 """Overview:Home page view for authenticated customer
     Return:  html page 
 """
-<<<<<<< HEAD
 #@login_required
 
-=======
-@login_required
->>>>>>> origin/security_cleanup_update
 def customer_home_page(request):
     #create a cart for the customer after login 
     carts_customer = get_object_or_404(Customer, user=request.user)
