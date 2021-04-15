@@ -11,7 +11,7 @@ def index(request):
 """Overview:Home page view for authenticated customer
     Return:  html page 
 """
-@login_required
+#@login_required
 
 def customer_home_page(request):
     return render(request, 'login_customer_home.html')
