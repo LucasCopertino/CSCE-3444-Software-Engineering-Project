@@ -1,9 +1,38 @@
 {% load static %} <!--This is a django-html tag to load the location of the static files we need like stylesheets and javascript files-->
 {% block content %}
-<form action="" method="POST">
-    {% csrf_token %}
-    {{form}}
+<link rel="stylesheet" href="{% static '/orders/styleCartAndPayment.css' %}">
+<style>
+    h1 {
+        margin-top: 20px;
+        text-align: center;
+    }
 
-    <input type="submit" name="Submit">
-</form>
+    form {
+        margin: 0px 20px 0px 20px;
+    }
+
+    .itemInfoBox{
+            background-color:white;
+            width: 250px;
+            min-height: 250px;
+            padding: 25px;
+            border: 2px solid darkgreen;
+            box-sizing: border-box;
+            margin-top: 40px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+</style>
+<h1>Create/Update Item</h1>
+<div class="itemInfoBox">
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{form}}
+
+        <input type="submit" name="Submit">
+    </form>
+</div>
+
+<!--Back Button-->
+<button class="back-button"><a href="#back">Back</a></button>
 {% endblock %}

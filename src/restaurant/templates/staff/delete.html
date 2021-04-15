@@ -1,3 +1,41 @@
+{% load static %}
+<link rel="stylesheet" href="{% static '/orders/styleCartAndPayment.css' %}">
+<style>
+    p{
+        text-align: center;
+        margin-top: 60px;
+        font-weight: bold;
+    }
+
+    form{
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    a{
+        text-decoration: none;
+        color: black;
+        margin-right: 10px;
+    }
+
+    input{
+        margin-left: 10px;
+        padding: 10px;
+    }
+
+    .confirm-box{
+            background-color:white;
+            width: 500px;
+            min-height: 250px;
+            padding: 25px;
+            border: 2px solid darkgreen;
+            box-sizing: border-box;
+            margin-top: 40px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+</style>
+<div class="confirm-box">
 <p>Are you sure you want to delete "{{item}}"?</p>
 <form action = "{% url 'delete_item' item.id %}" method="POST">
 
@@ -5,3 +43,4 @@
     <a href="{% url 'manager_menu' %}">Cancel</a>
     <input type="submit" name="Confirm">
 </form>
+</div>

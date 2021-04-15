@@ -8,7 +8,7 @@ from .models import pay_by_cash
 from orders.views import generate_order_id
 from .forms import ItemForm
 from menu.models import Item
-
+import datetime
 """ Overview: A function to that manages the waiter's home page
     Returns: Json objects, html page
 """
@@ -57,22 +57,26 @@ def manager_home(request):
 
 #@allowed_users(allowed_roles=['manager'])
 def manager_report(request):
-    orderItems = orderItem.objects.all()
-    orders= order.objects.all()
+    orderItems = orderItem.objects.all()#retrieves all the info from every item in orderItems
+    orders= order.objects.all()#retrieves all the info from every item in orders
+    today = datetime.datetime.now()
 
-    tax=0
-    tips=0
-    total=0
-    cost=0
-    for i in orders: 
-    
-        tax+=i.tax
-        tips+=i.tip
-    for i in orderItems:
-        q=i.quantity*i.cost
-        cost+=q
+    order_items = []
+    tax=0#calculate tax for the day
+    tips=0#calculate tips for the day
+    total=0#calculates total revenue for the day
+    cost=0#calculated order costs for the day
+    for i in orders: #for loop that calculates the cost of tax, tips, and meals if it was ordered today
+        if today.month == i.time.month and today.day == i.time.day and today.year == i.time.year:
+            order_items.append(i.items.all())
+            tax+=i.tax
+            tips+=i.tip
+            cost+=i.cost
+    #for i in orderItems:
+    #    q=i.quantity*i.cost
+    #    cost+=q
     total = tax+tips+cost
-    return render(request, 'manager_report.html', {'orderItems':orderItems, 'orders':orders, 'tax':tax, 'tips':tips, 'cost':cost, 'total':total})
+    return render(request, 'manager_report.html', {'orderItems':orderItems, 'orders':orders, 'tax':tax, 'tips':tips, 'cost':cost, 'total':total, 'order_items':order_items})
 
 #@allowed_users(allowed_roles=['kitchen'])
 def change_stat(request):
