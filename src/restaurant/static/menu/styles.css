@@ -22,9 +22,10 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 body{
+    background: url(BG3.jpg)lightseagreen;
     line-height: 1.5;
     font-family: var(--Mont);
-    background-color: white;
+    background-size: cover;
 }
 .menu{
     margin: 2rem 0;
@@ -38,6 +39,7 @@ img{
     width: 100%;
     display: block;
 }
+
 .menu-head{
     text-align: center;
 }
@@ -61,7 +63,7 @@ img{
     font-weight: 600;
     background: none;
     border: none;
-    color: wheat;
+    color:rgb(16, 117, 109);
     font-weight: bolder;
     display: block;
     margin: 0 1rem;
@@ -70,7 +72,7 @@ img{
     transition: opacity 0.4s ease-out;
 }
 .btn-hover:hover{
-    background:orange;
+    background:rgba(223, 26, 124, 0.75);
     transition: width 0.4s ease-out;
 }
 .menu-btn:hover::after{
@@ -86,14 +88,14 @@ img{
 .food-item{
     border-radius: 4px;
     overflow: hidden;
-    background: black;
+    background:black;
     color: #000;
     margin: 0.6rem 0;
     display: ;
     animation: fadeIn 2s;
 }
 .food-item:hover{
-        box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.75);
+        box-shadow: 0 0 16px 4px rgba(223, 26, 124, 0.75);
 
 }
 @keyframes fadeIn{
@@ -112,7 +114,7 @@ img{
 }
 .food-name{
     font-family: var(--Inter);
-    color: green;
+    color: rgba(223, 26, 124, 0.75);
     font-weight: 500;
     text-transform: capitalize;
 }
@@ -166,3 +168,6 @@ img{
         column-gap: 2rem;
     }
 }
+
+
+
