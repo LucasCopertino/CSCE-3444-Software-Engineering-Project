@@ -1,0 +1,46 @@
+{% load static %}
+{%load crispy_forms_tags %} 
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="{% static '/orders/styleCartAndPayment.css' %}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Home Page</title>
+    
+</head>
+<!--Nav Bar -->
+<nav>
+    <ul>
+        <li><a href="{% url 'homepage' %}">Home</a></li>
+        <li><a href="{% url 'menu_home' %}">Menu</a></li>
+        <li><a href="#games">Games</a></li>
+        <li><a href="{% url 'finish-pay' %}">Place Order</a></li>
+        <li><a href="{% url 'pay' %}">Pay Now</a></li>
+
+        <li class="nav-right"><a href="#help">Help</a></li>
+        <li class="nav-right" style="border-left: 1px solid white;"><a href="{% url 'free_table'%}">Logout</a></li>
+        
+    </ul>
+</nav> <!--End of Nav-->
+{% if yea is True %}
+        <h1 style="text-align: center;" >No redeemable rewards</h1>
+    
+{%endif%}
+
+{% if customer.reward_points > 1500 and yea is False%}
+        <h1 style="text-align: center;" >Redeem your free meal voucher here</h1>
+    </head>
+    <body>
+        {% for entree in entrees %}
+        
+        <p><a href="{% url 'use_reward' free_entree_id=entree.pk %}">{{entree.name}}</a></p>
+        {%endfor%}
+    </body>
+{%endif%}
+
+
+    </div>
+  </html>

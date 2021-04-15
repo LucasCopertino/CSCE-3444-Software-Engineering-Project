@@ -63,6 +63,15 @@ def cash_payment(request):
     context = {
         'order':customer_order
     }  #a json object to return to our client
+    #update customer reward points
+    integer_cost = int(customer_order.cost)
+    reward_points_for_order = 0
+    for dollar in range(integer_cost):
+        reward_points_for_order+=1
+    carts_customer.reward_points += reward_points_for_order
+    carts_customer.save()
+
+
     pay_by_cash.objects.create(order=customer_order) #create a pay by cash object in the database for the waiter to resolve 
     return redirect ('menu_home')
 """
@@ -94,6 +103,13 @@ def card_payment(request):
     for item in customer_order_items: #for loop to change the state of the items so they are sorted 
         item.is_ordered = True #now they don't have to show up where they are not needed
         item.save()
+     #update customer reward points
+    integer_cost = int(customer_order.cost)
+    reward_points_for_order = 0
+    for dollar in range(integer_cost):
+        reward_points_for_order+=1
+    carts_customer.reward_points += reward_points_for_order
+    carts_customer.save()
 #stripe payment process
     try:
         client_stripe = "pk_test_51IMeMeCiuu3zPBMk89bXdF2Xa5iy9gJo6pEZoKmPoWSAB1QlpxuN0Cnxj2omWn0wpPHZXB3Awk42Vy0esrXXOuAd00MQ0AJkhp"
@@ -269,6 +285,70 @@ def choose_meal(request):
         customer_order.save()
         print(customer_order.free_kids_meal)
     return redirect ('cart')
+
+    
+@login_required
+
+def show_free_entrees(request):
+    carts_customer = get_object_or_404(Customer, user=request.user)
+    if (int(carts_customer.reward_points/1500)>=int(carts_customer.reward_points_activated)+1):
+        no_entrees = False
+    else:
+        no_entrees = True
+        
+    cat = category.objects.filter(name='Entrees')[0]
+    entrees = Item.objects.filter(cat=cat)
+    return render(request, 'rewards.html', {'entrees':entrees, 'customer':carts_customer,'yea':no_entrees})
+@login_required
+def use_reward_get_entree(request, free_entree_id):
+    carts_customer = get_object_or_404(Customer, user=request.user)
+    
+    cat = category.objects.filter(name='Entrees')[0]
+    entrees = Item.objects.filter(cat=cat)
+    no_entrees = False
+    if request.method == 'GET':
+        print(free_entree_id)
+        carts_customer = get_object_or_404(Customer, user=request.user)
+        if (int(carts_customer.reward_points/1500)>=int(carts_customer.reward_points_activated)+1):
+            carts_customer.reward_points_activated+=1
+            carts_customer.save()
+            user_order = order.objects.filter(owner=carts_customer, is_ordered=False)[0]
+            if free_entree_id:
+                
+                free_entree = Item.objects.get(pk=free_entree_id)
+                # check if the user already owns this product
+
+                # create orderItem of the selected product
+                free_entree, status = orderItem.objects.get_or_create(Item=free_entree)
+                free_entree.quantity = free_entree.quantity + 1
+                free_entree.owner = carts_customer
+                free_entree.cost= free_entree.get_cost()
+                free_entree.free = True
+                print("Free entree gotten")
+                free_entree.save()
+                # create order associated with the user
+                user_order, status = order.objects.get_or_create(owner=carts_customer, is_ordered=False)
+                user_order.items.add(free_entree)
+                user_order.cost=user_order.get_cart_total()
+                no_entrees = True
+                
+                user_order.save()
+                if status:
+                    # generate a reference code
+                    user_order.order_id = generate_order_id()
+                    user_order.save()
+                remove_free_dessert_hold(user_order.order_id)
+
+                #assoicate order item with order some more (create more relationships)
+
+                free_entree.order_id = user_order.order_id
+                free_entree.save()
+                # show confirmation message and redirect back to the same page
+        return render(request, 'rewards.html', {'entrees':entrees, 'customer':carts_customer,'yea':no_entrees})
+
+
+
+
 def choose_tip(request):
     return render(request, 'payment_1.5_tip.html')
 """

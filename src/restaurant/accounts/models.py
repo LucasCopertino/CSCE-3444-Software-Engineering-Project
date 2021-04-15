@@ -12,7 +12,8 @@ stripe.api_key = STRIPE_PRIV_KEY
 class Customer(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,null=True) #unique relaionship with a1uthentication model
     pay_id = models.CharField(max_length=200, null=True, blank=True)
-
+    reward_points = models.IntegerField(default=0, null=False, blank=False)
+    reward_points_activated = models.IntegerField(default=0)
     def __str__(self):
         return self.user.username
 """ 

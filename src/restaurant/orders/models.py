@@ -19,6 +19,7 @@ class orderItem(models.Model):
     cost = models.DecimalField(max_digits=7,decimal_places=3, default=10.0)
     is_ordered = models.BooleanField(default=False)
     order_id = models.CharField(max_length=50, null=False, default='abc')
+    free = models.BooleanField(default=False)
     """
         Overview: function that sets how an object is referenced by default 
         Returns: two items - a string (object's name) and an integer(quantiy of objects)
@@ -63,7 +64,7 @@ class order(models.Model):
         Returns: a decimal 
     """
     def get_cart_total(self):
-        return sum([item.Item.price*item.quantity for item in self.items.all()])
+        return sum([item.Item.price*item.quantity for item in self.items.all() if item.free==False])
     """
         Overview: function that adds order tip to cost
         Returns: a decimal 

@@ -33,6 +33,8 @@ urlpatterns = [
     path('cart/',cart, name="cart"),
         path('free-kids-meal/',choose_meal, name="free_kids_meal"),
         path('free-dessert/',free_dessert, name="free_dessert"),
+        path('free-entree/',show_free_entrees, name="free_entree_display"),
+        path('choose-entree/<int:free_entree_id>',use_reward_get_entree, name="use_reward"),
 
         path('finish-pay/',choose_method, name="finish-pay"),
     path('pay/', start_payment, name="pay"),
