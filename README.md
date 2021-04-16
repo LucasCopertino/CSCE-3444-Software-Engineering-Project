@@ -8,14 +8,13 @@ This is our repository for the term project feel free to message me if we need t
 </ul>
 
 <h3>After the repository has been cloned to your local storage</h3>
+<h3>MacOS:</h3>
 	
 	Run the command "cd CSCE-3444-Software-Engineering-Project"
 	
 	Run the command "cd restaurant"
 	
 	Run the command "pip install -r requirements.txt" for MacOS
-	
-	Run the command "pip install -r myReq.txt" for Windows
 
 	Run the command, "python3 manage.py runserver"
 	
