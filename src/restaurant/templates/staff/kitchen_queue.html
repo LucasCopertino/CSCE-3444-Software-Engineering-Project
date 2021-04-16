@@ -238,9 +238,10 @@
                 <select class="status-dropdown" name='status' id="status">
                     <option value="in-progress">in progress</option>
                     <option value="complete">finished</option>
+                    <option value="complete">delete</option>
+
                 </select>
 
-                <button class="delete-order">Delete</button>
                 <button class="delete-order" onclick="changeStat({{order.pk}})">Change Stat</button>
 
             </div>
