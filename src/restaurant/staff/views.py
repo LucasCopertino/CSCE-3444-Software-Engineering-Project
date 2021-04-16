@@ -209,8 +209,8 @@ def show_table_map(request):
     else:
         return render(request, 'waiter_table_map.html')
     
-def createItem(request):
-    form = ItemForm()   
+def createItem(request):        #allows manager to create an item
+    form = ItemForm()           #gets all attributes of the menu item from models
     if request.method == 'POST':
         form = ItemForm(request.POST, request.FILES)
         if form.is_valid():
@@ -219,7 +219,7 @@ def createItem(request):
     context={'form':form}
     return render(request, 'create_item.html', context)
 
-def updateItem(request, pk):
+def updateItem(request, pk):        #allows manager to update an item. uses create item but shows all of the fields with current info of the item
     item = Item.objects.get(id=pk)
     form = ItemForm(instance=item)
     if request.method == 'POST':
@@ -230,12 +230,12 @@ def updateItem(request, pk):
     context={'form':form}
     return render(request, 'create_item.html', context)
 
-def manager_menu(request):
+def manager_menu(request):  #displays all menu items to manager with an update/delete button for each item and a create item button
     items = Item.objects.all() #put all food items in database in this single variable
     context = {'itms':items}
     return render(request, 'manager_menu.html',context) 
 
-def deleteItem(request, pk):
+def deleteItem(request, pk):    #delete function for menu items
     item = Item.objects.get(id=pk)
     if request.method == "POST":
         item.delete()

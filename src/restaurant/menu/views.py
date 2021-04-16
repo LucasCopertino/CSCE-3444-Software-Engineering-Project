@@ -24,7 +24,7 @@ def menu_home(request):
     Return: json object, html page 
 """
 #@login_required
-def cat_g(request, category_id):
+def cat_g(request, category_id):        #gives all menu items a category
     categories= category.objects.filter(pk=category_id).first()
     cats = category.objects.all()
     category_posts = Item.objects.filter(cat=categories)
