@@ -45,10 +45,9 @@
             <div class = "food-content">
               <h2 class = "food-name">{{item.name}}</h2>
               <h3 class = "food-price">${{item.price}}</h3>
-              <button style="width: 25px; height: 20px;"><a href='{% url "item_view" item_id=item.pk %}'>Details</a> </button>
+              <button style=" height: 20px;"><a href='{% url "item_view" item_id=item.pk %}'>Details</a> </button>
 
               <button style="width: 25px; height: 20px;" id="inct" onclick="increase({{item.pk}})"> + </button>
-              <input id=demoInput type=number style="width: 40px;">
               <button style="width: 25px; height: 20px;" id="inct" onclick="decrease({{item.pk}})"> - </button>
 
              <script src="https://use.fontawesome.com/a6e14efad5.js"></script>
