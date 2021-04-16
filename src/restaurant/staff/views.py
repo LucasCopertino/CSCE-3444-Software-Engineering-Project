@@ -210,9 +210,9 @@ def show_table_map(request):
         return render(request, 'waiter_table_map.html')
     
 def createItem(request):
-    form = ItemForm()
+    form = ItemForm()   
     if request.method == 'POST':
-        form = ItemForm(request.POST)
+        form = ItemForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('/manager-menu')#change to whatever page we want after creating new item
