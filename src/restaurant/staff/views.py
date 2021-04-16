@@ -183,7 +183,7 @@ def resolve_pay_by_cash(request):
     return redirect('waiter_home')
 
 #@allowed_users(allowed_roles=['waiter'])
-
+"""Shows a map of all occupied users for waiters"""
 def show_table_map(request):
     if (Table.objects.filter(occupied=True).count()>0):
         table_objs = Table.objects.filter(occupied=True)

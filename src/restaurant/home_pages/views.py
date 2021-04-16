@@ -14,8 +14,8 @@ Returns: A string containing the order id
 
  """
 def generate_order_id():
-    date_str = datetime.date.today().strftime('%Y%m%d')[2:] + str(datetime.datetime.now().second)
-    rand_str = "".join([random.choice(string.digits) for count in range(3)])
+    date_str = datetime.date.today().strftime('%Y%m%d')[2:] + str(datetime.datetime.now().second) #GET THE DATE AND TIME FOR ID GENERATION
+    rand_str = "".join([random.choice(string.digits) for count in range(3)]) #ADD RANDOMIZATION 
     return date_str + rand_str
 
 # Create your views here.
@@ -30,12 +30,12 @@ def index(request):
 def customer_home_page(request):
     #create a cart for the customer after login 
     carts_customer = get_object_or_404(Customer, user=request.user)
-    if order.objects.filter(owner=carts_customer, is_ordered=False).count()>0:
+    if order.objects.filter(owner=carts_customer, is_ordered=False).count()>0: #CHECK IF USER;S ORDER EXISTS AND AT A TABLE
         if Table.objects.filter(owner=carts_customer).count()<=0:
             order.objects.filter(owner=carts_customer, is_ordered=False).first().table_num=Table.objects.filter(owner=carts_customer).first().TableNum
         pass
     else:
-        if Table.objects.filter(owner=carts_customer).count()>0:
+        if Table.objects.filter(owner=carts_customer).count()>0: #IF USER NOT ASSIGNED TO A TABLE, CREATE A NEW ORDER ASSIGN TABLE USER SELECTED WHEN USER FOR LOGGED IN
 
             order.objects.create(owner=carts_customer, table_num=Table.objects.filter(owner=carts_customer).first().TableNum, order_id=generate_order_id())
         
@@ -57,15 +57,15 @@ def select_table(request):
     person = request.user
     if Customer.objects.filter(user=person).count()>0: 
         cust = Customer.objects.filter(user=person).first()
-        if Table.objects.filter(owner=cust).count()>0:
+        if Table.objects.filter(owner=cust).count()>0: #IF USER ALREADY ASSIGNED TO TABLE GO TO HOMEPAGE
             print("table num is",Table.objects.filter(owner=cust).first().TableNum)
             return redirect('customer-homepage')
-        else:
-            table_objs = Table.objects.filter(occupied=False)
+        else:#IF USER NOT ASSIGNED TO RENDER HTML VIEW WITH OPTIONS TO SELECT ONE
+            table_objs = Table.objects.filter(occupied=False)#DISPLAY ONLY UNOCCUPIED TABLES
             context = {
                 'tables':table_objs
             }
-            return render(request,'select_table.html',context)
+            return render(request,'select_table.html',context) #VIEW TO SELECT TABLE
     else:
         redirect('login')
 
@@ -94,8 +94,8 @@ def table_selection(request):
 def logOut(request):
     person = request.user
     if Customer.objects.filter(user=person).count()>0:
-        if Table.objects.filter(owner=Customer.objects.filter(user=person)[0], occupied=True).count()>0:
-            tables = Table.objects.filter(owner=Customer.objects.filter(user=person)[0], occupied=True)
+        if Table.objects.filter(owner=Customer.objects.filter(user=person)[0], occupied=True).count()>0: #CHECK FOR USERS TABLE
+            tables = Table.objects.filter(owner=Customer.objects.filter(user=person)[0], occupied=True) #UNASSIGN USER FROM TABLE
             for table in tables:
                 table.occupied = False
                 table.owner = None
