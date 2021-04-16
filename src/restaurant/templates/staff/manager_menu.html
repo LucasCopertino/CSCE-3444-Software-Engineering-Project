@@ -4,6 +4,11 @@
     body{
         max-width: 500px;
         margin: auto;
+        background: url("../../static/menu/BG3.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
     }
 
     h1{
@@ -12,17 +17,19 @@
     }
 
     a{
-        color: black;
+        background-color: rgb(16, 117, 109);
+        color: white;
         text-decoration: none;
         text-align: right;
-        border: 1px solid black;
+        border: 2px solid black;
         border-radius: 4px;
         padding: 4px;
         margin-top: 10px;
     }
 
-    a:visited{
-        color: inherit;
+    a:hover, a:visited, a:active{
+        color: white;
+        text-decoration: none;
     }
 
     .create-item{
@@ -30,8 +37,13 @@
         text-decoration: none;
         font-weight: bold;
         color: black;
-        border: 2px solid;
+        border: 2px solid black;
         width: 125px;
+    }
+
+    .create-item:visited{
+        color: white;
+        text-decoration: none;
     }
 
     .item-container{
@@ -41,6 +53,7 @@
         border: 2px solid black;
         width: 500px;
         border-radius: 4px;
+        background-color: white;
     }
 
 </style>

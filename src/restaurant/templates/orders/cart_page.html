@@ -13,6 +13,32 @@ By pressing the 'place order' button, the customer can begin playment.
     <br>
     <h1 style="text-align:center;">Cart</h1>
     <br>
+    <style>
+        .dessert-button{
+            background-color: rgb(16, 117, 109);
+            color: white;
+            border: none;
+            text-align: center;
+            text-decoration: none;
+            padding: 30px;
+            font-family: var(--Inter);
+            font-size: 40px;
+            font-weight: bold;
+            margin-top: 85px;
+            margin-right: 0px;
+            display: block;
+            border-radius: 4px;
+        }
+
+        .dessert-button a{
+            color:white;
+            text-decoration: none;
+        }
+
+        .dessert-button:hover{
+            box-shadow: 0 0 16px 4px rgba(223, 26, 124, 0.75);
+        }
+    </style>
     <script
     src="https://code.jquery.com/jquery-3.4.1.min.js"
     integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -44,7 +70,7 @@ By pressing the 'place order' button, the customer can begin playment.
     </div>
     {% if order.free_dessert is False and order.free_dessert_tries < 3 and order.free_dessert_hold is False %}
     <div class="main-buttons">
-    <button onclick="myFunction()">Try your luck at a free desert</button>
+    <button class="dessert-button" onclick="myFunction()">Try your luck at a free desert</button>
     <p id="gen"></p>
     <div>
         <script>

@@ -1,8 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
         <title>Manager End of Day Report</title>
     </head>
+    <link rel="stylesheet" href="{% static '/orders/styleCartAndPayment.css' %}">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&family=Kaushan+Script&family=Montserrat:wght@200;300;400;500;600;700;800;900&display=swap');
 
@@ -17,15 +19,15 @@
         }
 
         .logout-container button{
-            background-color: black;
-            
+            background-color: rgb(16, 117, 109);
             font-family: var(--Inter);
             font-size: 20px;
             font-weight: bold;
             border: none;
             border-radius: 4px;
-            padding-left: 20px;
-            padding-right: 20px;
+            padding: 10px;
+            margin-top: 10px;
+            margin-right: 10px;
         }
 
         .logout-container a{
@@ -41,6 +43,8 @@
         .main-header{
             font-family: var(--Inter);
             text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
         }
 
         .report{
@@ -51,27 +55,10 @@
             margin-left: 10%;
             margin-right: 10%;
             padding: 20px;
+            background-color: white;
         }
 
-        .back-button{
-            font-family: var(--Inter);
-            font-size: 16px;
-            font-weight: bold;
-            background-color: black;
-            
-            border: none;
-            border-radius: 4px;
-            padding: 20px;
-        }
-
-        .back-button a{
-            text-decoration: none;
-            color: white;
-        }
-
-        .back-button:hover{
-            box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.75);
-        }
+        
 
     </style>
 
