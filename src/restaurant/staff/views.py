@@ -102,8 +102,16 @@ def HelpFunc(request):
     orderx.save()
     h = Help.objects.get_or_create(orderx=orderx, unresolved=True)
 
-    return redirect('homepage')
+    return redirect('customer-homepage')
 
+def HelpFuncLocked(request):                                #if the games page is locked, it will redirect back to the games page locked instead
+    cust = get_object_or_404(Customer, user=request.user)
+    orderx = order.objects.get_or_create(owner=cust)[0]
+    orderx.order_id = generate_order_id()
+    orderx.save()
+    h = Help.objects.get_or_create(orderx=orderx, unresolved=True)
+
+    return redirect('games-home-locked')
 
 """ Overview: A function to that handles help request aand allows waiters resolve them
     Returns:reloads the page
