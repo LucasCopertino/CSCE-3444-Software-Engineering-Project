@@ -69,7 +69,7 @@ def manager_report(request):
     for i in orders: #for loop that calculates the cost of tax, tips, and meals if it was ordered today
         if today.month == i.time.month and today.day == i.time.day and today.year == i.time.year:
             order_items.append(i.items.all())
-            tax+=i.tax
+            tax+=i.get_tax()
             tips+=i.tip
             cost+=i.cost
     #for i in orderItems:
