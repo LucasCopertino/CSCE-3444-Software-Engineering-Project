@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Waiter View</title>
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+        background: url("../../static/menu/BG3.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+}
+
+.logoutContainer{
+	padding: 1px;	 /* background */
+    text-align: center; /* center the text */
+    border-radius: 4px; /* rounded corners */
+    margin-left: 840px;  /* move to the side */
+    margin-bottom: 10px;
+    background: black;
+    color: white;
+}
+
+.logout {
+	border: none;
+    outline: 0;
+    background-color: black;
+    text-align: center;
+    border-radius: 4px; /* rounded corners */
+    
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.logout a{
+  text-decoration: none;
+  color: white;
+}
+
+
+
+.header {
+  padding: 1px;
+  text-align: center; 
+  border-radius: 4px;
+  margin-bottom: 50px;
+  background: black;
+  color: white;
+}
+
+.row {
+  padding: 1px;
+  text-align: center; 
+  border-radius: 4px;
+}
+
+.card {
+  padding: 1px;
+  text-align: center; 
+  border-radius: 4px;
+  background: black;
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.container {
+  padding: .5px;
+  text-align: center; 
+  flex: 75%;				/*to split the area in the card */
+  border-radius: 4px;
+  background: black;
+  color: white;
+}
+
+.delete {
+	padding: .5px;
+  	text-align: center;
+  	flex: 25%;
+ 	border-radius: 4px;
+  	background: DarkRed;
+  	color: white;
+}
+
+/* Increase the font size of the <h1> element */
+.logoutContainer h1 {
+	font-size: 10px;
+}
+
+.header h1 {
+  font-size: 30px;
+}
+
+.back-button{
+  font-family: var(--Inter);
+  font-size: 16px;
+  font-weight: bold;
+  background-color: black;
+  border: none;
+  border-radius: 4px;
+  padding: 20px;
+                
+    }
+
+.back-button a{
+  text-decoration: none;
+  color: white;
+   }
+
+.back-button:hover{
+  box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.75);
+  }
+
+.to-order-status{
+  font-family: var(--Inter);
+  font-size: 16px;
+  background-color: black;
+  
+  border: none;
+  border-radius: 4px;
+  padding: 20px;
+}
+
+.to-order-status a{
+  text-decoration: none;
+  color: white;
+}
+
+</style>
+<script
+src="https://code.jquery.com/jquery-3.4.1.min.js"
+integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+crossorigin="anonymous"></script>
+<script>
+      function deleteHelp(pk){
+           $.ajax({
+             url: '{% url "delete_help" %}',  
+             type: 'get', 
+             data: {
+        'pk':pk,
+    },            type: 'get',
+             success: function(){
+                location.reload()
+             }
+            
+         
+         
+         
+           });
+         }
+         function deleteRefill(pk){
+           $.ajax({
+             url: '{% url "delete_refill" %}',  
+             type: 'get', 
+             data: {
+        'pk':pk,
+    },            type: 'get',
+             success: function(){
+                location.reload()
+             }
+            
+         
+         
+         
+           });
+         }function deleteOrder(pk){
+           $.ajax({
+             url: '{% url "delete_order" %}',  
+             type: 'get', 
+             data: {
+        'pk':pk,
+    },            type: 'get',
+             success: function(){
+                location.reload()
+             }
+            
+         
+         
+         
+           });
+
+         }
+         function payCash(pk){
+           $.ajax({
+             url: '{% url "resolve_cash_pay_req" %}',  
+             type: 'get', 
+             data: {
+        'pk':pk,
+    },            type: 'get',
+             success: function(){
+                location.reload()
+             }
+            
+         
+         
+         
+           });
+         }
+  </script>
+</head>
+<body>
+
+<div class="logoutContainer">
+  <h1><button class="logout"><a href="{% url 'free_table'%}">Log Out</a></button></h1>
+</div>
+
+<div class="header">
+  <h1>Notifications</h1>
+</div>
+{%for order in orders %}
+<div class="row">
+	<div class="card">
+    	<div class="container">
+        	<h1>Kitchen</h1>
+            <p>Order {{order.order_id}} for Table {{order.table_num}} is ready for pickup</p>
+        </div>
+        <button class="delete" onclick="deleteOrder({{order.pk}})">Resolve</button>
+
+    </div>
+</div>
+{% endfor%}
+{%for help in help_requests %}
+
+<div class="row">
+	<div class="card">
+    	<div class="container">
+        	<h1> Help Request </h1>
+            <p> Table {{help.orderx.table_num}} : {{help.orderx.owner.user.username}} needs help</p>
+        </div>
+        <input type="submit" value="Resolve"  class="delete" onclick="deleteHelp({{help.pk}})" >
+
+
+    </div>
+</div>
+
+{% endfor%}
+{%for req in drink_requests %}
+
+<div class="row">
+	<div class="card">
+    	<div class="container">
+        	<h1> Drink Refill </h1>
+            <p> Table {{req.orderx.table_num}} : {{req.orderx.owner.user.username}} needs {{req.drink.name}} refill</p>
+        </div>
+        <input type="submit" value="Resolve"  class="delete" onclick="deleteRefill({{req.pk}})" >
+
+
+    </div>
+</div>
+
+{% endfor%}
+
+{%for req in pay_requests %}
+
+<div class="row">
+	<div class="card">
+    	<div class="container">
+        	<h1> Cash Payment </h1>
+            <p> Table {{req.order.table_num}} : {{req.order.owner.user.username}} needs to pay with cash </p>
+        </div>
+        <input type="submit" value="Resolve"  class="delete" onclick="payCash({{req.pk}})" >
+
+
+    </div>
+</div>
+
+{% endfor%}
+  <button class="to-order-status"><a href="{% url 'table_map' %}">Go to Order Status</a></button>
+  <button class="back-button"><a href="{% url 'role_select' %}">Back</a></button>
+
+
+
+</body>
+</html>

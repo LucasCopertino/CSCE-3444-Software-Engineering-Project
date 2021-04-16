@@ -1,0 +1,52 @@
+{% load static %}
+{%load crispy_forms_tags %} 
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="{% static '/orders/styleCartAndPayment.css' %}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Home Page</title>
+    
+</head>
+<!--Nav Bar -->
+<nav>
+    <ul>
+        <li><a href="{% url 'homepage' %}">Home</a></li>
+        <li><a href="{% url 'menu_home' %}">Menu</a></li>
+        <li><a href="#games">Games</a></li>
+        <li><a href="{% url 'finish-pay' %}">Place Order</a></li>
+        <li><a href="{% url 'pay' %}">Pay Now</a></li>
+
+        <li class="nav-right"><a href="#help">Help</a></li>
+        <li class="nav-right" style="border-left: 1px solid white;"><a href="{% url 'free_table'%}">Logout</a></li>
+        
+    </ul>
+</nav> <!--End of Nav-->
+
+        <h1 style="text-align: center;" >Redeem your free meal voucher here</h1>
+    </head>
+    <button onclick="myFunction()">Generate code</button>
+        <div>
+            <script>
+                function myFunction() {
+                  var x = Math.floor((Math.random() * 99999999) + 1);
+                  document.getElementById("gen").innerHTML = x;
+                }
+                </script>
+            <h2 style = "text-align: center;"><b>Enter the eight digit code below to get your free meal<b></h2>
+            <p style="text-align: center" id="gen"></p>
+        </div>
+        
+
+        <form method="post" style="margin-top: 30px; text-align: center;">
+            {% csrf_token %}
+            {{form| crispy}}
+            <input type="submit" value="submit">
+        </form>
+        <button class="back-button"><a href="#back">Back</a></button>
+
+    </div>
+  </html>

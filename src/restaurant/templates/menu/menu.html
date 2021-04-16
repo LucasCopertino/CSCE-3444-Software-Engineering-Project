@@ -1,0 +1,105 @@
+{% extends 'base2.html' %}
+
+{% load static %} <!--This is a django-html tag to load the location of the static files we need like stylesheets and javascript files-->
+{% block content %}
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Food Menu
+
+
+    </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static '/menu/styles.css' %}" type="text/css">
+    <!-- fontawesome icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    
+  </head>
+  	<nav style="text-align: right; padding-right: 10px;"> 
+      <a href="{% url 'free_entree_display' %}" style="text-decoration: none;"> <i class="fa fa-user" aria-hidden="true" style="color: black"></i>Rewards</a>
+
+      <a href="{% url 'drink_refill' %}" style="text-decoration: none;">Refill Drink </a>
+<a href="{% url 'cart' %}" style="color: black; padding-left: 20px;"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+
+</nav>
+
+    <section class = "menu">
+      <div class = "menu-container">
+        
+        <div class = "menu-btns">
+        	<div class="btn-hover"></div>
+          {% for category in cats %}
+          
+            <a href ="{% url 'categories' category_id=category.pk %}"  class="menu-btn active-btn : btn-hover" type="button" id="featured">{{category.name}}</a></li>
+            {%endfor%}
+        </div>
+        {%for item in category_posts%}
+ 
+        <div class = "food-items">
+          <!-- item -->
+          <div class = "food-item featured">
+            <div class = "food-img">
+              <img src = "" alt = "food image">
+            </div>
+            <div class = "food-content">
+              <h2 class = "food-name">{{item.name}}</h2>
+              <h3 class = "food-price">${{item.price}}</h3>
+              <button style=" height: 20px;"><a href='{% url "item_view" item_id=item.pk %}'>Details</a> </button>
+
+              <button style="width: 25px; height: 20px;" id="inct" onclick="increase({{item.pk}})"> + </button>
+              <button style="width: 25px; height: 20px;" id="inct" onclick="decrease({{item.pk}})"> - </button>
+
+             <script src="https://use.fontawesome.com/a6e14efad5.js"></script>
+    
+           
+              <p class = "category">Categories: <span>Featured</span></p>
+            </div>
+          </div>
+          <!-- end of item -->
+          
+
+          
+        </div>
+        <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+        <script type="text/javascript">
+          // Create an instance of the Stripe object with public stripe key
+          function increase(click_id){
+          $.ajax({
+            url: `{% url "add-to-order" %}`,
+            data: {
+        "id" :click_id
+    },            type: 'get',
+            
+          })}
+          function decrease(click_id){
+          $.ajax({
+            url: `{% url "reduce-order-item" %}`,
+            data: {
+        "id" :click_id
+    },            type: 'get',
+            
+          })}
+        
+         
+           </script>
+ 
+        {%endfor%}
+
+      </div>
+    </section>
+
+    {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% endblock %}
+    
+    

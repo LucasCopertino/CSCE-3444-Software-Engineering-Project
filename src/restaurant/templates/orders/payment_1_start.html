@@ -1,0 +1,31 @@
+{% extends 'order_base.html' %}
+
+ {% block content %}
+
+        <h1 style="text-align:center;">
+            Payment
+        </h1>
+
+        <div class = totalBox>
+            <p style="text-align:center;">
+                 all items on receipt displayed here
+            </p>
+        </div>
+
+        <form style="text-align:center;">
+            <label for="couponCode">Enter coupon code here:</label><br>
+            <input type="text" id="couponCode"><br>
+        </form>
+
+        <!--Main Page Buttons-->
+        <div class="main-buttons">
+            <button class="button">Apply Coupon</button>
+            <button class="button">.count()>0</button>
+        </div>
+
+        <!--Back Button-->
+        <button class="back-button"><a href="{% url 'customer-homepage' %}">Back</a></button>
+        
+
+    </body>
+    {% endblock %}

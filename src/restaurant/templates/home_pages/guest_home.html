@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title>Home Page</title>
+        
+    </head>
+
+       
+        <!--Main Page Buttons-->
+        <div class="main-buttons">
+            <button class="button"><a href ="{% url 'categories' category_id=1 %}">Menu</a></button>
+            <button class="button"><a href="{% url 'games-home-guest' %}">Games</a></button>
+            <button class="button"><a href="{% url 'finish-pay' %}">Place Order</a></button>
+            <button class="button"><a href="{% url 'cart' %}">Cart</a></button>
+        </div>
+
+        <!--Back Button-->
+        <button class="back-button"><a href="{% url 'blank' %}">Back</a></button>
+        
+{% endblock %}
+
+
+
+ 

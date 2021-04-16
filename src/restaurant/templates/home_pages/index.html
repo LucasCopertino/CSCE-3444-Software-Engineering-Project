@@ -1,0 +1,56 @@
+
+{% load static %}
+
+{% block content %}
+<head>
+        <title>Home Page</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+      
+        <link rel="stylesheet" href="{% static '/orders/styleCartAndPayment.css' %}">
+        <style>
+            .employee-login{
+                float: right;
+                margin: 10px;
+                text-decoration: none;
+                border: 2px solid rgb(16, 117, 109);
+                border-radius: 4px;
+                padding: 10px;
+                background-color: rgb(16, 117, 109);
+                color: white;
+            }
+
+            .logo {
+                display: block;
+                max-width: 500px;
+                margin-left: auto;
+                margin-right: auto;
+                width: 50%;
+                
+            }
+        </style>
+
+    </head>
+    <body>
+        <div class='container'> <!--Main container-->
+            <a class="employee-login" href='#'>Employee Login</a>
+            <br>
+            <br>
+            <div class='main-text'>
+            <!--<h1 class='main-header'>Welcome to Cherry Cactus!</h1>-->
+            <!--<h2 class='main-header'>Please select a role</h2>-->
+            </div>
+            <!--Insert cherry cactus welcome logo-->
+            <img class="logo"src="https://i.imgur.com/QXzT2uM.png" alt="cherry cactus logo">
+            <div class='main-buttons'>
+                <button class='button-name' style="margin-top: 0; padding: 100px;"><a href='{% url 'login' %}'>Start Here</a></button>
+                <!--<button class='button-name'><a href='/admin/'>Employee</a></button>-->
+            </div>
+            
+
+
+        </div> <!--Container ends here-->
+    </body>
+        
+  {% endblock %}

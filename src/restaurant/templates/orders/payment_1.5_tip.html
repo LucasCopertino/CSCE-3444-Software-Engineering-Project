@@ -1,0 +1,57 @@
+{% extends 'order_base.html' %}
+
+
+{% block content %}
+<style>
+  .alt-tip{
+    text-align: center;
+  }
+</style>
+<script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+    <h1 style="text-align:center;">
+        What percent of your bill would you like to add as a tip?
+    </h1>
+    
+    <!--Main Page Buttons-->
+    <div class="main-buttons">
+        <button class="button tipBtn"  onclick="tipBtn(10)">10 percent</button>
+        <button class="button tipBtn"  onclick="tipBtn(15)">15 percent</button>
+        <button class="button tipBtn"  onclick="tipBtn(20)">20 percent</button>
+    </div>
+
+    <div class="alt-tip">
+    <form action="{% url 'tip' %}" method="post">
+        {% csrf_token %}
+        <label>Alternatively, you can enter rate here</label><br>
+        <input name="submit"><br>
+        
+        <input type="submit" value="Submit" >
+      </form> 
+    </div>
+      
+
+    <!--Back Button-->
+    <button class="back-button"><a href="{% url 'pay' %}">Back</a></button>
+</body> 
+<script type="text/javascript">
+
+    // Create an instance of the Stripe object with public stripe key
+    function tipBtn(val){
+    $.ajax({
+      url: `{% url "tip_btns" %}`,
+      data: {
+  "btnVal" :val
+},            type: 'get',
+success: function(){
+                window.location.href = "{% url 'cart' %}"
+             }
+            
+         
+      
+    })}
+    
+  </script>
+{% endblock %}

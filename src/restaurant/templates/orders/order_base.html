@@ -1,0 +1,34 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang = "en">
+<head> 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>Cart Page</title>
+    <link rel="stylesheet" href="{% static '/orders/styleCartAndPayment.css' %}">
+
+
+</head> 
+
+
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'customer-homepage' %}">Home</a></li>
+            <li class="nav-right" style="border-left: 1px solid white;"><a href="{% url 'help' %}" onclick="myFunction()">Help</a></li>
+            <li class="nav-right" style="border-left: 1px solid white;"><a href="{% url 'free_table'%}">Logout</a></li>
+            <li class="nav-right" style="border-left: 1px solid white;"><a href="{% url 'drink_refill'%}">Refill Drink</a></li>
+        </ul>
+    </nav> <!--End of Nav-->
+    <script>
+        function myFunction() {
+          alert("Help Requested. A waiter will be at your table soon");
+        }
+        </script>
+    {% block content %}
+    {% endblock %}
+
+    </body>

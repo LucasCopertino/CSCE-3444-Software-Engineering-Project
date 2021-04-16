@@ -1,0 +1,288 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+       
+        <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+        <script>
+
+        function reload_queue(){
+           $.ajax({
+             url: '{% url "kitchen_home" %}',  
+             type: 'get',
+             success: function(){
+                location.reload()
+             }
+            
+         
+         
+         
+           });
+         }
+         function changeStat(pk){
+             opt = document.getElementById('status')
+             statt = opt.options[opt.selectedIndex].text
+           $.ajax({
+             url: '{% url "change-stat" %}',  
+             type: 'get', 
+             data: {
+        'pk':pk,
+        'stat':statt
+    },            type: 'get',
+             success: function(){
+                location.reload()
+             }
+            
+         
+         
+         
+           });
+         }
+         setInterval(reload_queue,1000*60*2);
+       </script>
+    </head>
+    <link rel="stylesheet" href="{% static '/orders/styleCartAndPayment.css' %}">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&family=Kaushan+Script&family=Montserrat:wght@200;300;400;500;600;700;800;900&display=swap');
+
+        :root{
+                --Inter: 'Inter', sans-serif;
+                --Kaushan: 'Kaushan Script', cursive;
+                --Mont: 'Montserrat', sans-serif;
+        }
+
+        *{
+            box-sizing: border-box;
+        }
+
+        .main-title{
+            font-family: var(--Inter);
+            text-align: center;
+        }
+
+        .logout-container{
+            font-family: var(--Inter);
+            font-size: 20px;
+            float: right;
+            background-color: black;
+            border-radius: 4px;
+            
+        }
+
+        .logout-container:hover{
+            box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.75);
+        }
+
+        .logout-container button{
+            font-family: var(--Inter);
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            background-color: black;
+            
+            padding-left: 20px;
+            padding-right: 20px;
+            border-radius: 4px;
+            
+        }
+
+        .logout-container a{
+            text-decoration: none;
+            color: white;
+        }
+
+        .row::after{
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .column{
+            float: left;
+            width: 33.33%;
+            padding: 10px;
+            min-height: 300px;
+            background-color: lightgray;
+            color: green;
+            border: solid black;
+            border-radius: 4px;
+            font-family: var(--Inter);
+
+        }
+
+        .queue-header ul{
+            font-family: var(--Inter);
+            font-size: 24px;
+            font-weight: bold;
+            list-style-type: none;
+            margin: 0px;
+            padding-top: 4px;
+            padding-bottom: 4px;
+            overflow: hidden;
+            background: black;
+            color: white;
+            border-radius: 4px;
+            
+            
+        }
+
+        .queue-header li{
+            float: left;
+            text-align: center;
+            
+        }
+
+        .key{
+            width: 33.33%;
+        }
+
+        .back-button{
+                font-family: var(--Inter);
+                font-size: 16px;
+                font-weight: bold;
+                background-color: black;
+                border: none;
+                border-radius: 4px;
+                padding: 20px;
+                
+            }
+
+        .back-button a{
+            text-decoration: none;
+            color: white;
+        }
+
+        .back-button:hover{
+            box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.75);
+        }
+
+        .status-dropdown{
+            font-family: var(--Inter);
+            font-size: 20px;
+            padding: 10px;
+        }
+
+        .delete-order{
+            font-family: var(--Inter);
+            font-size: 20px;
+            background-color: green;
+            color: white;
+            border: solid 1px black;
+            border-radius: 4px;
+            padding: 10px;
+            margin-left: 20px;
+        }
+        #seconds {
+        font-size: 5em;}
+
+        #minutes {
+        font-size: 5em;
+        }
+        #hours {
+        font-size: 5em;
+        }
+
+        
+    </style>
+
+
+
+    <body>
+        <div class='logout-container'>
+            <button><a href="{% url 'free_table'%}">Log Out</a></button>
+        </div>
+
+        <div class='main-title'>
+            <h1>Kitchen Queue</h1>
+        </div>
+{% for order in orders %}
+
+        <div class='queue-header'>
+            <ul>
+                <li class='key'>Order</li>
+                <li class='key'>Time</li>
+                <li class='key'>Order Status</li>
+            </ul>
+        </div>
+        <br>
+        
+        
+
+        <!--Item in Queue goes in row-container-->
+        <div class='row'>
+            <div class='column'>
+                {%for item in items%}
+                <p style="color: black;">
+                    {% for s in item %}
+                    {% if s.order_id == order.order_id%}
+                    {{s.Item.name}} : {{s.quantity}}</p>
+                    {%endif%}
+                    {%endfor%}
+                {%endfor%}
+                <p style="color: black;"> Free Kids Meal(s) : {{order.free_kids_meal}}
+
+            </div>
+            <div class='column'>
+                <h2 style="text-align: center;"><strong>Time in queue</strong></h2>
+                    <div style="text-align: center;">
+                        <span id="hours" >0</span><span>:</span>
+                        <span id="minutes">0</span><span>:</span>
+                        <span id="seconds">0</span><span></span>
+                </div>
+            </div>
+            <div class='column'>
+                <h2>Status and delete here</h2>
+
+                <select class="status-dropdown" name='status' id="status">
+                    <option value="in-progress">in progress</option>
+                    <option value="complete">finished</option>
+                    <option value="complete">delete</option>
+
+                </select>
+
+                <button class="delete-order" onclick="changeStat({{order.pk}})">Change Stat</button>
+
+            </div>
+        </div>
+        {%endfor%}
+        <!--Next item in queue ends here-->
+
+        <br>
+        <button class='back-button'><a href="{% url 'role_select' %}">Back</a></button>
+        
+
+
+    </body>
+</html>
+<script type="text/javascript">
+    var minutesLabel = document.getElementById("hours");
+    var minutesLabel = document.getElementById("minutes");
+    var secondsLabel = document.getElementById("seconds");
+    var totalSeconds = 0;
+    setInterval(setTime, 1000);
+    
+      
+        
+    function setTime()
+    {
+        ++totalSeconds;
+        secondsLabel.innerHTML = pad(totalSeconds%60);
+        minutesLabel.innerHTML = pad(parseInt(totalSeconds/60));
+    }
+
+    function pad(val)
+    {
+        var valString = val + "";
+        if(valString.length < 2)
+        {
+            return "0" + valString;
+        }
+        else
+        {
+            return valString;
+        }
+    }
+</script>

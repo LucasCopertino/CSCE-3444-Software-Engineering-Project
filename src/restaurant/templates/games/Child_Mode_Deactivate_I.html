@@ -1,0 +1,163 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Child Mode</title>
+    <link rel="stylesheet" href="{% static '/orders/styleCartAndPayment.css' %}">
+    <style>
+
+        ul {
+            list-style-type: none;
+           margin: 5px 10px 0px 10px;
+           padding: 0px;
+           overflow: hidden;
+           background-color: black;
+           font-family: Arial, Helvetica, sans-serif;
+           border-radius: 8px;
+       }
+
+       li {
+           float: right;
+           border-right: 1px solid white;
+       }
+
+       li a {
+           display: block;
+           color: white;
+           text-align: center;
+           padding: 10px 16px;
+           text-decoration: none;
+       }
+
+       .nav-right {
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           padding: 10%;
+       }
+
+         .navbar a:hover {
+            background: #353640;
+         }
+
+         .header {
+             text-align: center;
+             font-size: 100px;
+         }
+
+         .form-box {
+             width: 500px;
+             background: rgba(0,0,0,0.8);
+             margin: 12% auto;
+             padding: 50px 0;
+             color: white;
+             box-shadow: 0 0 20px 2px rgba(0,0,0,0.5);
+             border-radius: 25px;
+
+         }
+
+         h1 {
+             text-align: center;
+             margin-bottom: 40px;
+
+         }
+
+         footer {
+         	 text-align: center;
+             margin-bottom: 40px;
+         }
+
+         .input-box {
+            margin: 31px auto;
+            width: 80%;
+            border-bottom: 1px solid #fff;
+            padding-top: 10px;
+            padding-bottom: 5px;
+
+         }
+
+         .input-box input {
+            width: 90%;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: #fff;
+         }
+
+         ::placeholder {
+             color: #ccc;
+         }
+
+         .submit-btn {
+            margin: 40px auto 20px;
+            width: 80%;
+            display: block;
+            outline: none;
+            padding: 10px 0;
+            border: 1px solid #fff;
+            cursor: pointer;
+            background: transparent;
+            color: #fff;
+            font-size: 16px;
+
+         }
+
+
+
+    </style>
+
+
+</head>
+
+
+<body>
+
+    <div class="navbar">
+        <ul>
+           
+            <li ><a href="{% url 'helplocked' %}" onclick="myFunction()">Help</a></li>
+            <li><a href="#">Logout</a></li>
+            <li><a href="#">Refill Drink</a></li>
+            <li><a href="{% url 'games-home-locked' %}">Go Back</a></li>
+            <li><a href="#">Home</a></li>
+    
+        </ul>
+    
+    </div>
+
+   
+    <div class="form-box">
+        <h1>Enter Password</h1>
+
+        <form action = "." method = "POST">{% csrf_token %}
+            <div class="input-box">
+                <input type="password" name="attempt" placeholder="Password">
+            </div>
+
+            <footer>Passcode is invalid, please try again.</footer>
+
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+
+    </div>
+    
+    
+
+
+
+
+
+    
+</body>
+
+<script>
+    function myFunction() {
+      alert("Help Requested. A waiter will be at your table soon");
+    }
+    </script>
+
+
+</html>

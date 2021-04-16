@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %} <!--This is a django-html tag to load the location of the static files we need like stylesheets and javascript files-->
+{% block content %}
+                <style>
+                  body{
+                    text-align: center;
+                  }
+
+                  .status-dropdown{
+                    margin-top: 20px;
+                    font-size: 25px;
+                    padding: 10px;
+                    background-color: white;
+                  }
+
+                  button {
+                    font-size: 25px;
+                    padding: 10px;
+                    background-color: white;
+                    border: 2px solid black;
+                    border-radius: 4px;
+                  }
+                </style>
+                <body>
+                  <h1>Refill Drink</h1>
+                <select class="status-dropdown" id="Drink">
+                    {% for drink in drinks %}
+                    <option value={{drink.pk}}>{{drink}}</option>
+                    {% endfor %}
+                </select>
+                <button onclick="drink_refill()">Select Drink</button>
+                </body>
+                <script
+                src="https://code.jquery.com/jquery-3.4.1.min.js"
+                integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+                crossorigin="anonymous"></script>
+                
+<script>
+
+
+function drink_refill(){
+        var s = document.getElementById('Drink')
+           $.ajax({
+             url: '{% url "drink_refill_req" %}',  
+             type: 'get',
+             data:{
+                 'id':s.value,
+             },
+             success: function(){
+                window.history.back()
+             }
+            
+         
+         
+         
+           });
+         }
+</script>
+
+{% endblock %}

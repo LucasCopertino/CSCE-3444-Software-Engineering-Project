@@ -1,0 +1,167 @@
+<!-- Cart Page
+
+This page shows everything currently in the customer cart.
+It displays names of items with their quantities and costs and totals cost.
+By pressing the 'place order' button, the customer can begin playment.
+
+-->
+
+{% extends 'base2.html' %}
+
+{% block content %}
+    <!--Page Heading-->
+    <br>
+    <h1 style="text-align:center;">Cart</h1>
+    <br>
+    <style>
+        .dessert-button{
+            background-color: rgb(16, 117, 109);
+            color: white;
+            border: none;
+            text-align: center;
+            text-decoration: none;
+            padding: 30px;
+            font-family: var(--Inter);
+            font-size: 40px;
+            font-weight: bold;
+            margin-top: 85px;
+            margin-right: 0px;
+            display: block;
+            border-radius: 4px;
+        }
+
+        .dessert-button a{
+            color:white;
+            text-decoration: none;
+        }
+
+        .dessert-button:hover{
+            box-shadow: 0 0 16px 4px rgba(223, 26, 124, 0.75);
+        }
+    </style>
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+    <!--Print Cart Items with quantities and costs-->
+    <div>
+        <p style="margin-left: 10px; text-align:center;">Order #{{order.order_id}} for Table {{order.table_num}} was started on {{order.time}}</p>
+        <hr style="width:35%;margin:auto; margin-bottom: 20px;">
+
+        {% for item in items %}
+        <div style="display: flex; justify-content: center;">
+            <p style="text-align: center;">{{item.Item.name}}</p>
+            <p style="margin-left: 10px;"> x</p>
+            <p style="margin-left: 10px;">{{item.quantity}} = {{item.cost}}</p>
+            <button style="width: 25px; height: 20px;" id="inct" onclick="increase({{item.Item.pk}})"> + </button>
+            <button style="width: 25px; height: 20px;" id="inct" onclick="decrease({{item.Item.pk}})"> - </button>
+            <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+            <script type="text/javascript">
+              // Create an instance of the Stripe object with public stripe key
+              function increase(click_id){
+              $.ajax({
+                url: `{% url "add-to-order" %}`,
+                data: {
+            "id" :click_id
+        },            type: 'get',
+        success:location.reload()
+                
+              })}
+              function decrease(click_id){
+              $.ajax({
+                url: `{% url "reduce-order-item" %}`,
+                data: {
+            "id" :click_id
+        },            type: 'get',
+        success:location.reload()
+    
+              })}
+            
+             
+               </script>
+        </div>
+        {%endfor%}
+
+        <!-- Print total -->
+        <hr style="width:35%;margin:auto; margin-top:20px">
+        <p style="margin-left: 10px; text-align:center;">Tax = {{tax}}</p>
+        <p style="margin-left: 10px; text-align:center;">Tip = {{order.tip}}</p>
+        <p style="margin-left: 10px; text-align:center;">Discount = - {{order.free_dessert_cost}}</p>
+
+        <p style="margin-left: 10px; text-align:center;">Total = {{order.cost}}</p>
+
+        <p style="margin-left: 10px; text-align:center;">Comments:  {{order.comments}}</p>
+
+      
+
+    </div>
+    {% if order.free_dessert is False and order.free_dessert_tries < 3 and order.free_dessert_hold is False %}
+    <div class="main-buttons">
+    <button class="dessert-button" onclick="myFunction()">Try your luck at a free desert</button>
+    <p id="gen"></p>
+    <div>
+        <script>
+            function freebie(stt, tries){
+            $.ajax({
+                url: '{% url "free_dessert" %}',  
+                type: 'GET',
+                data:{
+                    'win':stt,
+                    'tries':tries
+                },
+               
+            });
+        }
+        //Funtion for randomizing button clicks and limiting it to a 1/3 chance of a free dessert
+            function myFunction() {
+               if(Math.floor(Math.random() * (9 - 0 + 1)) % 3 == 0){
+                 var x = Math.floor((Math.random() * 99999999) + 1);
+                    freebie('true', tries)
+                    alert('Discount for one dessert active on cart')
+                    location.reload()
+                 }else{
+                    var tries = {{order.free_dessert_tries}};
+
+                     triess = 3-tries-1
+                     alert(triess + ' tries left');
+                     if (triess == 0){ //user cannot have more than 3 tries
+                        alert('You have run out of tries. Better luck on your next order!') 
+
+                     }
+                   }
+                   tries++;
+                   
+              }
+       </script>
+        
+ 
+</div>
+{% endif %}
+<form action="{% url 'comments' %}" method="post">
+    {% csrf_token %}
+    <label>Add comments for order</label><br>
+    <input name="submit"><br>
+    
+    <input type="submit" value="Submit" >
+  </form> 
+
+     <!--Payment Button-->
+     <div class="main-buttons">
+        <button class="button"><a href='{% url 'choose-tip' %}'>Add tip</a></button>
+
+        <button class="button"><a href='{% url 'finish-pay' %}'>Place order</a></button>
+    </div>
+
+    <footer>
+        <!--Back Button-->
+    </footer>   
+    
+        <button class="back-button"><a href="{% url 'menu_home' %}">Back</a></button>
+    </footer>       
+
+</body>  
+
+{% endblock %}

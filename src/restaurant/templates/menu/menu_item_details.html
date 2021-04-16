@@ -1,0 +1,98 @@
+{% extends 'base2.html' %}
+
+{% load static %} <!--This is a django-html tag to load the location of the static files we need like stylesheets and javascript files-->
+{% block content %}
+
+<head> 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <title>Item Details</title>
+    <link rel="stylesheet" href="{% static '/menu/styles.css' %}" type="text/css">
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+    <style>
+        .itemInfoBox{
+            background-color:white;
+            width: 500px;
+            min-height: 250px;  
+            padding: 25px;
+            border: 2px solid darkgreen;
+            box-sizing: border-box;
+            margin-left: auto; 
+            margin-right: auto; 
+        }
+    </style>
+
+</head> 
+
+    <body>
+        <!--
+            Each item has a name, picture, price, calorie count, and description.
+        -->
+    
+
+      
+        <!--Display item name-->
+        <h1 style="text-align: center;">
+                {{item.name}}
+        </h1>
+        <br>
+
+        <!--Display item picture-->
+        <div style="margin-left: auto; margin-right: auto; width: 400px;">    
+            <img src="{{item.image.url}}" alt="Picture of food">
+        </div>
+        <br>
+
+        <!--Display all associated text-->>
+        <div class=itemInfoBox >
+            <!--<div style="margin-left: auto; margin-right: auto; width: 400px;">    -->
+                <!--Display item price-->
+                <p>
+                    Price: ${{item.price}}
+                </p>
+                <br>
+
+                <!--Display item calorie count-->
+                <p>
+                    Calories: {{item.calory_info}}
+                    </p>
+                <br>
+
+                <!--Display item description-->
+                <p>
+                    Description: {{item.description}}
+                </p>
+
+            
+        </div>
+
+        <!--Main Page Buttons-->
+        <div class="main-buttons">
+            <button class="button" onclick="increase('{{item.pk}}')">Add to cart buttons here</button>
+        </div>
+
+        <!--Back Button-->
+        <button class="back-button"><a href="#back">Back</a></button>
+        <script type="text/javascript">
+            // Create an instance of the Stripe object with public stripe key
+            function increase(click_id){
+            $.ajax({
+              url: `{% url "add-to-order" %}`,
+              data: {
+          "id" :click_id
+      },            type: 'get',
+      success: function(){
+        alert('{{item.name}} added to order')
+
+      }
+
+              
+            })}
+            </script>
+       
+    </body>
+    {% endblock %}
