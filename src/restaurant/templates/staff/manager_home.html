@@ -1,9 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
     <head>
         <title>Manager Home</title>
     </head>
-
+    <link rel="stylesheet" href="{% static '/orders/styleCartAndPayment.css' %}">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&family=Kaushan+Script&family=Montserrat:wght@200;300;400;500;600;700;800;900&display=swap');
 
@@ -19,16 +20,15 @@
         }
 
         .logout-container button{
-            background-color: black;
-            
+            background-color: rgb(16, 117, 109);
             font-family: var(--Inter);
             font-size: 20px;
             font-weight: bold;
             border: none;
             border-radius: 4px;
-            padding-left: 20px;
-            padding-right: 20px;
-
+            padding: 10px;
+            margin-top: 10px;
+            margin-right: 10px;
         }
 
         .logout-container a{
@@ -52,12 +52,13 @@
         }
 
         .main-buttons button{
-            background-color: black;
+            background-color: rgb(16, 117, 109);
             color: white;
             font-family: var(--Inter);
             font-size: 40px;
             font-weight: bold;
             padding: 100px;
+            border: none;
             border-radius: 4px;
             margin: 20px;
         }
@@ -71,25 +72,7 @@
             box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.75);
         }
 
-        .back-button{
-            background-color: black;
-            border: none;
-            border-radius: 4px;
-            padding: 20px;
-        }
-
-        .back-button a{
-            text-decoration: none;
-            font-family: var(--Inter);
-            font-size: 16px;
-            font-weight: bold;
-            
-            color: white;
-        }
-
-        .back-button:hover{
-            box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.75);
-        }
+        
     </style>
 
 
@@ -97,7 +80,9 @@
         <div class="logout-container">
             <button><a href="#log-out">Log Out</a></button>
         </div>
-
+        <br>
+        <br>
+        <br>
         <div class="main-header">
             <h1>Manager Home View</h1>
         </div>

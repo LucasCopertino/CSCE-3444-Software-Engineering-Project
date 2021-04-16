@@ -1,5 +1,5 @@
 
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake</title>
+    <link rel="stylesheet" href="{% static '/orders/styleCartAndPayment.css' %}">
     <style>
         body {
             min-height: 100vh;
@@ -40,7 +41,7 @@
             border: .25vmin solid black;
         }
 
-        .back-button{
+        .back-games{
             font-size: 16px;
             font-weight: bold;
             background-color: black;
@@ -51,22 +52,22 @@
             
         }
 
-        .back-button a{
+        .back-games a{
             text-decoration: none;
             color: white;
         }
 
-        .back-button:hover{
+        .back-games:hover{
             box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.75);
         }
     </style>
     {% load static %}
-    <script src="{% static '/games/snake/game.js' %}" defer type="module"></script>
+    <script src="{% static '/games/snake-locked/game.js' %}" defer type="module"></script>
 </head>
 <body>
     <h1 class="game-title">Snake</h1>
     <h2 class="game-start">Press one of the arrow keys to start!</h2>
     <div id="game-board"></div>
-    <button class="back-button"><a href="{% url 'games-home-locked' %}">Back to Games</a></button>
+    <button class="back-games"><a href="{% url 'games-home-locked' %}">Back to Games</a></button>
 </body>
 </html>

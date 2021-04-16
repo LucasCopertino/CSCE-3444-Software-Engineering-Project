@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="{% static '/orders/styleCartAndPayment.css' %}">
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
@@ -57,7 +59,7 @@
             box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.75);
         }
 
-        .back-button{
+        .back-games{
             font-size: 16px;
             font-weight: bold;
             background-color: black;
@@ -67,12 +69,12 @@
             
         }
 
-        .back-button a{
+        .back-games a{
             text-decoration: none;
             color: white;
         }
 
-        .back-button:hover{
+        .back-games:hover{
             box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.75);
         }
     </style>
@@ -94,7 +96,7 @@
         </div>
         <h2 class="game-status"></h2>
         <button class="game-restart">Restart Game</button>
-        <button class="back-button"><a href = "{% url 'games-home-locked' %}">Back to Games</a></button>
+        <button class="back-games"><a href = "{% url 'games-home-locked' %}">Back to Games</a></button>
     </section>
 
     {% load static %}

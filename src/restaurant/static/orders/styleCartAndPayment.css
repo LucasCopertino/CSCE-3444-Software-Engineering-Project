@@ -9,12 +9,12 @@
 
 ul{
     list-style-type: none;
-    margin: 0px;
+    margin: 5px 10px 0px 10px;
     padding: 0px;
     overflow: hidden;
     background-color: black;
     font-family: var(--Inter);
-    border-radius: 4px;
+    border-radius: 8px;
 }
 
 li{
@@ -216,7 +216,7 @@ body{
     margin-left: 20px;
     margin-right: 20px;
     border-radius: 4px;
-    background-color: black;
+    background-color: rgb(16, 117, 109);
     border: none;
 }
 
