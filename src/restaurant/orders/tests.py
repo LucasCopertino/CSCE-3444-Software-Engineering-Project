@@ -20,6 +20,9 @@ class TestViews(TestCase):
         category.objects.create(
             name='Drinks'
         )
+        category.objects.create(
+            name='Desserts'
+        )
         Item.objects.create(
             name='test item',
             price =5.00,
@@ -54,6 +57,22 @@ class TestViews(TestCase):
             is_ordered = False,
             order_id = '12e213',
         )
+        orderItem.objects.create(
+            Item = Item.objects.filter(name='test ittem')[0],
+            quantity = 2,
+            owner = Customer.objects.filter(user=self.user)[0],
+            cost = 10.0,
+            is_ordered = False,
+            order_id = '12e213',
+        )
+        orderItem.objects.create(
+            Item = Item.objects.filter(name='test drink')[0],
+            quantity = 2,
+            owner = Customer.objects.filter(user=self.user)[0],
+            cost = 10.0,
+            is_ordered = False,
+            order_id = '12e213',
+        )
         Table.objects.create(
             TableNum = 2,
             occupied =True,
@@ -73,6 +92,7 @@ class TestViews(TestCase):
         order_id = '12e213',
         status = 'ss',
         tax = 8.25,
+        free_dessert_tries=0,
         )
 
 
@@ -131,11 +151,7 @@ class TestViews(TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response,  'menu.html')   
 
-    def test_reduce_order_item(self):
-        self.client.force_login(user=self.user)    
-        response = self.client.get(reverse('reduce-order-item'),data={'id':Item.objects.filter(name='test ittem')[0].pk})
-        self.assertEquals(response.status_code, 200)
-        self.assertTemplateUsed(response,  'menu.html')   
+  
     def test_cart(self):
         self.client.force_login(user=self.user)   
         response = self.client.get(reverse('cart'))
@@ -160,9 +176,12 @@ class TestViews(TestCase):
         self.client.force_login(user=self.user)
         response = self.client.get(reverse('drink_refill_req'),data={'id':Item.objects.filter(name='test drink')[0].pk})
         self.assertTemplateUsed(response,  'menu.html')   
+    def test_free_dessert(self):
+        self.client.force_login(user=self.user)
+        response = self.client.get(reverse('free_dessert'), data={'tries':order.objects.filter(owner=Customer.objects.filter(user=self.user)[0])[0].free_dessert_tries})
+        self.assertEquals(response.status_code, 200)
+    def test_reduce_order_item(self):
+        self.client.force_login(user=self.user)    
+        response = self.client.get(reverse('reduce-order-item'),data={'id':Item.objects.filter(name='test ittem')[0].pk})
+        self.assertEquals(response.status_code, 302)
 
-
-
-
-
-    

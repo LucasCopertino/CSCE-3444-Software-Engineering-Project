@@ -9,6 +9,9 @@ import datetime
 from orders.models import orderItem, order, Table, Refill, Help
 from django.test import RequestFactory
 from .models import pay_by_cash
+from .forms import ItemForm
+from http import HTTPStatus
+
 class TestViews(TestCase):
     def setUp(self):
             self.client = Client()
@@ -162,3 +165,24 @@ class TestViews(TestCase):
         response = self.client.get(reverse('table_map'))
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'waiter_table_map.html')        
+
+    def test_createItem(self):
+        response = self.client.post(reverse('create_item'))
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertTemplateUsed(response, 'create_item.html')        
+    def test_updateItem(self):
+        response = self.client.post(reverse('update_item', args=[Item.objects.filter(name='test item')[0].pk])) 
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'create_item.html')        
+
+    def test_manager_menu(self):
+       response = self.client.post(reverse('manager_menu')) 
+       self.assertEquals(response.status_code, 200)
+       self.assertTemplateUsed(response, 'manager_menu.html')  
+    def test_deleteItem(self):
+        response = self.client.post(reverse('delete_item', args=[Item.objects.filter(name='test item')[0].pk])) 
+
+        self.assertEquals(response.status_code,302)
+
+
+
