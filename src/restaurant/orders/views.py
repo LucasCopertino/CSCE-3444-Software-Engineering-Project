@@ -293,7 +293,7 @@ def choose_meal(request):
 
 def show_free_entrees(request):
     carts_customer = get_object_or_404(Customer, user=request.user)
-    if (int(carts_customer.reward_points/1500)>=int(carts_customer.reward_points_activated)+1):
+    if (int(carts_customer.reward_points/1500)>=int(carts_customer.reward_points_activated)+1): #check if user is eleigible for rewards
         no_entrees = False
     else:
         no_entrees = True
@@ -429,11 +429,11 @@ def free_dessert(request):
       ordery.free_dessert = True
       ordery.save()
       order_items = orderItem.objects.filter(order_id=ordery.order_id)
-      count = 10000
+      count = 10000 #set a lrage number for placeholder value. this will check if there was a dessrt in the cart
       for item in order_items:
           print(count)
 
-          if item.Item.cat == cat and count==10000:
+          if item.Item.cat == cat and count==10000: #CHECK FOR DESSERTS IN ORDER BUT MAKE SURE USER IS LIMITED TO EXACT # OF FREE ENTREES
               ordery.cost -= item.Item.price
               ordery.save()
 
@@ -451,11 +451,13 @@ def free_dessert(request):
   ordery.save()
   return redirect('cart')
 #@login_required
+
+#remove a free dessert tag on an order when customer gets a free dessert
 def remove_free_dessert_hold(order_id):
     cat = category.objects.filter(name='Desserts').first()
     ordery = order.objects.filter(order_id=order_id).first()
     order_items = orderItem.objects.filter(order_id=ordery.order_id)
-    count = 10000
+    count = 10000 #set a lrage number for placeholder value. this will check if there was a dessrt in the cart
     if ordery.free_dessert_hold == True:
         for item in order_items:
             if item.Item.cat == cat and count<1:
@@ -470,3 +472,14 @@ def remove_free_dessert_hold(order_id):
         ordery.save()
     else:
         pass
+    """fUNCTION THAT ENABLES CUSTOMERS ADD COMMENTS TO ORDERS IN CART"""
+def add_comments(request):
+    if request.method == 'POST': 
+       comment = request.POST.get('submit')
+       cust = get_object_or_404(Customer,user=request.user)
+       ordery = order.objects.filter(owner=cust,is_ordered=False)
+       orderx = ordery.first()
+       orderx.comments = comment
+       orderx.save()
+       
+    return redirect('cart')

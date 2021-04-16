@@ -24,7 +24,7 @@ def menu_home(request):
     Return: json object, html page 
 """
 #@login_required
-def cat_g(request, category_id):
+def cat_g(request, category_id):        #gives all menu items a category
     categories= category.objects.filter(pk=category_id).first()
     cats = category.objects.all()
     category_posts = Item.objects.filter(cat=categories)
@@ -33,6 +33,10 @@ def cat_g(request, category_id):
 
     #return 0
 #@login_required
+
+"""Overview: Renders more details about menu item to user
+    Return: json object, html page 
+"""
 def item_view(request, item_id):
-    item = Item.objects.filter(pk=item_id)[0]
+    item = Item.objects.filter(pk=item_id)[0] #QUERY DATABSE FOR ARGUMENT IN URL
     return render(request, 'menu_item_details.html', {'item':item})

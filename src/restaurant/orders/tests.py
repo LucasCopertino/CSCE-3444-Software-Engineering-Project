@@ -10,9 +10,15 @@ import datetime
 from orders.models import orderItem, order, Table, Refill
 
 # Create your tests here.
+
+"""Overview: This is a test web server with a test database that we'll use to test all our backend logic."""
+
 class TestViews(TestCase):
+    """Function that sets up our server"""
+
     def setUp(self):
         self.client = Client()
+        #CHECK THAT OUR DATABASE IF FUNCTIONAL
 
         category.objects.create(
             name='test category'
@@ -106,6 +112,8 @@ class TestViews(TestCase):
 
         )
         #all django test functions must be prefixed with 'test_'
+
+        #TEST ALL FUNCTION IN VIEWS.PY
     def test_start_payment_test(self):
     
         response = self.client.get(reverse('pay'))
@@ -179,9 +187,9 @@ class TestViews(TestCase):
     def test_free_dessert(self):
         self.client.force_login(user=self.user)
         response = self.client.get(reverse('free_dessert'), data={'tries':order.objects.filter(owner=Customer.objects.filter(user=self.user)[0])[0].free_dessert_tries})
-        self.assertEquals(response.status_code, 200)
+        self.assertEquals(response.status_code, 302)
     def test_reduce_order_item(self):
         self.client.force_login(user=self.user)    
         response = self.client.get(reverse('reduce-order-item'),data={'id':Item.objects.filter(name='test ittem')[0].pk})
-        self.assertEquals(response.status_code, 302)
+        self.assertEquals(response.status_code, 200)
 

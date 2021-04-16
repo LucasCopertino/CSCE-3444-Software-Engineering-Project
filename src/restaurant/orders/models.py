@@ -46,6 +46,7 @@ class order(models.Model):
     cost = models.DecimalField(max_digits=7,decimal_places=2, default=0.00)
     table_num = models.IntegerField( null=False, default=0)
     time = models.DateTimeField(auto_now_add=True, null=False)
+    comments = models.CharField(max_length=300, null=True, default='no comments')
     total_items = models.IntegerField(default=1)
     order_id = models.CharField(max_length=50, null=False, default='abc')
     status = models.CharField(max_length=50, default="ss")
