@@ -43,7 +43,7 @@ urlpatterns = [
     path('pay2/',split_payment, name="pay2"),
     path('pay3/',how_many_split, name="pay3"),
             path('choose-tip/',choose_tip, name="choose-tip"),
-
+    path('add-comment',add_comments, name="comments"),
         path('tip/',tip, name="tip"),
         path('tip-btn/',tip_btns, name="tip_btns"),
 

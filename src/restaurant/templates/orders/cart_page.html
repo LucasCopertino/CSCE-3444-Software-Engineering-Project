@@ -93,6 +93,7 @@ By pressing the 'place order' button, the customer can begin playment.
 
         <p style="margin-left: 10px; text-align:center;">Total = {{order.cost}}</p>
 
+        <p style="margin-left: 10px; text-align:center;">Comments:  {{order.comments}}</p>
 
       
 
@@ -139,6 +140,14 @@ By pressing the 'place order' button, the customer can begin playment.
  
 </div>
 {% endif %}
+<form action="{% url 'comments' %}" method="post">
+    {% csrf_token %}
+    <label>Add comments for order</label><br>
+    <input name="submit"><br>
+    
+    <input type="submit" value="Submit" >
+  </form> 
+
      <!--Payment Button-->
      <div class="main-buttons">
         <button class="button"><a href='{% url 'choose-tip' %}'>Add tip</a></button>

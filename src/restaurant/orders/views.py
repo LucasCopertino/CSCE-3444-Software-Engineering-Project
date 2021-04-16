@@ -470,3 +470,13 @@ def remove_free_dessert_hold(order_id):
         ordery.save()
     else:
         pass
+def add_comments(request):
+    if request.method == 'POST':
+       comment = request.POST.get('submit')
+       cust = get_object_or_404(Customer,user=request.user)
+       ordery = order.objects.filter(owner=cust,is_ordered=False)
+       orderx = ordery.first()
+       orderx.comments = comment
+       orderx.save()
+       
+    return redirect('cart')
