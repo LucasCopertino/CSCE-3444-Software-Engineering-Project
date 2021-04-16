@@ -7,8 +7,8 @@ from .models import Item, category
 admin.site.register(category)
 admin.site.register(childMode)
 class admin_item(admin.ModelAdmin):
-    list_display = ('name','price','description','calory_info','cat')
-    fields = ['name','price','description','calory_info','cat']
+    list_display = ('name','price','description','calory_info','cat','image')
+    fields = ['name','price','description','calory_info','cat','image']
 
     class Meta:
         model = Item

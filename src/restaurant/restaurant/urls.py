@@ -24,6 +24,8 @@ from staff.views import *
 from django.contrib.auth import views as auth_views
 from django.conf.urls import url
 from menu import views
+from django.conf import settings
+from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls,name='admin1'),
         path('',index, name="blank"),
@@ -103,3 +105,4 @@ urlpatterns = [
 
 
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

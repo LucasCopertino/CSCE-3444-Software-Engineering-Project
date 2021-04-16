@@ -131,6 +131,9 @@ STATIC_URL = '/static/' #this defines the static files we need for the website l
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),#BASE_DIR here is 'RESTAURANT/' directory
 )
+# config/settings.py
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOGIN_REDIRECT_URL='select_table'
 LOGOUT_REDIRECT_URL='index'
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True #if user closes the browser, they are logged out
