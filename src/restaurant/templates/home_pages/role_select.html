@@ -1,0 +1,20 @@
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Role Select</title>
+    <link rel="stylesheet" href="{% static '/orders/styleCartAndPayment.css' %}">
+    
+</head>
+    <h1 style="text-align: center; margin-top: 20px;">Select a Role</h1>
+   
+    <!--Main Page Buttons-->
+    <div class="main-buttons">
+        <a class ="button" href ="{% url 'manager_home' %}">Manager</a>
+        <a class ="button" href="{% url 'kitchen_home' %}">Kitchen</a>
+        <a class ="button" href="{% url 'waiter_home' %}">Waiter</a>
+    </div>
+
+    <!--Back Button-->
+    <button class="back-button"><a href="{% url 'blank' %}">Back</a></button>

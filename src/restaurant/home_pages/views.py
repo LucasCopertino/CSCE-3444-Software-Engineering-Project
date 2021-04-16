@@ -49,6 +49,9 @@ def home_page(request):
 
     return render(request, 'guest_home.html')
 
+def role_select(request):                           #page for employee to choose a role
+    return render(request, 'role_select.html')
+
 #@login_required
 """Overview:Page to select table number after login
     Return: json object, html page 

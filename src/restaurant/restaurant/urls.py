@@ -65,6 +65,7 @@ urlpatterns = [
 
     path('customer-homepage/', customer_home_page, name='customer-homepage'),
         path('homepage/', home_page, name='homepage'),
+        path('role-select/', role_select, name='role_select'),
 
     path('accounts/',include('django.contrib.auth.urls')),
     path('status/',change_stat, name='change-stat'),

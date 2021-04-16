@@ -92,6 +92,26 @@ body {
   font-size: 30px;
 }
 
+.back-button{
+  font-family: var(--Inter);
+  font-size: 16px;
+  font-weight: bold;
+  background-color: black;
+  border: none;
+  border-radius: 4px;
+  padding: 20px;
+                
+    }
+
+.back-button a{
+  text-decoration: none;
+  color: white;
+   }
+
+.back-button:hover{
+  box-shadow: 0 0 16px 4px rgba(0, 0, 0, 0.75);
+  }
+
 .to-order-status{
   font-family: var(--Inter);
   font-size: 16px;
@@ -182,7 +202,7 @@ crossorigin="anonymous"></script>
 <body>
 
 <div class="logoutContainer">
-  <h1><button class="logout"><a href="#log-out">Log Out</a></button></h1>
+  <h1><button class="logout"><a href="{% url 'free_table'%}">Log Out</a></button></h1>
 </div>
 
 <div class="header">
@@ -246,7 +266,8 @@ crossorigin="anonymous"></script>
 </div>
 
 {% endfor%}
-  <button class="to-order-status"><a href="#order-status">Go to Order Status</a></button>
+  <button class="to-order-status"><a href="{% url 'table_map' %}">Go to Order Status</a></button>
+  <button class="back-button"><a href="{% url 'role_select' %}">Back</a></button>
 
 
 

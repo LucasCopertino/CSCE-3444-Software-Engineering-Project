@@ -64,7 +64,7 @@
 
     <body>
         <div class='logout-container'>
-            <button style='float: right;'><a href="#log-out">Log Out</a></button>
+            <button style='float: right;'><a href="{% url 'free_table'%}">Log Out</a></button>
         </div>
 
         <div class='main-header'>
@@ -84,7 +84,7 @@
             <p>Total tips: {{tips}}</p>
             <p>Total revenue: {{total}}</p> 
         </div>
-        <button class="back-button"><a href="#back">Back</a></button>
+        <button class="back-button"><a href="{% url 'manager_home' %}">Back</a></button>
         
     </body>
 </html>
