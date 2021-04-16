@@ -29,14 +29,10 @@
         
         <div class = "menu-btns">
         	<div class="btn-hover"></div>
+          {% for category in cats %}
           
-            <a href ="{% url 'categories' category_id=1 %}"  class="menu-btn active-btn : btn-hover" type="button" id="featured">Appetiezers</a></li>
-            <a href ="{% url 'categories' category_id=6 %}" class="menu-btn active-btn: btn-hover" type="button" id="featured">Entrees</a></li>
-            <a href ="{% url 'categories' category_id=7 %}" class="menu-btn active-btn: btn-hover" type="button" id="featured">Sides</a></li>
-            <a href ="{% url 'categories' category_id=8 %}" class="menu-btn active-btn: btn-hover" type="button" id="featured">Desserts</a></li>
-            <a href ="{% url 'categories' category_id=9 %}" class="menu-btn active-btn: btn-hover" type="button" id="featured">Drinks</a></li>
-            <a href ="{% url 'categories' category_id=10 %}" class="menu-btn active-btn: btn-hover" type="button" id="featured">Bar</a></li>
-    
+            <a href ="{% url 'categories' category_id=category.pk %}"  class="menu-btn active-btn : btn-hover" type="button" id="featured">{{category.name}}</a></li>
+            {%endfor%}
         </div>
         {%for item in category_posts%}
  

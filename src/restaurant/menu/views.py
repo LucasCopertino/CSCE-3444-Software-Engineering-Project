@@ -13,7 +13,9 @@ from django.contrib.auth.models import Group
 #@login_required
 def menu_home(request):
     items = Item.objects.all() #put all food items in database in this single variable
-    context = {'itms':items}
+    cats = category.objects.all()
+
+    context = {'itms':items, 'categories':cats}
 
 
     return render(request, 'menu.html',context) 
@@ -23,7 +25,7 @@ def menu_home(request):
 """
 #@login_required
 def cat_g(request, category_id):
-    categories= category.objects.get(pk=category_id)
+    categories= category.objects.filter(pk=category_id).first()
     cats = category.objects.all()
     category_posts = Item.objects.filter(cat=categories)
     return render(request, 'menu.html', {'cats': cats,'categories':categories,'category_posts':category_posts})
