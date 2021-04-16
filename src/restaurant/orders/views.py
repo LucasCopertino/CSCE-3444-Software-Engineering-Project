@@ -154,7 +154,7 @@ def add_to_cart(request):
         # filter products by id
         item_id = request.GET.get('id')
 
-        orderitem = Item.objects.get(id=item_id)
+        orderitem = Item.objects.get(pk=item_id)
         # check if the user already owns this product
 
         # create orderItem of the selected product
@@ -203,7 +203,7 @@ def reduce_order_item(request):
         item_id = request.GET.get('id')
         
 
-        orderitem = Item.objects.get(id=item_id)
+        orderitem = Item.objects.get(pk=item_id)
         print(orderitem.name)
 
      #ensure that an order still.count()>0 for the customer
@@ -295,7 +295,7 @@ def show_free_entrees(request):
         no_entrees = False
     else:
         no_entrees = True
-        
+
     cat = category.objects.filter(name='Entrees')[0]
     entrees = Item.objects.filter(cat=cat)
     return render(request, 'rewards.html', {'entrees':entrees, 'customer':carts_customer,'yea':no_entrees})

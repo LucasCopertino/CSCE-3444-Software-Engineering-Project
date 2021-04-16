@@ -27,8 +27,8 @@ By pressing the 'place order' button, the customer can begin playment.
             <p style="text-align: center;">{{item.Item.name}}</p>
             <p style="margin-left: 10px;"> x</p>
             <p style="margin-left: 10px;">{{item.quantity}} = {{item.cost}}</p>
-            <button style="width: 25px; height: 20px;" id="inct" onclick="increase('{{item.pk}}')"> + </button>
-            <button style="width: 25px; height: 20px;" id="inct" onclick="decrease('{{item.pk}}')"> - </button>
+            <button style="width: 25px; height: 20px;" id="inct" onclick="increase('{{item.Item.pk}}')"> + </button>
+            <button style="width: 25px; height: 20px;" id="inct" onclick="decrease('{{item.Item.pk}}')"> - </button>
 
         </div>
         {%endfor%}
