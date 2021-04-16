@@ -11,7 +11,7 @@ This is our repository for the term project feel free to message me if we need t
 	
 	Run the command "cd CSCE-3444-Software-Engineering-Project"
 	
-	Run the command "cd restaurant"</li>
+	Run the command "cd restaurant"
 	
 	Run the command "pip install -r requirements.txt" for MacOS
 	
@@ -19,3 +19,17 @@ This is our repository for the term project feel free to message me if we need t
 
 	Run the command, "python3 manage.py runserver"
 	In a web browser, navigate to "localhost:8000"
+You can test all the apps made by the team for the project. 
+Available apps and their names are:
+	menu
+	orders
+	games
+	home_pages
+	staff
+	accounts
+	<h3>Performing Unit Tests</h3>
+
+	Run the command "cd CSCE-3444-Software-Engineering-Project"
+	
+	Run the command "cd restaurant"</li>
+	Run the command, "python3 manage.py test appname"
