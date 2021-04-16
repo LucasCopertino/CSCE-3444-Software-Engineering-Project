@@ -51,6 +51,7 @@ urlpatterns = [
     path('card-payment/',card_payment, name="card"),
         path('card/',card, name="card0"),
         path('help/',HelpFunc, name="help"),
+        path('helplocked/', HelpFuncLocked, name="helplocked"),
 
     path('sign-up',sign_up,name="sign_up"),
 

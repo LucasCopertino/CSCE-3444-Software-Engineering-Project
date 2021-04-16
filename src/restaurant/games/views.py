@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from accounts.models import Customer
 from games.models import childMode
+from django.conf import settings
 
 def games_home(request):
     return render(request, 'Games_Page.html') #view for games home page
@@ -81,7 +82,9 @@ def checkValid(field1, field2, request):                                        
         return 2
 
 def checkPass(attempt, passcode):                                               #function that checks if the entered passcode matches the stored passcode
-    if(attempt == passcode):
+    if(attempt == passcode):               #if the passcode isnt right, check for the master passcode (in case user forgets passcode and waiter has to grab it)
+        return 1
+    elif(attempt == settings.CHILDMODE_MASTER_PASS):
         return 1
     else:
         return 2
