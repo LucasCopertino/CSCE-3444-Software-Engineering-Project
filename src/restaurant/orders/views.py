@@ -162,13 +162,17 @@ def add_to_cart(request):
         # check if the user already owns this product
 
         # create orderItem of the selected product
-        order_item, status = orderItem.objects.get_or_create(Item=orderitem)
+        order_item = orderItem.objects.create(Item=orderitem)
         order_item.quantity = order_item.quantity + 1
         order_item.owner = user_profile
         order_item.cost= order_item.get_cost()
         order_item.save()
         # create order associated with the user
-        user_order, status = order.objects.get_or_create(owner=user_profile, is_ordered=False, order_id=generate_order_id())
+        user_order_count=order.objects.filter(owner=user_profile, is_ordered=False).count()
+        if user_order_count<=0:
+            user_order = order.objects.create(owner=user_profile, is_ordered=False)
+        else:
+            user_order = order.objects.filter(owner=user_profile, is_ordered=False).first()
         user_order.items.add(order_item)
         user_order.cost=user_order.get_cart_total()
                 ##asociate order with a table
@@ -178,8 +182,7 @@ def add_to_cart(request):
         taxx = user_order.get_tax()
         user_order.cost += taxx
         user_order.save()
-        if status:
-            # generate a reference code
+        if user_order.order_id == 'abc':
             user_order.order_id = generate_order_id()
             user_order.save()
 
@@ -210,12 +213,20 @@ def reduce_order_item(request):
         
 
         orderitem = Item.objects.get(pk=item_id)
-        user_order, status = order.objects.get_or_create(owner=user_profile, is_ordered=False,free_dessert_tries=0, order_id=generate_order_id())
-        print(orderitem.name)
+        user_order_count=order.objects.filter(owner=user_profile, is_ordered=False).count()
+        if user_order_count<=0:
+            user_order = order.objects.create(owner=user_profile, is_ordered=False)
+        else:
+            user_order = order.objects.filter(owner=user_profile, is_ordered=False).first()        
 
      #ensure that an order still.count()>0 for the customer
         if user_order:
-            order_item, statx = orderItem.objects.get_or_create(Item=orderitem) #get the first item that matches query since there will always be only one object in oiur queryset
+            order_item_count = orderItem.objects.filter(Item=orderitem, owner=user_profile).count()
+            if order_item_count <=0:
+                order_item = orderItem.objects.create(Item=orderitem, owner=user_profile)
+            else:
+                order_item = orderItem.objects.filter(Item=orderitem, owner=user_profile).first()
+
             order_item.owner = user_profile #set relationships
 
             #reduce the item quantity and ensure negatives dont happen
@@ -250,10 +261,12 @@ def cart(request):
     rn = datetime.datetime.now()  #check time cart is accessed
    
     carts_customer = get_object_or_404(Customer, user=request.user)
-    customer_order_items = orderItem.objects.filter(owner=carts_customer, is_ordered=False)
-    customer_order= order.objects.filter(owner=carts_customer, is_ordered=False).first()
-    customer_order.cost = customer_order.get_cart_total()
-
+    user_order_count=order.objects.filter(owner=carts_customer, is_ordered=False).count()
+    if user_order_count<=0:
+        customer_order = order.objects.create(owner=carts_customer, is_ordered=False)
+    else:
+        customer_order = order.objects.filter(owner=carts_customer, is_ordered=False).first()
+    customer_order_items = customer_order.items.all()
     context = {}
     freebie = 0 #store number of entrees
     taxx = customer_order.get_tax() #placeholder for json object attribute 
@@ -339,7 +352,7 @@ def use_reward_get_entree(request, free_entree_id):
                 print("Free entree gotten")
                 free_entree.save()
                 # create order associated with the user
-                user_order, status = order.objects.get_or_create(owner=carts_customer, is_ordered=False)
+                user_order=order.objects.filter(owner=carts_customer, is_ordered=False)[0]
                 user_order.items.add(free_entree)
                 user_order.cost=user_order.get_cart_total()
                 no_entrees = True

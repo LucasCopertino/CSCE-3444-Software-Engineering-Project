@@ -13,7 +13,7 @@ Overview: A database table containing the orderitems created by customers during
 
 """
 class orderItem(models.Model):
-    Item = models.OneToOneField(Item, on_delete=models.SET_NULL, null=True)
+    Item = models.ForeignKey(Item, on_delete=models.SET_NULL, null=True)
     quantity = models.IntegerField(null=False,default=0)
     owner = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)
     cost = models.DecimalField(max_digits=7,decimal_places=3, default=10.0)
