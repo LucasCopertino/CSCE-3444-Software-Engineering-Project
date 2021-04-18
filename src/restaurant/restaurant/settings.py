@@ -127,6 +127,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 #our update
+STATIC_ROOT = '/home/ubuntu/CSCE-3444-Software-Engineering-Project/src'
+
 STATIC_URL = '/static/' #this defines the static files we need for the website like our stylesheets and javascript functions. 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),#BASE_DIR here is 'RESTAURANT/' directory

@@ -65,7 +65,7 @@ class order(models.Model):
         Returns: a decimal 
     """
     def get_cart_total(self):
-        return sum([item.Item.price*item.quantity for item in self.items.all() if item.free==False])
+        return sum([item.Item.price*item.quantity for item in self.items.all() if item.free==False and item.is_ordered==False])
     """
         Overview: function that adds order tip to cost
         Returns: a decimal 

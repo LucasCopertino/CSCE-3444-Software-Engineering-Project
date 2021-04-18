@@ -14,7 +14,7 @@ import datetime
 """
 
 
-#@allowed_users(allowed_roles=['waiter'])
+@allowed_users(allowed_roles=['waiter'])
 def waiter_home(request):
     orders = order.objects.filter(status="finished",delivered=False)
     helpx = Help.objects.filter(unresolved=True)
@@ -34,13 +34,14 @@ def waiter_home(request):
 """
 
 
-#@allowed_users(allowed_roles=['kitchen'])
+@allowed_users(allowed_roles=['kitchen'])
 def kitchen_home(request):
     order_objs = order.objects.filter(status='in progress')
     order_items = []
     change_stat = statusForm(instance=order_objs.first()) #a form to change the status of an order that is in progress
     for s in order_objs:
-       order_items.append(s.items.all())
+        if len(s.items.all()) > 0:
+            order_items.append(s.items.all())
 
     
     context = {
@@ -51,11 +52,11 @@ def kitchen_home(request):
     }
     return render(request, 'kitchen_queue.html', context) #page for kitchen queue
 
-#@allowed_users(allowed_roles=['manager'])
+@allowed_users(allowed_roles=['manager'])
 def manager_home(request):
     return render(request, 'manager_home.html') #page for manager home
 
-#@allowed_users(allowed_roles=['manager'])
+@allowed_users(allowed_roles=['manager'])
 def manager_report(request):
     orderItems = orderItem.objects.all()#retrieves all the info from every item in orderItems
     orders= order.objects.all()#retrieves all the info from every item in orders
@@ -78,7 +79,7 @@ def manager_report(request):
     total = tax+tips+cost
     return render(request, 'manager_report.html', {'orderItems':orderItems, 'orders':orders, 'tax':tax, 'tips':tips, 'cost':cost, 'total':total, 'order_items':order_items})
 
-#@allowed_users(allowed_roles=['kitchen'])
+@allowed_users(allowed_roles=['kitchen'])
 def change_stat(request):
     if request.method == 'GET':
         idx= request.GET.get('pk')
@@ -116,7 +117,7 @@ def HelpFuncLocked(request):                                #if the games page i
 """ Overview: A function to that handles help request aand allows waiters resolve them
     Returns:reloads the page
 """
-#@allowed_users(allowed_roles=['waiter'])
+@allowed_users(allowed_roles=['waiter'])
 
 def delete_help_request(request):
     print(request)
@@ -133,7 +134,7 @@ def delete_help_request(request):
 """ Overview: A function to that handles refill request aand allows waiters resolve them
     Returns:reloads the page
 """
-#@allowed_users(allowed_roles=['waiter'])
+@allowed_users(allowed_roles=['waiter'])
 
 def delete_refill_request(request):
     print(request)
@@ -149,7 +150,7 @@ def delete_refill_request(request):
 """ Overview: A function to that allows waiters resolve completed orders
     Returns:reloads the page
 """
-#@allowed_users(allowed_roles=['waiter'])
+@allowed_users(allowed_roles=['waiter'])
 
 def delete_order_pickup(request):
     print(request)
@@ -163,7 +164,7 @@ def delete_order_pickup(request):
 """ Overview: A function to that allows waiters resolve cash payment requests
     Returns:reloads the page
 """
-#@allowed_users(allowed_roles=['waiter'])
+@allowed_users(allowed_roles=['waiter'])
 
 def resolve_pay_by_cash(request):
     order_request_uniq = request.GET.get('pk')
@@ -179,11 +180,11 @@ def resolve_pay_by_cash(request):
         item.save()
     order_request.order.save()  
     order_request.save()  
-   
+    order.objects.create(owner=customer_profile, order_id=generate_order_id())
+    
     return redirect('waiter_home')
 
-#@allowed_users(allowed_roles=['waiter'])
-"""Shows a map of all occupied users for waiters"""
+@allowed_users(allowed_roles=['waiter'])
 def show_table_map(request):
     if (Table.objects.filter(occupied=True).count()>0):
         table_objs = Table.objects.filter(occupied=True)

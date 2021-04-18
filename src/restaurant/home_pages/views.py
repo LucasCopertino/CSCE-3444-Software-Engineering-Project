@@ -25,13 +25,13 @@ def index(request):
 """Overview:Home page view for authenticated customer
     Return:  html page 
 """
-#@login_required
+@login_required
 
 def customer_home_page(request):
     #create a cart for the customer after login 
     carts_customer = get_object_or_404(Customer, user=request.user)
     if order.objects.filter(owner=carts_customer, is_ordered=False).count()>0: #CHECK IF USER;S ORDER EXISTS AND AT A TABLE
-        if Table.objects.filter(owner=carts_customer).count()<=0:
+        if Table.objects.filter(owner=carts_customer).count()>0:
             order.objects.filter(owner=carts_customer, is_ordered=False).first().table_num=Table.objects.filter(owner=carts_customer).first().TableNum
         pass
     else:
@@ -52,10 +52,11 @@ def home_page(request):
 def role_select(request):                           #page for employee to choose a role
     return render(request, 'role_select.html')
 
-#@login_required
 """Overview:Page to select table number after login
     Return: json object, html page 
 """
+@login_required
+
 def select_table(request):
     person = request.user
     if Customer.objects.filter(user=person).count()>0: 
@@ -72,10 +73,11 @@ def select_table(request):
     else:
         redirect('login')
 
-#@login_required
 """Overview:Function to handle table selection 
     Return:reload page
 """  
+@login_required
+
 def table_selection(request):
     user_profile = get_object_or_404(Customer, user=request.user)
 

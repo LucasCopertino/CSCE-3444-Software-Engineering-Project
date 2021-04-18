@@ -27,7 +27,7 @@ def games_ttt(request):
 def games_ttt_locked(request):
     return render(request, 'tictactoe_locked.html') #view for tic tac toe if child mode is activated
 
-#@login_required                         #login required, cannot set a child mode lock without being logged in
+@login_required                         #login required, cannot set a child mode lock without being logged in
 def set_childmode(request):
     currentUser = get_object_or_404(Customer, user=request.user) #get current user
     try:                                                        #check to make sure there isn't already a passcode, if there is, get rid of it

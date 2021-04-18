@@ -37,7 +37,7 @@ Returns: a html page
 
  """
 
-#@login_required
+@login_required
 def start_payment(request):
     return render (request, 'payment_1_start.html')
 
@@ -53,10 +53,10 @@ Returns: a html page
 
 """
 
-#@login_required
+@login_required
 def choose_method(request):
     return render (request, 'payment_4_choose_method.html')
-#@login_required
+@login_required
 def cash_payment(request):
     carts_customer = get_object_or_404(Customer, user=request.user) #get the customer by using the authentication modela and comparing with our customer model
     customer_order = get_object_or_404(order,owner=carts_customer, is_ordered=False) #get the customer's order by making use of databse relationships
@@ -81,7 +81,7 @@ Returns: a html page
 
 
  """
- #@login_required
+@login_required
 def card(request):
     return render(request, 'payment_5A_card.html')
 """
@@ -90,16 +90,20 @@ Returns: a json response to our stripe account on stripe.com
 
 
  """
- #@login_required
+@login_required
 def card_payment(request):
     carts_customer = get_object_or_404(Customer, user=request.user) #get the customer by using the authentication modela and comparing with our customer model
-    customer_order = get_object_or_404(order,owner=carts_customer, is_ordered=False) #get the customer's order by making use of databse relationships
-    remove_free_dessert_hold(customer_order.order_id)
+    customer_order_count = order.objects.filter(owner=carts_customer, is_ordered=False).count() #get the customer's order by making use of databse relationships
+    if customer_order_count <=0:
+        order.objects.create(owner=carts_customer, is_ordered=False, order_id=generate_order_id())
+        customer_order  = order.objects.filter(owner=carts_customer, is_ordered=False)[0] #get the customer's order by making use of databse relationships
 
+    else:
+        customer_order=order.objects.filter(owner=carts_customer, is_ordered=False)[0]
     context = {
         'order':customer_order
     }  #a json object to return to our client
-    customer_order_items = orderItem.objects.filter(owner=carts_customer) #get all the order items belonging to customer
+    customer_order_items = orderItem.objects.filter(owner=carts_customer,is_ordered=False) #get all the order items belonging to customer
     for item in customer_order_items: #for loop to change the state of the items so they are sorted 
         item.is_ordered = True #now they don't have to show up where they are not needed
         item.save()
@@ -145,7 +149,7 @@ Returns: a json response to our stripe account on stripe.com
 
 
  """
-#@login_required
+@login_required
 def add_to_cart(request):
     if request.method == 'GET':
 
@@ -164,7 +168,7 @@ def add_to_cart(request):
         order_item.cost= order_item.get_cost()
         order_item.save()
         # create order associated with the user
-        user_order, status = order.objects.get_or_create(owner=user_profile, is_ordered=False)
+        user_order, status = order.objects.get_or_create(owner=user_profile, is_ordered=False, order_id=generate_order_id())
         user_order.items.add(order_item)
         user_order.cost=user_order.get_cart_total()
                 ##asociate order with a table
@@ -178,11 +182,13 @@ def add_to_cart(request):
             # generate a reference code
             user_order.order_id = generate_order_id()
             user_order.save()
-        remove_free_dessert_hold(user_order.order_id)
 
         #assoicate order item with order some more (create more relationships)
 
         order_item.order_id = user_order.order_id
+        user_order.cost = user_order.get_cart_total()
+        user_order.save()
+
         order_item.save()
         # show confirmation message and redirect back to the same page
         messages.info(request, "item added to cart")
@@ -193,7 +199,7 @@ Returns: a html page
 
 
  """
- #@login_required
+@login_required
 def reduce_order_item(request):
     if request.method == 'GET':
 
@@ -204,7 +210,7 @@ def reduce_order_item(request):
         
 
         orderitem = Item.objects.get(pk=item_id)
-        user_order, status = order.objects.get_or_create(owner=user_profile, is_ordered=False,free_dessert_tries=0)
+        user_order, status = order.objects.get_or_create(owner=user_profile, is_ordered=False,free_dessert_tries=0, order_id=generate_order_id())
         print(orderitem.name)
 
      #ensure that an order still.count()>0 for the customer
@@ -222,7 +228,6 @@ def reduce_order_item(request):
             
             user_order.items.add(order_item)
             user_order.cost = user_order.get_cart_total()
-            remove_free_dessert_hold(user_order.order_id)
         
             taxx = user_order.get_tax()
             user_order.cost += taxx
@@ -240,14 +245,14 @@ Returns: A html page, json objects
 
 
  """
- #@login_required
+@login_required
 def cart(request):
     rn = datetime.datetime.now()  #check time cart is accessed
    
     carts_customer = get_object_or_404(Customer, user=request.user)
     customer_order_items = orderItem.objects.filter(owner=carts_customer, is_ordered=False)
     customer_order= order.objects.filter(owner=carts_customer, is_ordered=False).first()
-    remove_free_dessert_hold(customer_order.order_id)
+    customer_order.cost = customer_order.get_cart_total()
 
     context = {}
     freebie = 0 #store number of entrees
@@ -274,7 +279,7 @@ Returns: redirects to the cart
 
 
  """
- #@login_required
+@login_required
 def choose_meal(request):
     if request.method == 'GET':
         amount = request.GET.get('amount')
@@ -314,7 +319,12 @@ def use_reward_get_entree(request, free_entree_id):
         if (int(carts_customer.reward_points/1500)>=int(carts_customer.reward_points_activated)+1):
             carts_customer.reward_points_activated+=1
             carts_customer.save()
-            user_order = order.objects.filter(owner=carts_customer, is_ordered=False)[0]
+            user_order_count = order.objects.filter(owner=carts_customer, is_ordered=False).count()
+            if user_order_count <=0:
+                user_order =  order.objects.create(owner=carts_customer, is_ordered=False)
+            else:
+                user_order =  order.objects.filter(owner=carts_customer, is_ordered=False)[0]
+
             if free_entree_id:
                 
                 free_entree = Item.objects.get(pk=free_entree_id)
@@ -339,7 +349,6 @@ def use_reward_get_entree(request, free_entree_id):
                     # generate a reference code
                     user_order.order_id = generate_order_id()
                     user_order.save()
-                remove_free_dessert_hold(user_order.order_id)
 
                 #assoicate order item with order some more (create more relationships)
 
@@ -358,7 +367,7 @@ Overview: card the payment process
 Returns:redirect to cart
 
  """
- #@login_required
+@login_required
 def tip(request):
     if request.method == 'POST':
        tip_rate = request.POST.get('submit')
@@ -377,7 +386,7 @@ Overview: Handle the tip buttons on the tip selection page
 Returns:json object, html page
 
  """
-#@login_required
+@login_required
 def tip_btns(request):
     if request.method == 'GET':
          tip_rate = request.GET.get('btnVal')
@@ -396,7 +405,7 @@ Overview: Show the refull drink page and display drinks for refill
 Returns:json object, html page
 
  """
- #@login_required
+@login_required
 def refill_drink(request):
     catt  = category.objects.filter(name="Drinks").first()
     drinks = Item.objects.filter(cat=catt)
@@ -409,7 +418,7 @@ Overview: create a refill request for the waiter view to handle
 Returns:json object, html page
 
  """
- #@login_required
+@login_required
 def refill_request(request):
     drink_pk = request.GET.get('id')
     cust = get_object_or_404(Customer, user=request.user)
@@ -419,7 +428,7 @@ def refill_request(request):
     req = Refill.objects.get_or_create(owner=cust,drink=drink1, orderx=orderx, unresolved=True) #create a refill request or get from backend if.count()>0
     return render(request, 'menu.html')
 
-#@login_required
+@login_required
 def free_dessert(request):
   cust = get_object_or_404(Customer, user=request.user)  
   ordery = order.objects.filter(owner=cust,is_ordered=False)[0]
@@ -450,7 +459,7 @@ def free_dessert(request):
   ordery.free_dessert_tries = request.GET.get('tries')
   ordery.save()
   return redirect('cart')
-#@login_required
+@login_required
 
 #remove a free dessert tag on an order when customer gets a free dessert
 def remove_free_dessert_hold(order_id):

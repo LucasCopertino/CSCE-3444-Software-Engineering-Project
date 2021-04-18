@@ -10,7 +10,7 @@ from django.contrib.auth.models import Group
 """Overview: Render the menu page to the user
     Return: json object, html page 
 """
-#@login_required
+@login_required
 def menu_home(request):
     items = Item.objects.all() #put all food items in database in this single variable
     cats = category.objects.all()
@@ -23,7 +23,7 @@ def menu_home(request):
 """Overview: Renders category menu items to the user
     Return: json object, html page 
 """
-#@login_required
+@login_required
 def cat_g(request, category_id):        #gives all menu items a category
     categories= category.objects.filter(pk=category_id).first()
     cats = category.objects.all()
@@ -32,11 +32,12 @@ def cat_g(request, category_id):        #gives all menu items a category
 
 
     #return 0
-#@login_required
 
 """Overview: Renders more details about menu item to user
     Return: json object, html page 
 """
+@login_required
+
 def item_view(request, item_id):
     item = Item.objects.filter(pk=item_id)[0] #QUERY DATABSE FOR ARGUMENT IN URL
     return render(request, 'menu_item_details.html', {'item':item})

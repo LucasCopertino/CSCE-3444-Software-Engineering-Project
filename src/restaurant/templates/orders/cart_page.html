@@ -67,7 +67,7 @@ By pressing the 'place order' button, the customer can begin playment.
                 data: {
             "id" :click_id
         },            type: 'get',
-        success:location.reload()
+        success:window.location.href="{%url 'cart' %}"
                 
               })}
               function decrease(click_id){
@@ -76,7 +76,7 @@ By pressing the 'place order' button, the customer can begin playment.
                 data: {
             "id" :click_id
         },            type: 'get',
-        success:location.reload()
+        success:window.location.href="{%url 'cart' %}"
     
               })}
             
@@ -104,6 +104,8 @@ By pressing the 'place order' button, the customer can begin playment.
     <p id="gen"></p>
     <div>
         <script>
+                                var tries = {{order.free_dessert_tries}};
+
             function freebie(stt, tries){
             $.ajax({
                 url: '{% url "free_dessert" %}',  
@@ -123,9 +125,8 @@ By pressing the 'place order' button, the customer can begin playment.
                     alert('Discount for one dessert active on cart')
                     location.reload()
                  }else{
-                    var tries = {{order.free_dessert_tries}};
 
-                     triess = 3-tries-1
+                     triess = 3-tries
                      alert(triess + ' tries left');
                      if (triess == 0){ //user cannot have more than 3 tries
                         alert('You have run out of tries. Better luck on your next order!') 
