@@ -67,7 +67,7 @@ By pressing the 'place order' button, the customer can begin playment.
                 data: {
             "id" :click_id
         },            type: 'get',
-        success:window.location.href="{%url 'cart' %}"
+        success:location.href="{% url 'cart' %}"
                 
               })}
               function decrease(click_id){
@@ -76,7 +76,7 @@ By pressing the 'place order' button, the customer can begin playment.
                 data: {
             "id" :click_id
         },            type: 'get',
-        success:window.location.href="{%url 'cart' %}"
+        success:location.href="{% url 'cart' %}"
     
               })}
             
