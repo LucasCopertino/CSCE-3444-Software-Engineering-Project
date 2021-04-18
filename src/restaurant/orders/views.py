@@ -344,7 +344,12 @@ def use_reward_get_entree(request, free_entree_id):
                 # check if the user already owns this product
 
                 # create orderItem of the selected product
-                free_entree, status = orderItem.objects.get_or_create(Item=free_entree)
+                free_entree_count = orderItem.objects.filter(Item=free_entree, owner=carts_customer).count()
+                if free_entree_count <= 0:
+                    free_entree = orderItem.objects.create(Item=free_entree, owner=carts_customer)
+                else:
+                    free_entree = orderItem.objects.filter(Item=free_entree, owner=carts_customer).first()
+
                 free_entree.quantity = free_entree.quantity + 1
                 free_entree.owner = carts_customer
                 free_entree.cost= free_entree.get_cost()
