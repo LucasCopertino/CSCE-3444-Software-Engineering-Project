@@ -259,7 +259,7 @@ Returns: A html page, json objects
 @login_required
 def cart(request):
     rn = datetime.datetime.now()  #check time cart is accessed
-   
+    total_cost = 0.00
     carts_customer = get_object_or_404(Customer, user=request.user)
     user_order_count=order.objects.filter(owner=carts_customer, is_ordered=False).count()
     if user_order_count<=0:
@@ -267,6 +267,10 @@ def cart(request):
     else:
         customer_order = order.objects.filter(owner=carts_customer, is_ordered=False).first()
     customer_order_items = customer_order.items.all()
+    for order_item in customer_order_items:
+        total_cost+=order_item.get_cost()
+    customer_order.cost = total_cost
+    customer_order.save()
     context = {}
     freebie = 0 #store number of entrees
     taxx = customer_order.get_tax() #placeholder for json object attribute 
