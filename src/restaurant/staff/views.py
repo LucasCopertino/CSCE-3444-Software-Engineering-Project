@@ -98,10 +98,15 @@ def change_stat(request):
 def HelpFunc(request):
  
     cust = get_object_or_404(Customer, user=request.user)
-    orderx = order.objects.get_or_create(owner=cust)[0]
+    order_count = order.objects.filter(owner=cust, is_ordered=False).count()
+    if order_count <=0:
+        orderx = order.objects.create(owner=cust)
+    else:
+        orderx.objects.filter(owner=cust, is_ordered=False)
     orderx.order_id = generate_order_id()
     orderx.save()
-    h = Help.objects.get_or_create(orderx=orderx, unresolved=True)
+
+    h = Help.objects.create(orderx=orderx, unresolved=True)
 
     return redirect('customer-homepage')
 
