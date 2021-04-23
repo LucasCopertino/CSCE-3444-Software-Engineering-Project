@@ -1,6 +1,6 @@
 # CSCE-3444-Software-Engineering-Project
 <h3>Ensure python and pip are installed in environment</h3>
-This is our repository for the term project feel free to message me if we need to change something
+This is our repository for the term project (a restaurant management system) feel free to message me if we need to change something
 <h1> Follow the next steps to run the test server in your environment</h1>
 <ul>
 	<li>Open a shell environment</li>	
